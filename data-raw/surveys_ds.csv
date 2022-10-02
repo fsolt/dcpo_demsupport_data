@@ -240,6 +240,8 @@ lb2017,threestate_dcn,threestate_lb,p8stgbs,"c(2,3,1)","c(-1,-2)"
 lb2017,church4,church_lb,p22st,c(4:1),c(-1)
 lb2018,threestate_dcn,threestate_lb,p12stgbs,"c(2,3,1)","c(-1,-2)"
 lb2018,church4,church_lb,p24st,c(4:1),c(-1)
+lb2020,threestate_dcn,threestate_lb,p10stgbs,"c(2,3,1)","c(-1,-2)"
+lb2020,church4,church_lb,p20st_a,c(4:1),c(-1)
 neb_combo,threestate_dcn,threestate_neb,a7,"c(2,3,1)",c(98)
 neb_combo,strong4a,strong_neb,a3c,c(1:4),c(98)
 neb_combo,army_approve4,army_neb,a3b,c(1:4),c(98)
