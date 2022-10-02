@@ -66,10 +66,14 @@ set.seed(324)
 ```
 
 ```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys_ds.csv"))}
-surveys_tb <- read_csv(here::here("data-raw", "surveys_ds.csv"),
+survey_file <- list.files(here::here("data-raw"),
+                          full.names = TRUE) %>% 
+  str_subset("surveys_.*\\.csv")
+
+surveys <- read_csv(survey_file,
                        col_types = "cccccc")
 
- dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys_tb,
+dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
                                          datapath = here::here("..",
                                                                "data", "dcpo_surveys"),
                                          file = here::here("data",
