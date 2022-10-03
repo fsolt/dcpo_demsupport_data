@@ -65,10 +65,10 @@ library(rsdmx)
 set.seed(324)
 ```
 
-```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys_ds.csv"))}
+```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys.csv"))}
 survey_file <- list.files(here::here("data-raw"),
                           full.names = TRUE) %>% 
-  str_subset("surveys_.*\\.csv")
+  str_subset("surveys.*\\.csv")
 
 surveys <- read_csv(survey_file,
                        col_types = "cccccc")
@@ -80,7 +80,7 @@ dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
                                                            "dcpo_input_raw.csv"))
 ```
 
-```{r tb_summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "dcpo_input_raw.csv"))}
+```{r summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "dcpo_input_raw.csv"))}
 dcpo_input_raw <- read_csv(here::here("data", "dcpo_input_raw.csv"),
                                   col_types = "cdcddcd")
 
@@ -99,7 +99,7 @@ process_dcpo_input_raw <- function(dcpo_input_raw_df) {
 dcpo_input_raw1 <- dcpo_input_raw %>% 
   process_dcpo_input_raw()
 
-n_surveys <- surveys_tb %>% 
+n_surveys <- surveys %>% 
   distinct(survey) %>% 
   nrow()
 
