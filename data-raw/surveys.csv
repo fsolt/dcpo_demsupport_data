@@ -223,9 +223,9 @@ evs2017,strong_bad4,strong_evs,v145,c(1:4),"c(-1,-2)"
 evs2017,army_bad4,army_evs,v147,c(1:4),"c(-1,-2)"
 evs2017,imp10,impdemoc_evs,v142,c(1:10),"c(-10,-1,-2)"
 evs2017,dem_good4a,evdemoc_evs,v148,c(4:1),"c(-1,-2)"
-fsdeva2020fall,strong4a,strong_wvs,q10c_1,c(1:4),
-fsdeva2020fall,army_approve4,army_wvs,q10c_3,c(1:4),
-fsdeva2020fall,dem_good4a,evdemoc_wvs,q10c_4,c(4:1),
+fsdeva2020spr,strong4a,strong_wvs,q10c_1,c(1:4),
+fsdeva2020spr,army_approve4,army_wvs,q10c_3,c(1:4),
+fsdeva2020spr,dem_good4a,evdemoc_wvs,q10c_4,c(4:1),
 gallup_vop2004,church4,church_vop,q2d,c(4:1),9
 gallup_vop2005,church4,church_vop,q6a1,c(4:1),9
 gallup_vop2007,church4,church_vop,q3a,c(4:1),9
@@ -256,8 +256,8 @@ kobar2001,army_approve4,army_asianb,q31_1,c(4:1),8
 kobar2001,strong4a,strong_asiab,q31_2,c(4:1),8
 kobar2001,threestate_dcn,threestate_kobar,q50,"c(2,3,1)",
 kobar2004,suitable10,democsuit_kobar,q25,c(1:10),88
-kobar2004,army_approve4,army_asianb,q15_1,c(4:1),8
-kobar2004,strong4a,strong_asiab,q15_2,c(4:1),8
+kobar2004,army_approve4,army_asianb,q15a1,c(4:1),8
+kobar2004,strong4a,strong_asiab,q15a2,c(4:1),8
 kobar2004,threestate_dcn,threestate_kobar,q19,"c(2,3,1)",
 kobar2010,suitable10,democsuit_kobar,q24,c(1:10),88
 kobar2010,army_approve4,army_asianb,q11_1,c(4:1),8
