@@ -88,7 +88,7 @@ process_dcpo_input_raw <- function(dcpo_input_raw_df) {
   dcpo_input_raw_df %>% 
     with_min_yrs(2) %>% 
     with_min_cy(5) %>% 
-    with_min_yrs(2) %>% #?
+    with_min_yrs(2) %>% # double-check after dropping <5 cy
     filter(year >= 1972 & n > 0) %>% 
     group_by(country) %>% 
     mutate(cc_rank = n()) %>% 
