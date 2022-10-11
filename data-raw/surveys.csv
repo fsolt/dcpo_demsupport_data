@@ -215,6 +215,14 @@ asianb4,army_approve4,army_asianb,q132,c(1:4),c(7:9)
 asianb4,oneparty_bad4,party_asianb,q131,c(1:4),c(7:9)
 asianb4,suitable10,democsuit_asianb,q97,c(1:10),c(97:99)
 asianb4,wantdem10,democextent_asianb,q96,c(1:10),c(97:99)
+caucasusb2011,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2012,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-2:-1)
+caucasusb2013,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2015,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2017,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2019,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2020,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
+caucasusb2021,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
 cdcee,strong2b,strong_cdcee,v517,c(1:2),99
 cdcee,elections2,election_cdcee,v276,c(2:1),99
 cdcee,church3,church_cdcee,v40,c(3:1),99
