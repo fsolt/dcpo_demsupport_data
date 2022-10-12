@@ -189,6 +189,10 @@ asiab2006,dem_good3,evdemoc_asiab,q38d,c(3:1),c(9)
 asiab2007,strong_bad3,strong_asiab,q39a,c(1:3),c(9)
 asiab2007,army_bad3,army_asiab,q39c,c(1:3),c(9)
 asiab2007,dem_good3,evdemoc_asiab,q39d,c(3:1),c(9)
+asiab2008,strong_bad3,strong_asiab,q40a,c(1:3),c(9)
+asiab2008,army_bad3,army_asiab,q40c,c(1:3),c(9)
+asiab2008,dem_good3,evdemoc_asiab,q40d,c(3:1),c(9)
+asiab2008,threestate_ncd,threestate_asiab,q41,"c(2,1,3)",c(9)
 asianb1,threestate_dcn,threestate_asianb,q117,c(1:3),"c(98,99)"
 asianb1,strong4a,strong_asianb,q121,c(1:4),"c(98,99)"
 asianb1,army_approve4,army_asianb,q123,c(1:4),"c(98,99)"
