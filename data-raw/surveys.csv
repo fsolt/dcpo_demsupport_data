@@ -219,6 +219,7 @@ asianb4,army_approve4,army_asianb,q132,c(1:4),c(7:9)
 asianb4,oneparty_bad4,party_asianb,q131,c(1:4),c(7:9)
 asianb4,suitable10,democsuit_asianb,q97,c(1:10),c(97:99)
 asianb4,wantdem10,democextent_asianb,q96,c(1:10),c(97:99)
+bsa2005,church4,church_cses,demobest,c(4:1),"c(-2,-1,8,9)"
 caucasusb2011,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
 caucasusb2012,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-2:-1)
 caucasusb2013,threestate_dcn,threestate_cb,attdem,"c(2,3,1)",c(-3:-1)
@@ -246,6 +247,12 @@ eb30,threestate_dcn,threestate_eb,v122,"c(2,3,1)",99
 eb37,threestate_dcn,threestate_eb,v27,"c(2,3,1)",99
 eb471,threestate_dcn,threestate_eb,v313,"c(2,3,1)",99
 ess6,imp11,impdemoc_ess,implvdm,c(0:10),99
+eurasiab2001,church4,church_eurasiab,demochur,c(1:4),
+eurasiab2001,strong4e,strong_eurasiab,autleade,"c(2, 1, -1, -2)",
+eurasiab2001,army_approve4,army_eurasiab,antiarmy,c(1:4),
+eurasiab2010,church4,church_eurasiab,v135_5,c(4:1),
+eurasiab2010,strong4e,strong_eurasiab,v135_4,c(1:4),
+eurasiab2010,army_approve4,army_eurasiab,v135_2,c(1:4),
 evs_combo,strong_bad4,strong_evs,e114,c(1:4),"c(-1,-2)"
 evs_combo,army_bad4,army_evs,e116,c(1:4),"c(-1,-2)"
 evs_combo,dem_good4a,evdemoc_evs,e117,c(4:1),"c(-1,-2)"
