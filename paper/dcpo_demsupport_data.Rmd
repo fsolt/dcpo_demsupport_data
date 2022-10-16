@@ -60,6 +60,7 @@ library(DCPO)
 library(tidyverse)
 library(countrycode)
 library(patchwork)
+library(ggthemes)
 library(rsdmx)
 
 set.seed(324)
@@ -71,7 +72,9 @@ survey_file <- list.files(here::here("data-raw"),
   str_subset("surveys.*\\.csv")
 
 surveys <- read_csv(survey_file,
-                       col_types = "cccccc")
+                    col_types = "cccccc") 
+# %>% 
+#   mutate(item = item_con)
 
 dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
                                          datapath = here::here("..",
@@ -150,18 +153,18 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 In all, we identified `r n_items` such survey items that were asked in no fewer than five country-years in countries surveyed at least twice; these items were drawn from `r n_surveys` different survey datasets.^[
 The complete list of survey items is included in online Appendix A.]
 
-Together, the survey items in the source data were asked in `r n_countries` different countries in at least two time points over `r n_years` years, `r year_range`, yielding a total of `r n_cyi` country-year-item observations.
-Observations for every year in each country surveyed would number `r total_cy`, and a complete set of country-year-items would encompass `r {n_countries * n_years * n_items} %>% scales::comma()` observations.
-Compared to this complete set of country-year-items, the available data can be seen to be very, very sparse.
-From a more optimistic standpoint, we note there there are `r n_cy` country-years in which we have at least _some_ information about the trust in civil servants of the population, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
+Together, the survey items in the source data were asked in `r n_countries` countries in two or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
+If every country that appears in the source data had been surveyed in every year in the source data, we would have `r total_cy` observations (assuming each survey asked just one of our items), and if these hypothetical surveys included every _item_, we would have `r {n_countries * n_years * n_items} %>% scales::comma()` observations.
+With these figures in mind, the actually available data are very, very sparse.
+On the other hand, we do have in the source data `r n_cy` country-years in which we have at least _some_ information about the trust in civil servants of the population, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
 But there can be no denying that the many different survey items employed renders these data incomparable and difficult to use together.
 
-```{r item_and_country_plots, fig.height = 3.5, fig.cap = "Countries and Years with the Most Observations in the TCS Source Data \\label{item_country_plots}"}
+```{r item_and_country_plots, fig.height = 3.5, fig.width=7, fig.cap = "Countries and Years with the Most Observations in the DSD Source Data \\label{item_country_plots}"}
 items_plot <- dcpo_input_raw1 %>%
   distinct(country, year, item) %>%
   count(item) %>%
   arrange(desc(n)) %>% 
-  # head(12) %>% 
+  head(12) %>% 
   ggplot(aes(forcats::fct_reorder(item, n, .desc = TRUE), n)) +
   geom_bar(stat = "identity") +
   theme_bw() +
@@ -172,13 +175,19 @@ items_plot <- dcpo_input_raw1 %>%
   ylab("Country-Years\nObserved") +
   ggtitle("Items")
 
-trust4_cy <- dcpo_input_raw1 %>% 
-  filter(item == "trust4") %>%
+most_common_item <- dcpo_input_raw1 %>% 
+  count(item) %>% 
+  arrange(-n) %>% 
+  slice_head() %>% 
+  pull(item)
+
+most_common_cy <- dcpo_input_raw1 %>% 
+  filter(item == most_common_item) %>%
   distinct(country, year) %>%
   nrow()
 
-trust4_surveys <- dcpo_input_raw1 %>%
-  filter(item == "trust4") %>%
+most_common_surveys <- dcpo_input_raw1 %>%
+  filter(item == most_common_item) %>%
   distinct(survey) %>%
   pull(survey) %>% 
   str_split(", ") %>% 
@@ -199,7 +208,7 @@ countries_plot <- dcpo_input_raw1 %>%
   geom_bar(stat = "identity") +
   theme_bw() +
   theme(axis.title.x = element_blank(),
-        axis.text.x  = element_text(angle = 90, vjust = .45, hjust = .95),
+        axis.text.x  = element_text(angle = 90, vjust = .45, hjust = .95, size = 7),
         axis.title.y = element_text(size = 9),
         plot.title = element_text(hjust = 0.5, size = 11)) +
   ylab("Year-Items\nObserved") +
@@ -233,10 +242,12 @@ ybc_plot <- dcpo_input_raw1 %>%
   theme_bw() +
   theme(axis.title.x = element_blank(),
         # axis.text.x  = element_text(angle = 90, vjust = .45, hjust = .95),
+        axis.text.x = element_text(size = 7),
         axis.title.y = element_text(size = 9),
         plot.title = element_text(hjust = 0.5, size = 11)) +
+  xlab("Year") +
   ylab("Countries\nObserved") +
-  ggtitle("Years")
+  ggtitle("Year")
 
 us_obs <- dcpo_input_raw1 %>% 
   distinct(country, year, item) %>%
@@ -244,7 +255,31 @@ us_obs <- dcpo_input_raw1 %>%
   filter(country == "United States") %>%
   pull(n)
 
-others <- dcpo_input_raw1 %>%
+most_common_cyi <- dcpo_input_raw1 %>% 
+  count(country, year, item) %>% 
+  count(country) %>% 
+  arrange(-n) %>% 
+  slice_head() %>% 
+  pull(country)
+
+most_common_cyi_obs <- dcpo_input_raw1 %>%
+  filter(country == most_common_cyi) %>%
+  distinct(country, year, item) %>%
+  nrow()
+
+most_common_cy <- dcpo_input_raw1 %>% 
+  count(country, year) %>% 
+  count(country) %>% 
+    arrange(-n) %>% 
+  slice_head() %>% 
+  pull(country)
+
+most_common_cy_obs <- dcpo_input_raw1 %>%
+  filter(country == most_common_cyi) %>%
+  distinct(country, year, item) %>%
+  nrow()
+
+others_cyi <- dcpo_input_raw1 %>%
   distinct(country, year, item) %>%
   count(country) %>%
   arrange(desc(n)) %>%
@@ -316,8 +351,42 @@ n_data_poor <- {data_poorest %>%
     data_poorest <- " "
   }
 
-(countries_plot + cby_plot) / (ybc_plot)
+world_map <- map_data("world") %>% 
+  filter(!long > 180)
+
+cby_map <- world_map %>% 
+  distinct(region) %>% 
+  mutate(country = countrycode::countrycode(region,
+                                            "country.name",
+                                            "country.name")) %>% 
+  filter(!region=="Antarctica") %>% 
+  left_join(dcpo_input_raw1 %>% 
+              count(country, year) %>% 
+              count(country, name = "Years"),
+            by = "country") %>% 
+  mutate(Years = ifelse(is.na(Years), 0, Years)) %>% 
+  ggplot(aes(fill = Years, map_id = region)) +
+  geom_map(map = world_map,
+           color = "white",
+           size = 0.06) +
+  coord_map(projection = "mollweide", 
+            ylim=c(-80, 90),
+            xlim=c(-170, 170)) +
+  theme_void() +
+  scale_fill_distiller(na.value = "gray90", 
+                       palette = "Blues",
+                       direction = 1) +
+  ggtitle("Years Observed by Country") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = c(.05,.1),
+        legend.justification = c(0,0), 
+        legend.direction = "vertical") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_x_continuous(expand=c(0,0))
+
+cby_map + (countries_plot/ ybc_plot) + plot_layout(widths = c(4, 1))
 ```
+
 
 \pagebreak
 ```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
@@ -349,11 +418,11 @@ dcpo_input_raw1 %>%
 
 
 Consider the most frequently asked item in the data we collected, which asks respondents ...
-Employed by the Arab Barometer,the Asia Europe Survey, the Asian Barometer, the British Social Attitudes Survey, the Latino Barometer, the East Asian Social Survey, the European Values Survey, the Italian National Election Study, the South Asian Barometer, and the World Values Survey, this question was asked in a total of `r XXXXX_cy` different country-years.
-That this constitutes only `r {XXXXX_cy*100/(spanned_cy %>% str_replace(",", "") %>% as.numeric())} %>% round()`% of the country-years spanned by our data---and again, this is the _most common_ survey item---again underscores just how sparse and incomparable the available public opinion data is on this topic.
+Employed by the Arab Barometer,the Asia Europe Survey, the Asian Barometer, the British Social Attitudes Survey, the Latino Barometer, the East Asian Social Survey, the European Values Survey, the Italian National Election Study, the South Asian Barometer, and the World Values Survey, this question was asked in a total of `r most_common_cy_obs` different country-years.
+That this constitutes only `r {most_common_cy_obs*100/(spanned_cy %>% str_replace(",", "") %>% as.numeric())} %>% round()`% of the country-years spanned by our data---and again, this is the _most common_ survey item---again underscores just how sparse and incomparable the available public opinion data is on this topic.
 
-The upper left panel of Figure&nbsp;\ref{item_country_plots} shows the dozen countries with the highest count of country-year-item observations.
-The United States, with `r us_obs` observations, is far and away the best represented country in the source data, followed by `r others`.
+The left panel of Figure&nbsp;\ref{item_country_plots} shows the dozen countries with the highest count of country-year-item observations.
+`r most_common_cyi`, with `r most_common_cyi_obs` observations, is far and away the best represented country in the source data, followed by `r others_cyi`.
 At the other end of the spectrum, `r n_data_poorest` countries`r data_poorest`have only the minimum two observations required to be included in the source dataset at all.
 The upper right panel shows the twelve countries with the most years observed; this group is similar, but with `r adding` joining the list and `r dropping` dropping off.
 The bottom panel counts the countries observed in each year and reveals just how few relevant survey items were asked before 1990.
@@ -364,174 +433,6 @@ In the next section, we describe how we make use of all of this sparse and incom
 evaluate <- TRUE
 ```
 
-```{r dcpo_input, eval=evaluate, cache=evaluate, include=FALSE, results=FALSE}
-dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
-                                     scale_q = "trust4",
-                                     scale_cp = 2)
-save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
-```
-
-```{r dcpo, eval=evaluate, cache=evaluate, include=FALSE, results=FALSE}
- iter <- 1000
- 
- dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
- dcpo_output <- dcpo$sample(
-   data = dcpo_input[1:13], 
-   max_treedepth = 14,
-   adapt_delta = 0.99,
-   step_size = 0.005,
-   seed = 324, 
-   chains = 4, 
-   parallel_chains = 4,
-   iter_warmup = iter/2,
-   iter_sampling = iter/2,
-   refresh = iter/50
- )
- results_path <- here::here(file.path("data", 
-                                      iter, 
-                                      {str_replace_all(Sys.time(), "[- :]", "") %>%
-                                          str_replace("\\d{2}$", "")}))
- dir.create(results_path, 
-            showWarnings = FALSE, 
-            recursive = TRUE)
- dcpo_output$save_data_file(dir = results_path,
-                            random = FALSE)
- dcpo_output$save_output_files(dir = results_path,
-                               random = FALSE)
-```
-
-```{r dcpo_results, cache=TRUE}
- if (!exists("results_path")) {
-   latest <- "XXXXX"
-   results_path <- here::here("data", "1000", latest)
-   
-   # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
-   if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
-     dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
-     osf_retrieve_node("XXXXX") %>% 
-       osf_ls_files() %>% 
-       filter(name == latest) %>% 
-       osf_download(path = here::here("data", "1000"))
-   }
-}
- 
- dcpo_output <- as_cmdstan_fit(here::here(results_path,
-                                          list.files(results_path, pattern = "csv$")))
- 
-
-```
-
-```{r dcpo_results_summary, cache=TRUE}
-load(file = here::here("data", "dcpo_input.rda"))
-theta_results <- DCPOtools::summarize_dcpo_results(dcpo_input,
-                                                   dcpo_output,
-                                                   "theta")
-
-res_cy <- nrow(theta_results) %>% 
-  scales::comma()
-
-res_c <- theta_results %>% 
-  pull(country) %>% 
-  unique() %>% 
-  length()
-
-save(theta_results, file = here::here("data","theta_results.rda"))
-```
-
-```{r cs_plot, fig.cap="TCS Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
-
-n_panes <- 2
-axis_text_size <- 10
-
-p1_data <- theta_results %>%
-  group_by(country) %>%
-  top_n(1, year) %>%
-  ungroup() %>%
-  arrange(mean) %>%
-  transmute(country_year = paste0(country, " (", year, ")") %>% 
-              str_replace("’", "'"),
-            estimate = mean,
-            conf.high = q90,
-            conf.low = q10,
-            pane = n_panes - (ntile(mean, n_panes) - 1),
-            ranked = as.factor(ceiling(row_number())))
-
-p_theta <- ggplot(p1_data,
-                  aes(x = estimate, y = ranked)) +
-  geom_segment(aes(x = conf.low, xend = conf.high,
-                   y = ranked, yend = ranked),
-               na.rm = TRUE,
-               alpha = .4) +
-  geom_point(fill = "black", shape = 21, size = .5, na.rm = TRUE) +
-  theme_bw() + theme(legend.position="none",
-                     axis.text.x  = element_text(size = axis_text_size,
-                                                 angle = 90,
-                                                 vjust = .45,
-                                                 hjust = .95),
-                     axis.text.y  = element_text(size = axis_text_size),
-                     axis.title = element_blank(),
-                     strip.background = element_blank(), 
-                     strip.text = element_blank(),
-                     panel.grid.major = element_line(size = .3),
-                     panel.grid.minor = element_line(size = .15)) +
-  scale_y_discrete(breaks = p1_data$ranked, labels=p1_data$country_year) +
-  coord_cartesian(xlim=c(0, 1)) +
-  facet_wrap(vars(pane), scales = "free", nrow = 1)
-
-
-p_theta +
-  plot_annotation(caption = "Note: Gray whiskers represent 80% credible intervals.")
-
-bottom5 <- p1_data %>% 
-  arrange(ranked) %>% 
-  slice(1:5) %>% 
-  pull(country_year) %>% 
-  str_replace(" \\(.*", "") %>% 
-  knitr::combine_words()
-
-```
-
-We estimated the model using the `DCPOtools` package for R [@Solt2020a], running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
-The $\hat{R}$ diagnostic had a maximum value of 1.01, indicating that the model converged.
-The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Appendix A).
-
-The result is estimates, in all `r res_cy` country-years spanned by the source data, of mean XXXXX.
-Figure&nbsp;\ref{cs_mry} displays the most recent available XXXXX score for each of the `r res_c` countries and territories in the dataset.
-
-
-The latest scores for `r bottom5` have them as the places where the public has the lowest XXXXX.
-
-```{r ts_plots, fig.cap="XXXXX Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
-countries <- c("Finland", "China", "Philippines", "Bangladesh",
-               "Malaysia", "Turkey", "United Kingdom", "South Korea",
-               "Belgium", "Spain", "United States", "Chile", 
-               "Ukraine", "Italy", "Argentina", "Mexico")
-
-countries2 <- countries %>% 
-  str_replace("United States", "U.S.") %>% 
-  str_replace("United Kingdom", "U.K.")
-
-c_res <- theta_results %>% 
-  filter(country %in% countries) %>%
-  mutate(country = str_replace(country, "United States", "U.S.") %>% 
-           str_replace("United Kingdom", "U.K.") %>% 
-           factor(levels = countries2))
-
-ggplot(data = c_res, aes(x = year, y = mean)) +
-  theme_bw() +
-  theme(legend.position = "none") +
-  coord_cartesian(xlim = c(1980, 2020), ylim = c(0, 1)) +
-  labs(x = NULL, y = "TCS Scores") +
-  geom_ribbon(data = c_res, aes(ymin = q10, ymax = q90, linetype=NA), alpha = .25) +
-  geom_line(data = c_res) +
-  facet_wrap(~country, nrow = 2) +
-  theme(axis.text.x  = element_text(size=7,
-                                    angle = 90,
-                                    vjust = .45,
-                                    hjust = .95),
-        strip.background = element_rect(fill = "white", colour = "white")) +
-  plot_annotation(caption = "Note: Countries are ordered by their XXXXX scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
-```
 
 
 \pagebreak
