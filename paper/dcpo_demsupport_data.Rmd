@@ -58,6 +58,7 @@ knitr::opts_chunk$set(
 library(DCPOtools)
 library(DCPO)
 library(tidyverse)
+library(here)
 library(countrycode)
 library(patchwork)
 library(ggthemes)
@@ -67,7 +68,7 @@ set.seed(324)
 ```
 
 ```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys.csv"))}
-survey_file <- list.files(here::here("data-raw"),
+survey_file <- list.files(here("data-raw"),
                           full.names = TRUE) %>% 
   str_subset("surveys.*\\.csv")
 
@@ -77,20 +78,38 @@ surveys <- read_csv(survey_file,
 #   mutate(item = item_con)
 
 dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
-                                         datapath = here::here("..",
-                                                               "data", "dcpo_surveys"),
-                                         file = here::here("data",
-                                                           "dcpo_input_raw.csv"))
+                                        datapath = here("..",
+                                                        "data",
+                                                        "dcpo_surveys"),
+                                        file = here("data",
+                                                    "dcpo_input_raw.csv"))
 ```
 
 ```{r summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "dcpo_input_raw.csv"))}
-dcpo_input_raw <- read_csv(here::here("data", "dcpo_input_raw.csv"),
+dcpo_input_raw <- read_csv(here("data", "dcpo_input_raw.csv"),
                                   col_types = "cdcddcd")
+
+with_min_coverage <- function(x, min_cov) {
+  if (!is.na(min_cov)) {
+    country <- year <- years <- spanned <- coverage <- NULL
+
+    x <- x %>%
+      group_by(country) %>%
+      mutate(years = length(unique(year)),
+             spanned = length(min(year):max(year)),
+             coverage = years/spanned) %>%
+      filter(coverage >= min_cov) %>%
+      select(-years, -spanned, -coverage) %>%
+      ungroup()
+  }
+  return(x)
+}
 
 process_dcpo_input_raw <- function(dcpo_input_raw_df) {
   dcpo_input_raw_df %>% 
     with_min_yrs(2) %>% 
     with_min_cy(5) %>% 
+    with_min_coverage(.2) %>% 
     with_min_yrs(2) %>% # double-check after dropping <5 cy
     filter(year >= 1972 & n > 0) %>% 
     group_by(country) %>% 
@@ -100,6 +119,50 @@ process_dcpo_input_raw <- function(dcpo_input_raw_df) {
 }
 
 dcpo_input_raw1 <- dcpo_input_raw %>% 
+  filter(!(
+    str_detect(survey, "army_wvs") &
+      # WVS obs identified as problematic by Claassen
+      ((country == "Albania" & year == 1998) |
+         (country == "Indonesia" &
+            (year == 2001 | year == 2006)) |
+         (country == "Iran" & year == 2000) |
+         (country == "Pakistan" &
+            (year == 1997 | year == 2001)) | # 1996 in Claassen
+         (country == "Vietnam" & year == 2001)
+      ) |
+      (str_detect(item, "strong_wvs") &
+         ((country == "Egypt" & year == 2012) |
+            (country == "Iran" &
+               (year == 2000 | year == 2007)) | # 2005 in Claassen
+            (country == "India") |
+            (country == "Pakistan" &
+               (year == 1997 | year == 2001)) | # 1996 in Claassen
+            (country == "Kyrgyzstan" &
+               (year == 2003 | year == 2011)) |
+            (country == "Romania" &
+               (year == 1998 | year == 2005 | year == 2012)) |
+            (country == "Vietnam" & year == 2001)
+         )) |
+      (survey == "pew2002" &
+         (country %in% c("Angola", "Bolivia", "Brazil", "China", "Egypt",
+         "Guatemala", "Honduras", "India", "Indonesia", "Côte d'Ivoire",
+         "Mali", "Pakistan", "Senegal", "Venezuela", "Vietnam"))
+         ) |
+      (survey == "pew2005" &
+         (country %in% c("China", "India", "Morocco", "Pakistan"))
+         ) |
+      (survey == "pew2007" &
+         (country %in% c("Bolivia", "Brazil", "China", "India", "Côte d'Ivoire", "Pakistan", "South Africa", "Venezuela"))
+         ) |
+      (
+        country %in% c(
+          "Puerto Rico",
+          "Northern Ireland",
+          "SrpSka Republic",
+          "Hong Kong SAR China"
+        )
+      )
+  )) %>% 
   process_dcpo_input_raw()
 
 n_surveys <- surveys %>% 
