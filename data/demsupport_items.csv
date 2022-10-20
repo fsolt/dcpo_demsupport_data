@@ -1,2 +1,3 @@
 survey,item_con,item,variable,values,nonresponses,question_text,response_categories
 pew2017,dem_good4b,evdemoc_pew,polsys_republic,"c(4:1)","c(8,9)"," a democratic system where representatives elected by citizens decide what becomes law","1 very good / somewhat good / somewhat bad / very bad"
+arabb1,dem_good4c,evdemoc_arabb,q2451,"c(4:1)","c(97,98,99)","a democratic political system (public freedoms, guarantees equality in political and civil rights, alternation of power, and accountability and transparency of the executive authority)","1 very good / 2 good / 3 bad / 4 very bad"
