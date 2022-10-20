@@ -1,2 +1,4 @@
 survey,item_con,item,variable,values,nonresponses,question_text,response_categories
-afrob1,threestate_dcn,threestate_afrob,supdem,c(3:1),"c(4,98)",blank,blank
+aes2007,strong4a,strong_wvs,c12p1,c(1:4),,,
+aes2007,army_approve4,army_wvs,c12p3,c(1:4),,,
+aes2007,dem_good4a,evdemoc_wvs,c12p4,c(4:1),,,
