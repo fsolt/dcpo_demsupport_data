@@ -1,2 +1,2 @@
 survey,item_con,item,variable,values,nonresponses,question_text,response_categories
-pew2017,dem_good4b,evdemoc_pew,polsys_republic,c(4:1),c(8,9), a democratic system where representatives elected by citizens decide what becomes law,1 very good / somewhat good / somewhat bad / very bad
+pew2017,dem_good4b,evdemoc_pew,polsys_republic,c(4:1),"c(8,9)", a democratic system where representatives elected by citizens decide what becomes law,1 very good / somewhat good / somewhat bad / very bad
