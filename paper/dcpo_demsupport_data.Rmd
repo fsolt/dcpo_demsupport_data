@@ -105,11 +105,40 @@ with_min_coverage <- function(x, min_cov) {
   return(x)
 }
 
+with_max_gap <- function(x, max_gap, edges = TRUE) {
+    if (!is.na(max_gap)) {
+        country <- yr_obs <- NULL
+
+        c_yrs <- x %>% 
+            group_by(country, year) %>% 
+            summarize(year = first(year)) %>% 
+            mutate(lead_span = ifelse(!is.na(lead(year)),
+                                      lead(year) - year - 1,
+                                      50),
+                   lag_span = ifelse(!is.na(lag(year)),
+                                     year - lag(year) - 1,
+                                     50),
+                   min_span = pmin(lead_span, lag_span),
+                   max_span = pmax(lead_span, lag_span),
+                   drop = min_span > max_gap & max_span == 50)
+        
+        x <- x %>% 
+          left_join(c_yrs,
+                    by = c("country", "year")) %>% 
+          filter(!drop) %>% 
+          select(-contains("span")) %>% 
+          select(-drop)
+    }
+    return(x)
+}
+
 process_dcpo_input_raw <- function(dcpo_input_raw_df) {
   dcpo_input_raw_df %>% 
     with_min_yrs(2) %>% 
     with_min_cy(5) %>% 
-    with_min_coverage(.2) %>% 
+    # with_min_coverage(.2) %>% 
+    with_max_gap(6) %>%
+    with_max_gap(6) %>% 
     with_min_yrs(2) %>% # double-check after dropping <5 cy
     filter(year >= 1972 & n > 0) %>% 
     group_by(country) %>% 
@@ -184,7 +213,7 @@ n_cy <- dcpo_input_raw1 %>%
 
 n_years <- as.integer(summary(dcpo_input_raw1$year)[6]-summary(dcpo_input_raw1$year)[1])
 
-spanned_cy <- dcpo_input_raw %>% 
+spanned_cy <- dcpo_input_raw1 %>% 
   group_by(country) %>% 
   summarize(years = max(year) - min(year) + 1) %>% 
   summarize(n = sum(years)) %>% 
@@ -455,18 +484,21 @@ cby_map + (countries_plot/ ybc_plot) + plot_layout(widths = c(4, 1))
 ```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
 dcpo_input_raw1 %>% 
   mutate(country = str_replace(country, "’", "'")) %>% 
-  distinct(country, year, item, cc_rank) %>% 
+  group_by(country) %>% 
+  mutate(years_rank = length(unique(year))) %>% 
+  distinct(country, year, item, cc_rank, years_rank) %>% 
   group_by(country, year) %>% 
   summarize(n = n(),
-            cc_rank = cc_rank) %>% 
+            cc_rank = cc_rank,
+            years_rank = years_rank) %>% 
   ungroup() %>% 
   distinct() %>% 
   ggplot(aes(x = year, 
-             y = forcats::fct_reorder(country, cc_rank),
+             y = forcats::fct_reorder(country, years_rank),
              fill = n)) + 
   geom_tile() +
-  scale_fill_stepsn(colors = rev(hcl.colors(5, "inferno")),
-                    n.breaks = 5,
+  scale_fill_stepsn(colors = rev(hcl.colors(6, "inferno")),
+                    n.breaks = 6,
                     show.limits = TRUE,
                     right = FALSE,
                     name = "Observations") +
