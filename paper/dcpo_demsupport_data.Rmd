@@ -134,12 +134,12 @@ with_max_gap <- function(x, max_gap, edges = TRUE) {
 
 process_dcpo_input_raw <- function(dcpo_input_raw_df) {
   dcpo_input_raw_df %>% 
-    with_min_yrs(2) %>% 
+    with_min_yrs(3) %>% 
     with_min_cy(5) %>% 
-    # with_min_coverage(.2) %>% 
-    with_max_gap(6) %>%
-    with_max_gap(6) %>% 
-    with_min_yrs(2) %>% # double-check after dropping <5 cy
+    # # with_min_coverage(.2) %>% 
+    # with_max_gap(6) %>%
+    # with_max_gap(6) %>% 
+    with_min_yrs(3) %>% # double-check after dropping <5 cy
     filter(year >= 1972 & n > 0) %>% 
     group_by(country) %>% 
     mutate(cc_rank = n()) %>% 
