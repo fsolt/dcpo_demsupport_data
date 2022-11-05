@@ -11,6 +11,7 @@
 *.nav
 *.snm
 *.toc
+*.ent
 dev/*
 framed.sty
 paper/*cache/*
