@@ -1,7 +1,7 @@
 survey,item_con,item,variable,values,nonresponses,question_text,response_categories
-aes2007,army_approve4,army_wvs,c12p3,c(1:4),,The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
-aes2007,dem_good4a,evdemoc_wvs,c12p4,c(4:1),,Having a democratic political system,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
-aes2007,strong4a,strong_wvs,c12p1,c(1:4),,strong leader who doesn't bother with parliament,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
+aes2007,army_approve4,army_cses,c12p3,c(1:4),,The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+aes2007,dem_good4a,evdemoc_cses,c12p4,c(4:1),,Having a democratic political system,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
+aes2007,strong4a,strong_cses,c12p1,c(1:4),,strong leader who doesn't bother with parliament,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
 afrob1,army_approve5,army_afrob,rejmil,c(5:1),"c(6,98)",The army comes in to govern the country,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 afrob1,oneparty_bad5,party_afrob,rejone,c(5:1),"c(6,98)",only one political party is allowed to stand for election and hold office,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 afrob1,strong5,strong_afrob,rejdic,c(5:1),"c(6,98)",elections and parliament are abolished so that the president can decide everything,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
