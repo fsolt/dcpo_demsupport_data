@@ -58,7 +58,7 @@ knitr::opts_chunk$set(
 # remotes::install_github("fsolt/DCPOtools")
 
 library(DCPOtools)
-library(DCPO)
+library(cmdstanr)
 library(tidyverse)
 library(here)
 library(countrycode)
@@ -69,14 +69,13 @@ library(rsdmx)
 set.seed(324)
 ```
 
-```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys.csv"))}
+```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys_demsupport.csv"))}
 survey_file <- list.files(here("data-raw"),
                           full.names = TRUE) %>% 
   str_subset("surveys.*\\.csv")
 
 surveys <- read_csv(survey_file,
-                    col_types = "cccccc") %>%
-  mutate(item = item_con)
+                    col_types = "ccccccc")
 
 dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
                                         datapath = here("..",
@@ -137,9 +136,6 @@ process_dcpo_input_raw <- function(dcpo_input_raw_df) {
   dcpo_input_raw_df %>% 
     with_min_yrs(3) %>% 
     with_min_cy(5) %>% 
-    # # with_min_coverage(.2) %>% 
-    # with_max_gap(6) %>%
-    # with_max_gap(6) %>% 
     with_min_yrs(3) %>% # double-check after dropping <5 cy
     filter(year >= 1972 & n > 0) %>% 
     group_by(country) %>% 
@@ -243,15 +239,15 @@ back_to_numeric <- function(string_number) {
 covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) * 100}
 ```
 
-In all, we identified `r n_items` such survey items that were asked in no fewer than five country-years in countries surveyed at least twice; these items were drawn from `r n_surveys` different survey datasets.^[
+In all, we identified `r n_items` such survey items that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.^[
 The complete list of survey items is included in online Appendix A.]
 
 Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
-It is clear that these data are sparse: if every country that appears in the source data had been surveyed in every year in the source data, we would have at least `r total_cy` observations, and if these hypothetical surveys included every _item_, we would have `r {n_countries * n_years * n_items} %>% scales::comma()` observations.
+These data are sparse: if every country that appears in the source data had been surveyed in every year in the source data, we would have at least `r total_cy` observations, and if these hypothetical surveys included every _item_, we would have `r {n_countries * n_years * n_items} %>% scales::comma()` observations.
 From a more optimistic perspective, we do have in the source data `r n_cy` country-years for which we have at least _some_ information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
 Still, the many different survey items employed means these data are incomparable and difficult to use together.
 
-```{r item_and_country_plots, fig.height = 3.5, fig.width=7, fig.cap = "Countries and Years with the Most Observations in the DSD Source Data \\label{item_country_plots}"}
+```{r item_and_country_plots, fig.height = 3.5, fig.width=7, fig.cap = "Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}"}
 items_plot <- dcpo_input_raw1 %>%
   distinct(country, year, item) %>%
   count(item) %>%
@@ -266,27 +262,6 @@ items_plot <- dcpo_input_raw1 %>%
         plot.title = element_text(hjust = 0.5, size = 11)) +
   ylab("Country-Years\nObserved") +
   ggtitle("Items")
-
-most_common_item <- dcpo_input_raw1 %>% 
-  count(item) %>% 
-  arrange(-n) %>% 
-  slice_head() %>% 
-  pull(item)
-
-most_common_cy <- dcpo_input_raw1 %>% 
-  filter(item == most_common_item) %>%
-  distinct(country, year) %>%
-  nrow()
-
-most_common_surveys <- dcpo_input_raw1 %>%
-  filter(item == most_common_item) %>%
-  distinct(survey) %>%
-  pull(survey) %>% 
-  str_split(", ") %>% 
-  unlist() %>% 
-  unique() %>% 
-  sort()
-
 
 countries_plot <- dcpo_input_raw1 %>%
   mutate(country = if_else(stringr::str_detect(country, "United"),
@@ -325,7 +300,6 @@ cby_plot <- dcpo_input_raw1 %>%
   ylab("Years\nObserved") +
   ggtitle("Countries")
 
-
 ybc_plot <- dcpo_input_raw1 %>%
   distinct(country, year) %>%
   count(year, name = "nn") %>%
@@ -341,43 +315,86 @@ ybc_plot <- dcpo_input_raw1 %>%
   ylab("Countries\nObserved") +
   ggtitle("Year")
 
-us_obs <- dcpo_input_raw1 %>% 
+world_map <- map_data("world") %>% 
+  filter(!long > 180)
+
+cby_map <- world_map %>% 
+  distinct(region) %>% 
+  mutate(country = countrycode::countrycode(region,
+                                            "country.name",
+                                            "country.name")) %>% 
+  filter(!region=="Antarctica") %>% 
+  left_join(dcpo_input_raw1 %>% 
+              count(country, year) %>% 
+              count(country, name = "Years"),
+            by = "country") %>% 
+  mutate(Years = ifelse(is.na(Years), 0, Years)) %>% 
+  ggplot(aes(fill = Years, map_id = region)) +
+  geom_map(map = world_map,
+           color = "white",
+           size = 0.06) +
+  coord_map(projection = "mollweide", 
+            ylim=c(-80, 90),
+            xlim=c(-170, 170)) +
+  theme_void() +
+  scale_fill_distiller(na.value = "gray90", 
+                       palette = "Blues",
+                       direction = 1) +
+  ggtitle("Years Observed by Country") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = c(.05,.1),
+        legend.justification = c(0,0), 
+        legend.direction = "vertical") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_x_continuous(expand=c(0,0))
+
+cby_map + (countries_plot/ ybc_plot) + plot_layout(widths = c(4, 1))
+```
+
+```{r most_common}
+most_common_item <- dcpo_input_raw1 %>% 
+  count(item) %>% 
+  arrange(-n) %>% 
+  slice_head() %>% 
+  pull(item)
+
+most_common_item_cy <- dcpo_input_raw1 %>% 
+  filter(item == most_common_item) %>%
+  distinct(country, year) %>%
+  nrow()
+
+most_common_item_surveys <- dcpo_input_raw1 %>%
+  filter(item == most_common_item) %>%
+  distinct(survey) %>%
+  pull(survey) %>% 
+  str_split(", ") %>% 
+  unlist() %>% 
+  unique() %>% 
+  sort()
+
+top_country_cyi <- dcpo_input_raw1 %>% 
   distinct(country, year, item) %>%
   count(country) %>%
-  filter(country == "United States") %>%
-  pull(n)
+  arrange(-n) %>% 
+  slice_head() %>%
+  pull(country)
 
-most_common_cyi <- dcpo_input_raw1 %>% 
-  count(country, year, item) %>% 
+top_country_cyi_obs <- dcpo_input_raw1 %>%
+  filter(country == top_country_cyi) %>%
+  distinct(country, year, item) %>%
+  nrow()
+
+top_country_cy <- dcpo_input_raw1 %>% 
+  count(country, year) %>% 
   count(country) %>% 
   arrange(-n) %>% 
   slice_head() %>% 
   pull(country)
 
-most_common_cyi_obs <- dcpo_input_raw1 %>%
-  filter(country == most_common_cyi) %>%
-  distinct(country, year, item) %>%
+top_country_cy_obs <- dcpo_input_raw1 %>%
+  filter(country == top_country_cy) %>%
+  distinct(country, year) %>%
   nrow()
-
-most_common_cy <- dcpo_input_raw1 %>% 
-  count(country, year) %>% 
-  count(country) %>% 
-    arrange(-n) %>% 
-  slice_head() %>% 
-  pull(country)
-
-most_common_cy_obs <- dcpo_input_raw1 %>%
-  filter(country == most_common_cyi) %>%
-  distinct(country, year, item) %>%
-  nrow()
-
-others_cyi <- dcpo_input_raw1 %>%
-  distinct(country, year, item) %>%
-  count(country) %>%
-  arrange(desc(n)) %>%
-  slice(2:5) %>%
-  pull(country) %>% 
-  knitr::combine_words()
 
 countries_cp <- dcpo_input_raw1 %>%
   mutate(country = if_else(stringr::str_detect(country, "United"),
@@ -420,10 +437,10 @@ y_peak_nn <- dcpo_input_raw1 %>%
   pull(nn)
 
 data_poorest <- dcpo_input_raw1 %>%
-  distinct(country, year, item) %>%
+  distinct(country, year) %>%
   count(country) %>%
   arrange(n) %>%
-  filter(n == 2) %>%
+  filter(n == min(n)) %>%
   pull(country) %>% 
   knitr::combine_words() %>% 
   paste0("---", ., "---")
@@ -435,48 +452,198 @@ n_data_poor <- {data_poorest %>%
     first()} %>% 
   length() 
 
-  if(n_data_poor < 20) {
-    n_data_poorest <- n_data_poor %>% 
-      wordify_numeral()
-  } else {
-    n_data_poorest <- n_data_poor
-    data_poorest <- " "
-  }
+if (n_data_poor < 20) {
+  n_data_poorest <- n_data_poor %>% 
+    wordify_numeral()
+} else {
+  n_data_poorest <- n_data_poor
+  data_poorest <- " "
+}
 
-world_map <- map_data("world") %>% 
-  filter(!long > 180)
+```
 
-cby_map <- world_map %>% 
-  distinct(region) %>% 
-  mutate(country = countrycode::countrycode(region,
-                                            "country.name",
-                                            "country.name")) %>% 
-  filter(!region=="Antarctica") %>% 
-  left_join(dcpo_input_raw1 %>% 
-              count(country, year) %>% 
-              count(country, name = "Years"),
-            by = "country") %>% 
-  mutate(Years = ifelse(is.na(Years), 0, Years)) %>% 
-  ggplot(aes(fill = Years, map_id = region)) +
-  geom_map(map = world_map,
-           color = "white",
-           size = 0.06) +
-  coord_map(projection = "mollweide", 
-            ylim=c(-80, 90),
-            xlim=c(-170, 170)) +
-  theme_void() +
-  scale_fill_distiller(na.value = "gray90", 
-                       palette = "Blues",
-                       direction = 1) +
-  ggtitle("Years Observed by Country") +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position = c(.05,.1),
-        legend.justification = c(0,0), 
-        legend.direction = "vertical") +
-  scale_y_continuous(expand=c(0,0)) +
-  scale_x_continuous(expand=c(0,0))
 
-cby_map + (countries_plot/ ybc_plot) + plot_layout(widths = c(4, 1))
+Consider the most frequently asked item in the data we collected, which asks respondents whether they strongly disagree, disagree, agree, or strongly agree with the statement, "Democracy may have its problems but it is still the best form of government."
+This question was asked in a total of `r most_common_item_cy` different country-years in `r length(most_common_item_surveys)` different survey datasets.
+That is, the _most common_ survey item was asked in only `r {most_common_item_cy*100/(spanned_cy %>% str_replace(",", "") %>% as.numeric())} %>% round()`% of the country-years spanned by our data, a reminder that the available public opinion data on democratic support is sparse.
+
+The left panel of Figure&nbsp;\ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
+`r top_country_cy` leads in this regard; it was observed in `r top_country_cy_obs` different years.
+Thanks in part to sustained interest in democratic support in the LatinoBarometer and the Americas Barometer, most Latin America countries were surveyed in at least 25 years.
+Germany, Poland, Ukraine, and Russia were all surveyed in more than 20 years.
+At the other end of the spectrum, `r n_data_poorest` countries have only the minimum three survey years required to be included in the source dataset at all.
+
+The upper right panel of this figure shows the twelve countries with the most year-items in the source data.
+It reveals that South Korea enjoys the richest collection of data on support for democracy.
+In addition to countries already mentioned, Japan and the Philippines were also surveyed often and with multiple different items.
+The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
+Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy.
+In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
+
+```{r dcpo_chunk_options, cache=TRUE}
+evaluate <- TRUE
+```
+
+```{r dcpo_input, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
+dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
+                                     scale_q = most_common_item,
+                                     scale_cp = 2)
+save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
+```
+
+```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
+ iter <- 1000
+ 
+ dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
+ dcpo_output <- dcpo$sample(
+   data = dcpo_input[1:13], 
+   max_treedepth = 14,
+   adapt_delta = 0.99,
+   step_size = 0.005,
+   seed = 324, 
+   chains = 4, 
+   parallel_chains = 4,
+   iter_warmup = iter/2,
+   iter_sampling = iter/2,
+   refresh = iter/50
+ )
+ results_path <- here::here(file.path("data", 
+                                      iter, 
+                                      {str_replace_all(Sys.time(), "[- :]", "") %>%
+                                          str_replace("\\d{2}$", "")}))
+ dir.create(results_path, 
+            showWarnings = FALSE, 
+            recursive = TRUE)
+ dcpo_output$save_data_file(dir = results_path,
+                            random = FALSE)
+ dcpo_output$save_output_files(dir = results_path,
+                               random = FALSE)
+```
+
+```{r dcpo_results}
+ if (!exists("results_path")) {
+   latest <- "202212161836"
+   results_path <- here::here("data", "1000", latest)
+   
+   # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
+   if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
+     dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
+     osf_retrieve_node("XXXXX") %>% 
+       osf_ls_files() %>% 
+       filter(name == latest) %>% 
+       osf_download(path = here::here("data", "1000"))
+   }
+}
+ 
+ dcpo_output <- as_cmdstan_fit(here::here(results_path,
+                                          list.files(results_path, pattern = "csv$")))
+ 
+
+```
+
+```{r dcpo_results_summary, cache=TRUE}
+load(file = here::here("data", "dcpo_input.rda"))
+theta_results <- DCPOtools::summarize_dcpo_results(dcpo_input,
+                                                   dcpo_output,
+                                                   "theta")
+
+res_cy <- nrow(theta_results) %>% 
+  scales::comma()
+
+res_c <- theta_results %>% 
+  pull(country) %>% 
+  unique() %>% 
+  length()
+
+save(theta_results, file = here::here("data","theta_results.rda"))
+```
+
+```{r cs_plot, fig.cap="DSD Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
+
+n_panes <- 2
+axis_text_size <- 10
+
+p1_data <- theta_results %>%
+  group_by(country) %>%
+  top_n(1, year) %>%
+  ungroup() %>%
+  arrange(mean) %>%
+  transmute(country_year = paste0(country, " (", year, ")") %>% 
+              str_replace("’", "'"),
+            estimate = mean,
+            conf.high = q90,
+            conf.low = q10,
+            pane = n_panes - (ntile(mean, n_panes) - 1),
+            ranked = as.factor(ceiling(row_number())))
+
+p_theta <- ggplot(p1_data,
+                  aes(x = estimate, y = ranked)) +
+  geom_segment(aes(x = conf.low, xend = conf.high,
+                   y = ranked, yend = ranked),
+               na.rm = TRUE,
+               alpha = .4) +
+  geom_point(fill = "black", shape = 21, size = .5, na.rm = TRUE) +
+  theme_bw() + theme(legend.position="none",
+                     axis.text.x  = element_text(size = axis_text_size,
+                                                 angle = 90,
+                                                 vjust = .45,
+                                                 hjust = .95),
+                     axis.text.y  = element_text(size = axis_text_size),
+                     axis.title = element_blank(),
+                     strip.background = element_blank(), 
+                     strip.text = element_blank(),
+                     panel.grid.major = element_line(size = .3),
+                     panel.grid.minor = element_line(size = .15)) +
+  scale_y_discrete(breaks = p1_data$ranked, labels=p1_data$country_year) +
+  coord_cartesian(xlim=c(0, 1)) +
+  facet_wrap(vars(pane), scales = "free", nrow = 1)
+
+
+p_theta +
+  plot_annotation(caption = "Note: Gray whiskers represent 80% credible intervals.")
+
+bottom5 <- p1_data %>% 
+  arrange(ranked) %>% 
+  slice(1:5) %>% 
+  pull(country_year) %>% 
+  str_replace(" \\(.*", "") %>% 
+  knitr::combine_words()
+
+```
+
+We estimated the model using the `DCPOtools` package for R [@Solt2020a], running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
+The $\hat{R}$ diagnostic had a maximum value of 1.01, indicating that the model converged.
+The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Appendix A).
+
+The result is estimates, in all `r res_cy` country-years spanned by the source data, of support for democracy.
+Figure&nbsp;\ref{cs_mry} displays the most recent available DSD score for each of the `r res_c` countries and territories in the dataset.
+
+
+The latest scores for `r bottom5` have them as the places where the public expresses the lowest support for democracy.
+
+```{r ts_plots, fig.cap="DSD Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
+countries <- c("Finland", "China", "Philippines", "Bangladesh",
+               "Malaysia", "Turkey", "United Kingdom", "South Korea",
+               "Belgium", "Spain", "United States", "Chile", 
+               "Ukraine", "Italy", "Argentina", "Mexico")
+
+c_res <- theta_results %>% 
+  filter(country %in% countries)
+
+ggplot(data = c_res, aes(x = year, y = mean)) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  coord_cartesian(xlim = c(1985, 2020), ylim = c(0, 1)) +
+  labs(x = NULL, y = "DSD Scores") +
+  geom_ribbon(data = c_res, aes(ymin = q10, ymax = q90, linetype=NA), alpha = .25) +
+  geom_line(data = c_res) +
+  facet_wrap(~country, nrow = 2) +
+  theme(axis.text.x  = element_text(size=7,
+                                    angle = 90,
+                                    vjust = .45,
+                                    hjust = .95),
+        strip.background = element_rect(fill = "white", colour = "white")) +
+  plot_annotation(caption = "Note: Countries are ordered by their DSD scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
 ```
 
 
@@ -511,23 +678,3 @@ dcpo_input_raw1 %>%
         axis.text.y  = element_text(size = 6)) 
 ```
 
-
-Consider the most frequently asked item in the data we collected, which asks respondents ...
-Employed by the Arab Barometer,the Asia Europe Survey, the Asian Barometer, the British Social Attitudes Survey, the Latino Barometer, the East Asian Social Survey, the European Values Survey, the Italian National Election Study, the South Asian Barometer, and the World Values Survey, this question was asked in a total of `r most_common_cy_obs` different country-years.
-That this constitutes only `r {most_common_cy_obs*100/(spanned_cy %>% str_replace(",", "") %>% as.numeric())} %>% round()`% of the country-years spanned by our data---and again, this is the _most common_ survey item---again underscores just how sparse and incomparable the available public opinion data is on this topic.
-
-The left panel of Figure&nbsp;\ref{item_country_plots} shows the dozen countries with the highest count of country-year-item observations.
-`r most_common_cyi`, with `r most_common_cyi_obs` observations, is far and away the best represented country in the source data, followed by `r others_cyi`.
-At the other end of the spectrum, `r n_data_poorest` countries`r data_poorest`have only the minimum two observations required to be included in the source dataset at all.
-The upper right panel shows the twelve countries with the most years observed; this group is similar, but with `r adding` joining the list and `r dropping` dropping off.
-The bottom panel counts the countries observed in each year and reveals just how few relevant survey items were asked before 1990.
-Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about trust in civil servants.
-In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
-
-```{r dcpo_chunk_options}
-evaluate <- TRUE
-```
-
-
-
-\pagebreak
