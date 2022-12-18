@@ -492,52 +492,52 @@ save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
 ```
 
 ```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
- iter <- 1000
- 
- dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
- dcpo_output <- dcpo$sample(
-   data = dcpo_input[1:13], 
-   max_treedepth = 14,
-   adapt_delta = 0.99,
-   step_size = 0.005,
-   seed = 324, 
-   chains = 4, 
-   parallel_chains = 4,
-   iter_warmup = iter/2,
-   iter_sampling = iter/2,
-   refresh = iter/50
- )
- results_path <- here::here(file.path("data", 
-                                      iter, 
-                                      {str_replace_all(Sys.time(), "[- :]", "") %>%
-                                          str_replace("\\d{2}$", "")}))
- dir.create(results_path, 
-            showWarnings = FALSE, 
-            recursive = TRUE)
- dcpo_output$save_data_file(dir = results_path,
-                            random = FALSE)
- dcpo_output$save_output_files(dir = results_path,
-                               random = FALSE)
+iter <- 1000
+
+dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
+dcpo_output <- dcpo$sample(
+  data = dcpo_input[1:13], 
+  max_treedepth = 14,
+  adapt_delta = 0.99,
+  step_size = 0.005,
+  seed = 324, 
+  chains = 4, 
+  parallel_chains = 4,
+  iter_warmup = iter/2,
+  iter_sampling = iter/2,
+  refresh = iter/50
+)
+results_path <- here::here(file.path("data", 
+                                     iter, 
+                                     {str_replace_all(Sys.time(), "[- :]", "") %>%
+                                         str_replace("\\d{2}$", "")}))
+dir.create(results_path, 
+           showWarnings = FALSE, 
+           recursive = TRUE)
+dcpo_output$save_data_file(dir = results_path,
+                           random = FALSE)
+dcpo_output$save_output_files(dir = results_path,
+                              random = FALSE)
 ```
 
 ```{r dcpo_results}
- if (!exists("results_path")) {
-   latest <- "202212161836"
-   results_path <- here::here("data", "1000", latest)
-   
-   # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
-   if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
-     dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
-     osf_retrieve_node("XXXXX") %>% 
-       osf_ls_files() %>% 
-       filter(name == latest) %>% 
-       osf_download(path = here::here("data", "1000"))
-   }
+if (!exists("results_path")) {
+  latest <- "202212161836"
+  results_path <- here::here("data", "1000", latest)
+  
+  # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
+  if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
+    dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
+    osf_retrieve_node("XXXXX") %>% 
+      osf_ls_files() %>% 
+      filter(name == latest) %>% 
+      osf_download(path = here::here("data", "1000"))
+  }
 }
- 
- dcpo_output <- as_cmdstan_fit(here::here(results_path,
-                                          list.files(results_path, pattern = "csv$")))
- 
+
+dcpo_output <- as_cmdstan_fit(here::here(results_path,
+                                         list.files(results_path, pattern = "csv$")))
+
 
 ```
 
