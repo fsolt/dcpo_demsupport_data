@@ -6,7 +6,7 @@ output:
     fig_caption: true
     latex_engine: pdflatex
     template: svm-latex-ms2.tex
-title: "Democratic Support Around the World: Dynamic Comparative Data on Public Support for Democracy"
+title: "Dimensionality, Conditionality, and Definition: Why [Recent?] Latent Variable Measures of Democratic Support Are Invalid [idk]"
 thanks: "Corresponding author: [frederick-solt@uiowa.edu](mailto:frederick-solt@uiowa.edu).  Current version: `r format(Sys.time(), '%B %d, %Y')`."
 author:
 - name: Yuehong Cassandra Tai
