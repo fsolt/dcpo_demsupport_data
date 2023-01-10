@@ -347,10 +347,10 @@ eb471,threestate_231,threestate_eb,v313,"c(2,3,1)",which of the following statem
 ess6,imp11,impdemoc_ess,implvdm,c(0:10),How important is it for you to live in a country that is governed democratically?,0 not at all important / 10 extremely important
 ess10,imp11,impdemoc_ess,implvdm,c(0:10),How important is it for you to live in a country that is governed democratically?,0 not at all important / 10 extremely important
 ess10,strong11,strong_ess,accalaw,c(10:0),How acceptable for you would it be for [country] to have a strong leader who is above the law?,0 not at all acceptable / 10 completely acceptable
-eurasiab2001,army_approve4,army_eurasiab,antiarmy,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+eurasiab2001,army_approve4,army_eurasiab,antiarmy,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 eurasiab2001,church4,church_eurasiab,demochur,c(1:4),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 eurasiab2001,strong4e,strong_eurasiab,autleade,"c(2, 1, -1, -2)",Support for strong leader,-2 fully disagree / -1 partially disagree / 1 partially agree / 2 fully agree
-eurasiab2010,army_approve4,army_eurasiab,v135_2,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+eurasiab2010,army_approve4,army_eurasiab,v135_2,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 eurasiab2010,church4,church_eurasiab,v135_5,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 eurasiab2010,strong4e,strong_eurasiab,v135_4,c(1:4),Strong leader?,1 agree / 2 quite agree / 3 rather disagree / 4 disagree
 evs_combo,army_bad4,army_evs,e116,c(1:4),Having the army rule the country,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
@@ -370,7 +370,7 @@ evs2017ukr,dem_good4a,evdemoc_evs,v148,c(4:1),Having a democratic political syst
 evs2017ukr,imp10,impdemoc_evs,v142,c(1:10),importance of democracy,1 not at all important / 10 absolutely important
 evs2017ukr,strong_bad4,strong_evs,v145,c(1:4),a strong non-democratic leader that does not bother with parliament and elections,1 very good / 2 good / 3 bad / 4 very bad
 fsdelection_combo,church4,church_cses,fnes25,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
-fsdeva2020spr,army_approve4,army_wvs,q10c_3,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+fsdeva2020spr,army_approve4,army_wvs,q10c_3,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 fsdeva2020spr,dem_good4a,evdemoc_wvs,q10c_4,c(4:1),Having a democratic political system,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
 fsdeva2020spr,strong4e,strong_evs,q10c_1,c(1:4),strong leader who doesn't bother with parliament,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
 gallup_vop2004,church4,church_vop,q2d,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
@@ -451,7 +451,7 @@ lb2020,threestate_231,threestate_lb,p10stgbs,"c(2,3,1)",Which of the following s
 lits_wave1,threestate_231,,q311,"c(2,3,1)",Which of the following statements do you agree with most?,"1 democracy is preferable to any other form of political system / 2 Under some circumstances, an authoritarian government may be preferable to a democracy / 3 For people like me, it does not matter whether a government is democratic or authoritarian"
 lits_wave2,threestate_231,,q311,"c(2,3,1)",Which of the following statements do you agree with most?,"1 democracy is preferable to any other form of political system / 2 Under some circumstances, an authoritarian government may be preferable to a democracy / 3 For people like me, it does not matter whether a government is democratic or authoritarian"
 lits_wave3,threestate_231,,q412,"c(2,3,1)",Which of the following statements do you agree with most?,"1 democracy is preferable to any other form of political system / 2 Under some circumstances, an authoritarian government may be preferable to a democracy / 3 For people like me, it does not matter whether a government is democratic or authoritarian"
-neb_combo,army_approve4,army_neb,a3b,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+neb_combo,army_approve4,army_neb,a3b,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 neb_combo,strong4a,strong_neb,a3c,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 neb_combo,threestate_231,threestate_neb,a7,"c(2,3,1)",which of the following statements do you agree with most,1 democracy is preferable to any other kind of government / 2 in some circumstances a non-democratic government can be preferable / 3 for someone like me it doesn't matter what kind of government we have
 norcs2021_21,strong5a,,r21padkom2,c(1:5),having a strong leader in government is good even if rules are bent to get things done,1 competely agree / 2 somewhat agree / 3 neither agree nor disagree / 4 somewhat disagree / 5 competely disagree
@@ -495,12 +495,12 @@ pewrel2006_10nat,strong2c,strong_pew,q34,"c(2,1)",some feel that we should rely 
 polpan1998,threestate_231,,xj11,"c(2,3,1)",Do you think for people like you:,1 democracy is always the best form of government / 2 sometimes non-democratic government is better / 3 there is no difference
 polpan2003,threestate_231,,wj11,"c(2,3,1)",Do you think for people like you:,1 democracy is always the best form of government / 2 sometimes non-democratic government is better / 3 there is no difference
 polpan2008,threestate_231,,vj03,"c(2,3,1)",Do you think for people like you:,1 democracy is always the best form of government / 2 sometimes non-democratic government is better / 3 there is no difference
-sasianb1,army_approve4,army_sasianb,c18b,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+sasianb1,army_approve4,army_sasianb,c18b,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 sasianb1,elections4,election_sasianb,c18d,c(4:1),the country should be governed by those chosen by the people in a fair election,1 Strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 sasianb1,strong4a,strong_sasianb,c18a,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 sasianb1,suitable4,democsuit_sasianb,c17,c(4:1),"How suitable is democracy for our country- very suitable, suitabl, not suitable or not at all suitable?",1 very suitable / 2 suitable / 3 not suitable / 4 not at all suitable
 sasianb1,threestate_231,threestate_sasianb,c23,"c(2,3,1)",which of the following statements do you agree with most,1 democracy is preferable to any other kind of government / 2 in some circumstances a non-democratic government can be preferable / 3 for someone like me it doesn't matter what kind of government we have
-sasianb2,army_approve4,army_sasianb,gbc35b,c(1:4),The army (military) should come in to govern the country,1 strongly approave / 2 approve / 3 disapprove / 4 strongly disapprove
+sasianb2,army_approve4,army_sasianb,gbc35b,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 sasianb2,strong4a,strong_sasianb,gbc35a,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 sasianb2,threestate_231,threestate_sasianb,gbc34,"c(2,3,1)",which of the following statements do you agree with most,1 democracy is preferable to any other kind of government / 2 in some circumstances a non-democratic government can be preferable / 3 for someone like me it doesn't matter what kind of government we have
 tcmeg2004,army_bad4,army_tcmeg,m603e,c(1:4),Having the army rule the country,1 very good / 2 fairly good / 3 fairly bad / 4 very bad
