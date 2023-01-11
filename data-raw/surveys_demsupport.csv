@@ -510,7 +510,7 @@ tcmeg2004,strong_bad4,strong_tcmeg,m603b,c(1:4),a strong non-democratic leader t
 twscs1992_pol,suitable4,,v43_2,c(1:4),Democracy is not suitable for Taiwan,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 twscs1994_val,imp5,,v23_3,c(0:4),How important is the following to you: democracy?,0 not important at all / 123 / 4 very important
 twscs1998_pol,suitable4,,v36,c(1:4),Democracy is not suitable for Taiwan,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
-twscs1999_rel,imp5,,v13_13,c(0:4),How important is the following to you: democracy?,0 not important at all / 123 / 4 very important
+twscs1999_val,imp5,,v13_13,c(0:4),How important is the following to you: democracy?,0 not important at all / 123 / 4 very important
 twscs2000,threestate_231,,v89,"c(2,3,1)","Of the three statements listed on the card, which one comes closest to your view?","1 under any circumstances, democracy is the best system / 2 under certain circumstances, dictationship is better than democracy / 3 to me, all political systems are the same"
 twscs2005,threestate_231,,v95,"c(2,3,1)","Of the three statements listed on the card, which one comes closest to your view?","1 under any circumstances, democracy is the best system / 2 under certain circumstances, dictationship is better than democracy / 3 to me, all political systems are the same"
 twscs2009_rel,imp5,,v79g,c(0:4),How important is the following to you: democracy?,0 not important at all / 123 / 4 very important
