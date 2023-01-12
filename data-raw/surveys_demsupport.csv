@@ -225,94 +225,59 @@ asianb5_australia,oneparty4,party_asianb,q131,c(1:4),Only one political party sh
 asianb5_australia,strong4a,strong_asianb,q130,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
 asianb5_india,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 asianb5_india,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
-asianb5_india,suitable4a,demcitizens_asianb,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
+asianb5_india,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_india,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_india,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_indonesia,army4a,army_asianb,v_139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_indonesia,church4,church_asianb,v_136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_indonesia,oneparty4,party_asianb,v_138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_indonesia,strong4a,strong_asianb,v_137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_indonesia,suitable4a,,v_171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_japan,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_japan,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_japan,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_japan,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_japan,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_korea,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_korea,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_korea,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_korea,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_korea,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_malaysia,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_malaysia,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_malaysia,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_malaysia,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_malaysia,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_mongolia,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_mongolia,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_mongolia,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_mongolia,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_mongolia,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_myanmar,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_myanmar,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_myanmar,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_myanmar,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_myanmar,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_philippines,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_philippines,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_philippines,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_philippines,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_philippines,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_taiwan,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_taiwan,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_taiwan,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_taiwan,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_taiwan,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_thailand,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_thailand,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 asianb5_thailand,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
 asianb5_thailand,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_thailand,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
+asianb5_vietnam,army4a,army_asianb,q139,c(1:4),The army (military) should come in to govern the country,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_vietnam,church4,church_asianb,q136,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
+asianb5_vietnam,oneparty4,party_asianb,q138,c(1:4),Only one political party should be allowed to stand for election and hold office.,1 strongly approve / 2 approve / 3 disapprove / 4 strongly disapprove
+asianb5_vietnam,strong4a,strong_asianb,q137,c(1:4),We should get rid of parliament and elections and have a strong leader decide things.,1 strongly disapprove / 2 disapprove / 3 neither approve nor disapprove / 4 approve / 5 strongly approve
+asianb5_vietnam,suitable4a,,q171,c(1:4),The citizens in our country are not prepared for a democratic system,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree
 bsa2005,church4,church_cses,demobest,c(4:1),Democracy may have its problems but it is still the best form of government,1 strongly agree / 2 agree / 3 disagree / 4 strongly disagree
 caucasusb2011,threestate_231,threestate_cb,attdem,"c(2,3,1)",which of the following statements do you agree with most,1 democracy is always preferable to any other kind of government / 2 under certain situations a dictatorship is preferable / 3 for people like me it does not matter whether we have a democratic government or nondemocratic government
 caucasusb2012,threestate_231,threestate_cb,attdem,"c(2,3,1)",which of the following statements do you agree with most,1 democracy is always preferable to any other kind of government / 2 under certain situations a dictatorship is preferable / 3 for people like me it does not matter whether we have a democratic government or nondemocratic government
