@@ -1,1 +1,7 @@
-﻿survey,item,variable,values,question_text,response_categories,citation
+survey,item,variable,values,question_text,response_categories,citation
+wvs6_bahrain,imp10,v140,c(1:10),importance of democracy,1 not at all important / 10 absolutely important,Eddy S. F. Yeung(2023)
+wvs_combo,strong4b,e114,c(1:4),a strong non-democratic leader that does not bother with parliament and elections,1 very good / 2 good / 3 bad / 4 very bad,Eddy S. F. Yeung(2023)
+asianb4,auth_family,v142,c(1:4),Government leaders are like the head of a family; we should all follow their decisions. ,1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
+asianb4,auth_morals,v147,c(1:4),"If we have political leaders who are morally upright, we can let them decide everything. ",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
+asianb4,judicial_independence,v145,c(1:4),"When judges decide important cases, they should accept the view of the executive branch. ",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
+asianb4,rule_law4,q149,c(1:4),"When the country is facing a difficult situation, it is ok for the government to disregard the law in order to deal with the situation",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
