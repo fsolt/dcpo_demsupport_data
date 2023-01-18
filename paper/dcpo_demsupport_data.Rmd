@@ -66,6 +66,124 @@ library(patchwork)
 library(ggthemes)
 library(rsdmx)
 
+# define functions
+validation_plot <- function(v_data_raw, v_var, v_val, neg = FALSE,
+                            lab_x, lab_y, show_n = FALSE,
+                            theta_summary, theta_results) {
+    
+    if (missing(lab_x)) lab_x <- .7
+    if (missing(lab_y)) lab_y <- .97
+    # defaults per https://stackoverflow.com/a/49167744/2620381
+    if ("theta_summary" %in% ls(envir = .GlobalEnv) & missing(theta_summary))
+        theta_summary <- get("theta_summary", envir = .GlobalEnv)
+    if ("theta_results" %in% ls(envir = .GlobalEnv) & missing(theta_results))
+        theta_results <- get("theta_results", envir = .GlobalEnv)
+    
+    validation_formatted <- v_data_raw %>% 
+        DCPOtools::format_dcpo(scale_q = v_var, # these arguments are required
+                               scale_cp = 1)    # but they don't matter here
+    
+    if (neg)
+      validation_summarized <- validation_formatted$data %>%
+      filter(item == paste(v_var, v_val, "or higher")) %>%
+      mutate(iso2c = countrycode::countrycode(country,
+                                              origin = "country.name",
+                                              destination = "iso2c"),
+             prop = 1-y_r/n_r,
+             se = sqrt((prop*(1-prop))/n),
+             prop_90 = prop + qnorm(.9)*se,
+             prop_10 = prop - qnorm(.9)*se) %>%
+      left_join(theta_summary %>% select(-kk, -tt), by = c("country", "year"))
+    else
+      validation_summarized <- validation_formatted$data %>%
+      filter(item == paste(v_var, v_val, "or higher")) %>%
+      mutate(iso2c = countrycode::countrycode(country,
+                                              origin = "country.name",
+                                              destination = "iso2c"),
+             prop = y_r/n_r,
+             se = sqrt((prop*(1-prop))/n),
+             prop_90 = prop + qnorm(.9)*se,
+             prop_10 = prop - qnorm(.9)*se) %>%
+      left_join(theta_summary %>% select(-kk, -tt), by = c("country", "year"))
+    
+    if ("title" %in% names(v_data_raw)) {
+      v_title <- v_data_raw %>% 
+        filter(item == v_var) %>% 
+        pull(title) %>% 
+        first()
+    } else {
+      v_title <- v_var
+    } 
+    
+    if (neg)
+      validation_cor <- bind_rows(theta_results,
+                                  .id = "iter") %>%
+      right_join(validation_summarized %>%
+                   transmute(country = country,
+                             year = year,
+                             prop = 1 - y_r/n_r,
+                             se = sqrt((prop*(1-prop))/n)),
+                 by = c("country", "year")) %>% 
+      rowwise() %>% 
+      mutate(sim = rnorm(1, mean = prop, sd = se)) %>% 
+      ungroup() %>% 
+      group_split(iter) %>% 
+      map(~with(.x, cor(theta, sim))) %>%
+      unlist() %>%
+      mean() %>%
+      round(2) %>%
+      paste("R =", .) 
+    else
+      validation_cor <- bind_rows(theta_results,
+                                  .id = "iter") %>%
+      right_join(validation_summarized %>%
+                   transmute(country = country,
+                             year = year,
+                             prop = y_r/n_r,
+                             se = sqrt((prop*(1-prop))/n)),
+                 by = c("country", "year")) %>% 
+      rowwise() %>% 
+      mutate(sim = rnorm(1, mean = prop, sd = se)) %>% 
+      ungroup() %>% 
+      group_split(iter) %>% 
+      map(~with(.x, cor(theta, sim))) %>%
+      unlist() %>%
+      mean() %>%
+      round(2) %>%
+      paste("R =", .)  
+    
+    validation_n <- paste("n =", nrow(validation_summarized))
+    
+    if (show_n == TRUE)
+      validation_lab <- paste0(validation_cor,
+                               "\n",
+                               validation_n)
+    else
+      validation_lab <- validation_cor
+        
+    validation_label <- tibble(mean = lab_x,
+                               prop = lab_y,
+                               label = validation_lab)
+   
+   validation_summarized %>%
+       ggplot(aes(x = mean,
+                  y = prop * 100)) +
+       geom_segment(aes(x = q10, xend = q90,
+                        y = prop * 100, yend = prop * 100),
+                    na.rm = TRUE,
+                    alpha = .2) +
+       geom_segment(aes(x = mean, xend = mean,
+                        y = prop_90 * 100, yend = prop_10 * 100),
+                    na.rm = TRUE,
+                    alpha = .2) +
+     geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) +
+     geom_label(data = validation_label, aes(label = label), size = 3) +
+     # geom_text(aes(label = iso2c), size = 2) +
+     ggtitle(v_title)
+}
+
+
+
 set.seed(324)
 ```
 
@@ -237,8 +355,6 @@ back_to_numeric <- function(string_number) {
 }
 
 covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) * 100}
-
-most_common_item
 ```
 
 ## The Latent Variable Approach to Measuring Democratic Support 
@@ -485,14 +601,14 @@ In the next section, we describe how we make use of all of this sparse and incom
 evaluate <- TRUE
 ```
 
-```{r dcpo_input, eval=TRUE, cache=FALSE, include=FALSE, results=FALSE}
+```{r dcpo_input, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
 dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
                                      scale_q = most_common_item,
                                      scale_cp = 2)
 save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
 ```
 
-```{r dcpo, eval=TRUE, cache=FALSE, include=FALSE, results=FALSE}
+```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
 iter <- 1000
 
 dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
@@ -559,10 +675,14 @@ res_c <- theta_summary %>%
 save(theta_summary, file = here::here("data","theta_summary.rda"))
 ```
 
-```{dcpo_results, cache = TRUE}
-theta_results <- edr(par = "theta")
+```{r dcpo_results, cache = TRUE}
+theta_results <- extract_dcpo_results(dcpo_input,
+                                      dcpo_output,
+                                      par = "theta")
 
-
+alpha_summary <- summarize_dcpo_results(dcpo_input,
+                                        dcpo_output,
+                                        par = "alpha")
 ```
 
 
@@ -661,187 +781,6 @@ ggplot(data = c_sum, aes(x = year, y = mean)) +
     - emancipative values vs their absence
 1. 
 
-```{r convergent_setup, cache = TRUE, cache.extra = tools::md5sum(here::here("data", "pge.rda"))}
-
-internal_dat <- dcpo_input$data %>% 
-  filter(item == "polileader4 3 or higher") %>% 
-  mutate(prop = 1 - y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  left_join(theta_results %>% select(-kk, -tt), by = c("country", "year"))
-
-pge_polileader <- theta_results %>% 
-  map(. %>% right_join(dcpo_input$data %>% 
-                         filter(item == "polileader4 3 or higher") %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = 1 - y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   polileader = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
-
-internal_cor <- map(pge_polileader, function(x) with(x, cor(pge_mean, polileader))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
-
-internal_label <- tibble(mean = .78, prop = .99, label = internal_cor)
-
-internal_plot <- internal_dat %>% 
-  ggplot(aes(x = mean,
-             y = prop * 100)) +
-  geom_segment(aes(x = `10%`, xend = `90%`,
-                   y = prop * 100, yend = prop * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_segment(aes(x = mean, xend = mean,
-                   y = prop_90 * 100, yend = prop_10 * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_smooth(method = 'lm', se = FALSE) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11)) +
-  coord_cartesian(ylim=c(0,100)) +
-  scale_x_continuous(breaks=seq(.1, .9, 0.2)) +
-  labs(x = "PGE Score", 
-       y = '% Agreeing That "On the Whole, Men\nMake Better Political Leaders than Women Do"') + 
-  ggtitle("All Country-Years") +
-  geom_label(data = internal_label, aes(label = label), size = 3)
-
-## Cross-sectional
-internal_poliequal <- dcpo_input$data %>% 
-  filter(item == "poliequal3 2 or higher" & year == 2007) %>% 
-  mutate(iso2c = countrycode::countrycode(country,
-                             origin = "country.name",
-                             destination = "iso2c"),
-         prop = 1 - y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  left_join(theta_results %>% select(-kk, -tt), by = c("country", "year"))
-
-pge_poliequal <- pge %>% 
-  map(. %>% right_join(dcpo_input$data %>% 
-                         filter(item == "poliequal3 2 or higher" & year == 2007) %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = 1 - y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   poliequal = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
-
-internal_cs_cor <- map(pge_poliequal, 
-                       function(x) with(x, cor(pge_mean, poliequal))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
-
-internal_cs_label <- tibble(mean = .7, prop = .73, label = internal_cs_cor)
-
-internal_cs_plot <- internal_poliequal %>% 
-  ggplot(aes(x = mean,
-             y = prop * 100)) +
-  geom_segment(aes(x = `10%`, xend = `90%`,
-                   y = prop * 100, yend = prop * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_segment(aes(x = mean, xend = mean,
-                   y = prop_90 * 100, yend = prop_10 * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_text(aes(label = iso2c), size = 2) +
-  geom_smooth(method = 'lm', se = FALSE) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11)) +
-  labs(x = "PGE Score", 
-       y = '% Opining That "Men Generally Make\nBetter Political Leaders Than Women"') + 
-  ggtitle("Pew Global Spring 2007") +
-  geom_label(data = internal_cs_label, aes(label = label), size = 3)
-
-# Longitudinal
-internal_us <- dcpo_input$data %>% 
-  filter(item == "emopoli2 2 or higher") %>% 
-  mutate(prop = y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  right_join(theta_results %>% 
-               select(-kk, -tt) %>%
-               filter(country == "United States"),
-             by = c("country", "year"))
-
-pge_emopoli <- pge %>% 
-  map(. %>% right_join(dcpo_input$data %>% 
-                         filter(item == "emopoli2 2 or higher") %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   emopoli = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
-
-internal_us_cor <- map(pge_emopoli, function(x) with(x, cor(pge_mean, emopoli))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
-
-internal_us_label <- tibble(year = 1980, mean = .87, label = internal_us_cor)
-
-internal_us_plot <- internal_us %>% 
-  ggplot(aes(x = year,
-             y = mean)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = `10%`,
-                  ymax = `90%`,
-                  linetype = NA),
-               alpha = .2) +
-  geom_point(aes(y = prop),
-             fill = "black",
-             shape = 21,
-             size = .5,
-             na.rm = TRUE) +
-  geom_path(aes(y = prop),
-            linetype = 3,
-            na.rm = TRUE,
-            alpha = .7) +
-  geom_segment(aes(x = year, xend = year,
-                   y = prop_90, yend = prop_10),
-               na.rm = TRUE,
-               alpha = .2) +
-  annotate("text", x = 1979, y = .7, size = 2,
-           label = 'U.S. GSS') +
-  annotate("text", x = 2012, y = .60, size = 2,
-           label = "PGE") +
-  labs(x = "Year", 
-       y = "Score") +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11)) +
-  ggtitle("United States") +
-  geom_label(data = internal_us_label, aes(label = label), size = 3)
-
-```
-
-```{r convergent, cache = TRUE, cache.extra = tools::md5sum(here::here("data", "pge.rda")), fig.cap="Convergent Validation: Correlations Between PGE Scores and Individual PGE Source Data Survey Items \\label{conv_plot}", fig.height=4}
-
-internal_plot + internal_cs_plot + internal_us_plot +
-  plot_annotation(caption = "Note: Gray whiskers and shading represent 80% credible intervals.")
-```
 
 Such future research, however, depends on the validity of the PGE scores.
 Like @Caughey2019 [684-685], we provide evidence of our measure's validity with convergent validation and construct validation.
@@ -857,214 +796,226 @@ In every case, the correlations---estimated taking into account the uncertainty 
 
 
 ```{r construct_validation_survey, cache = TRUE, cache.extra = tools::md5sum(here::here("data", "pge.rda")), fig.cap="Construct Validation: Correlations Between PGE Scores and Individual 'Balancing' Gender Egalitarianism Survey Items \\label{surv_const_plot}", fig.height=4}
-validation_asianb_raw <- "data-raw/validation_items_asianb.csv" %>% 
-  read_csv(col_types = "cccccc") %>% 
-  DCPOtools::dcpo_setup(datapath = here("..",
-                                        "data",
-                                        "dcpo_surveys"),
-                        file = here("data",
-                                    "dcpo_input_raw.csv"))
+validation_asianb_raw <- "data-raw/validation_items_asianb.csv" %>%
+    read_csv(col_types = "ccccccc") %>%
+    DCPOtools::dcpo_setup(datapath = here("..",
+                                          "data",
+                                          "dcpo_surveys"),
+                          file = here("data",
+                                      "dcpo_input_asianb.csv")) %>% 
+  filter(!country == "Hong Kong SAR China") %>% 
+  left_join(read_csv("data-raw/validation_asianb_titles.csv",
+                     col_types = "cc"), by = "item")
 
-dcpo_input_validation_asianb <- validation_asianb_raw %>% DCPOtools::format_dcpo(scale_q = "econ_priority4a",
-                                                                                 scale_cp = 2)
+econ_priority_plot0 <- validation_plot(validation_asianb_raw,
+                                      "econ_priority4a", 3) 
+econ_priority_plot <- econ_priority_plot0 +
+    theme_bw() +
+    theme(legend.position="none",
+          axis.text  = element_text(size=8),
+          axis.title = element_text(size=9),
+          plot.title = element_text(hjust = 0.5, size = 11)) +
+    coord_cartesian(ylim=c(0,100)) +
+    labs(x = "Democratic Support Score",
+         y = '"If You Had to Choose Between Democracy and Economic Development,\nWhich Would You Say Is More Important?"\n% Choosing Democracy') +
+    ggtitle("Asian Barometer, Five Waves")
 
-econ_priority <- dcpo_input_validation_asianb$data %>% 
-  filter(item == "econ_priority4a 3 or higher") %>% 
-  mutate(iso2c = countrycode::countrycode(country,
-                                          origin = "country.name",
-                                          destination = "iso2c"),
-         prop = 1 - y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  left_join(theta_results %>% select(-kk, -tt), by = c("country", "year"))
+leg_check_plot0 <- validation_plot(validation_asianb_raw,
+                                      "legislative_check4", 3) 
 
-dsd_econ_priority <- theta_results %>% 
-  map(. %>% right_join(econ_priority %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = 1 - y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   econ_priority = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
-
-econ_priority_cor <- map(dsd_econ_priority, function(x) 
-  with(x, cor(pge_mean, econ_priority))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
-
-wantch_label <- tibble(mean = .76, prop = .97, label = wantch_cor)
-
-wantch_plot <- wantch %>% 
-  ggplot(aes(x = mean,
-             y = prop * 100)) +
-  geom_segment(aes(x = `10%`, xend = `90%`,
-                   y = prop * 100, yend = prop * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_segment(aes(x = mean, xend = mean,
-                   y = prop_90 * 100, yend = prop_10 * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_smooth(method = 'lm', se = FALSE) +
+leg_check_plot <- leg_check_plot0 +
   theme_bw() +
   theme(legend.position="none",
         axis.text  = element_text(size=8),
         axis.title = element_text(size=9),
         plot.title = element_text(hjust = 0.5, size = 11)) +
   coord_cartesian(ylim=c(0,100)) +
-  labs(x = "PGE Score", 
-       y = '% Agreeing That "A Job is Alright But What\nMost Women Really Want is a Home and Children"') + 
-  ggtitle("All Country-Years") +
-  geom_label(data = wantch_label, aes(label = label), size = 3)
+  labs(x = "Democratic Support Score",
+       y = '% Disagreeing that "If the Government Is Constantly Checked by the\nLegislature, It Cannot Possibly Accomplish Great Things."') +
+  ggtitle("Asian Barometer, Five Waves")
+
+leg_check_plot0 <- validation_plot(validation_asianb_raw,
+                                      "legislative_check4", 3) 
+
+leg_check_plot <- leg_check_plot0 +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11)) +
+  coord_cartesian(ylim=c(0,100)) +
+  labs(x = "Democratic Support Score",
+       y = '% Disagreeing that "If the Government Is Constantly Checked by the\nLegislature, It Cannot Possibly Accomplish Great Things."') +
+  ggtitle("Asian Barometer, Five Waves")
+
+asianb_v_vars <- c("dem_capable2", 
+                   {validation_asianb_raw %>% 
+                       filter(str_detect(item, "4")) %>% 
+                       pull(item) %>% 
+                       unique() %>% 
+                       `[`(1:14)})
+
+all_plots <- purrr::map2(asianb_v_vars,
+                        c(2, rep(3, 14)),
+                        ~validation_plot(validation_asianb_raw,
+                                .x, .y, neg = TRUE) +
+      theme_bw() +
+      theme(legend.position="none",
+            axis.text  = element_text(size=8),
+            axis.title = element_text(size=9),
+            plot.title = element_text(hjust = 0.5, size = 11)) +
+      coord_cartesian(ylim = c(0,100),
+                      xlim = c(.65, .9)) +
+      labs(x = "Democratic Support Score",
+           y = '% Agreeing')
+    )
+
+do.call(gridExtra::grid.arrange, c(all_plots, ncol = 5))
 
 # cross-section
-familywoman <- dcpo_input_balance$data %>% 
-  filter(item == "familywoman4 3 or higher") %>% 
+familywoman <- dcpo_input_balance$data %>%
+  filter(item == "familywoman4 3 or higher") %>%
   mutate(iso2c = countrycode::countrycode(country,
-                             origin = "country.name",
-                             destination = "iso2c"),
-         prop = 1 - y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  left_join(theta_results %>% select(-kk, -tt), by = c("country", "year"))
+                                          origin = "country.name",
+                                            destination = "iso2c"),
+           prop = 1 - y_r/n_r,
+           se = sqrt((prop*(1-prop))/n),
+           prop_90 = prop + qnorm(.9)*se,
+           prop_10 = prop - qnorm(.9)*se) %>%
+    left_join(theta_results %>% select(-kk, -tt), by = c("country", "year"))
 
-pge_familywoman <- pge %>% 
-  map(. %>% right_join(familywoman %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = 1 - y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   familywoman = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
+pge_familywoman <- pge %>%
+    map(. %>% right_join(familywoman %>%
+                             rowwise() %>%
+                             transmute(country = country,
+                                       year = year,
+                                       prop = 1 - y_r/n_r,
+                                       se = sqrt((prop*(1-prop))/n),
+                                       familywoman = rnorm(1, mean = prop, sd = se)),
+                         by = c("country", "year")))
 
-familywoman_cor <- map(pge_familywoman, function(x) 
-  with(x, cor(pge_mean, familywoman))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
+familywoman_cor <- map(pge_familywoman, function(x)
+    with(x, cor(pge_mean, familywoman))) %>%
+    unlist() %>%
+    mean() %>%
+    round(2) %>%
+    paste0("R = ", .)
 
 familywoman_label <- tibble(mean = .8, prop = .97, label = familywoman_cor)
 
-familywoman_plot <- familywoman %>% 
-  ggplot(aes(x = mean,
-             y = prop * 100)) +
-  geom_segment(aes(x = `10%`, xend = `90%`,
-                   y = prop * 100, yend = prop * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_segment(aes(x = mean, xend = mean,
-                   y = prop_90 * 100, yend = prop_10 * 100),
-               na.rm = TRUE,
-               alpha = .2) +
-  geom_text(aes(label = iso2c), size = 2) +
-  geom_smooth(method = 'lm', se = FALSE) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11)) +
-  coord_cartesian(ylim=c(0,100)) +
-  labs(x = "PGE Score", 
-       y = '% Agreeing That "The Most Important Role of a\nWoman is to Take Care of Her Home and Family"') + 
-  ggtitle("Eurobarometer 87.4") +
-  geom_label(data = familywoman_label, aes(label = label), size = 3)
+familywoman_plot <- familywoman %>%
+    ggplot(aes(x = mean,
+               y = prop * 100)) +
+    geom_segment(aes(x = `10%`, xend = `90%`,
+                     y = prop * 100, yend = prop * 100),
+                 na.rm = TRUE,
+                 alpha = .2) +
+    geom_segment(aes(x = mean, xend = mean,
+                     y = prop_90 * 100, yend = prop_10 * 100),
+                 na.rm = TRUE,
+                 alpha = .2) +
+    geom_text(aes(label = iso2c), size = 2) +
+    geom_smooth(method = 'lm', se = FALSE) +
+    theme_bw() +
+    theme(legend.position="none",
+          axis.text  = element_text(size=8),
+          axis.title = element_text(size=9),
+          plot.title = element_text(hjust = 0.5, size = 11)) +
+    coord_cartesian(ylim=c(0,100)) +
+    labs(x = "PGE Score",
+         y = '% Agreeing That "The Most Important Role of a\nWoman is to Take Care of Her Home and Family"') +
+    ggtitle("Eurobarometer 87.4") +
+    geom_label(data = familywoman_label, aes(label = label), size = 3)
 
 # time series
-psw_de <- dcpo_input_balance$data %>% 
-  filter(item == "preschoolwork4 3 or higher" & country == "Germany") %>% 
-  mutate(prop = y_r/n_r,
-         se = sqrt((prop*(1-prop))/n),
-         prop_90 = prop + qnorm(.9)*se,
-         prop_10 = prop - qnorm(.9)*se) %>% 
-  right_join(theta_results %>% 
-               select(-kk, -tt) %>%
-               filter(country == "Germany"),
-             by = c("country", "year"))
+psw_de <- dcpo_input_balance$data %>%
+    filter(item == "preschoolwork4 3 or higher" & country == "Germany") %>%
+    mutate(prop = y_r/n_r,
+           se = sqrt((prop*(1-prop))/n),
+           prop_90 = prop + qnorm(.9)*se,
+           prop_10 = prop - qnorm(.9)*se) %>%
+    right_join(theta_results %>%
+                   select(-kk, -tt) %>%
+                   filter(country == "Germany"),
+               by = c("country", "year"))
 
-pge_de <- pge %>% 
-  map(. %>% right_join(psw_de %>% 
-                         rowwise() %>% 
-                         transmute(country = country,
-                                   year = year,
-                                   prop = y_r/n_r,
-                                   se = sqrt((prop*(1-prop))/n),
-                                   var = rnorm(1, mean = prop, sd = se)), 
-                       by = c("country", "year")))
+pge_de <- pge %>%
+    map(. %>% right_join(psw_de %>%
+                             rowwise() %>%
+                             transmute(country = country,
+                                       year = year,
+                                       prop = y_r/n_r,
+                                       se = sqrt((prop*(1-prop))/n),
+                                       var = rnorm(1, mean = prop, sd = se)),
+                         by = c("country", "year")))
 
-psw_de_cor <- map(pge_de, function(x) 
-  with(x, cor(pge_mean, var, use = "pairwise.complete.obs"))) %>% 
-  unlist() %>% 
-  mean() %>% 
-  round(2) %>% 
-  paste0("R = ", .)
+psw_de_cor <- map(pge_de, function(x)
+    with(x, cor(pge_mean, var, use = "pairwise.complete.obs"))) %>%
+    unlist() %>%
+    mean() %>%
+    round(2) %>%
+    paste0("R = ", .)
 
 psw_de_label <- tibble(year = 1990, mean = .8, label = psw_de_cor)
 
-psw_de_plot <- psw_de %>% 
-  ggplot(aes(x = year,
-             y = mean)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = `10%`,
-                  ymax = `90%`,
-                  linetype = NA),
-               alpha = .2) +
-  geom_point(aes(y = prop),
-             fill = "black",
-             shape = 21,
-             size = .5,
-             na.rm = TRUE) +
-  geom_path(aes(y = prop),
-            linetype = 3,
-            na.rm = TRUE,
-            alpha = .7) +
-  geom_segment(aes(x = year, xend = year,
-                   y = prop_90, yend = prop_10),
-               na.rm = TRUE,
-               alpha = .2) +
-  annotate("text", x = 2010, y = .30, size = 2,
-           label = 'ALLBUS, EVS, WVS') +
-  annotate("text", x = 1986, y = .66, size = 2,
-           label = "PGE") +
-  labs(x = "Year", 
-       y = "Score") +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11)) +
-  ggtitle("Germany") +
-  geom_label(data = psw_de_label, aes(label = label), size = 3)
+psw_de_plot <- psw_de %>%
+    ggplot(aes(x = year,
+               y = mean)) +
+    geom_line() +
+    geom_ribbon(aes(ymin = `10%`,
+                    ymax = `90%`,
+                    linetype = NA),
+                alpha = .2) +
+    geom_point(aes(y = prop),
+               fill = "black",
+               shape = 21,
+               size = .5,
+               na.rm = TRUE) +
+    geom_path(aes(y = prop),
+              linetype = 3,
+              na.rm = TRUE,
+              alpha = .7) +
+    geom_segment(aes(x = year, xend = year,
+                     y = prop_90, yend = prop_10),
+                 na.rm = TRUE,
+                 alpha = .2) +
+    annotate("text", x = 2010, y = .30, size = 2,
+             label = 'ALLBUS, EVS, WVS') +
+    annotate("text", x = 1986, y = .66, size = 2,
+             label = "PGE") +
+    labs(x = "Year",
+         y = "Score") +
+    theme_bw() +
+    theme(legend.position="none",
+          axis.text  = element_text(size=8),
+          axis.title = element_text(size=9),
+          plot.title = element_text(hjust = 0.5, size = 11)) +
+    ggtitle("Germany") +
+    geom_label(data = psw_de_label, aes(label = label), size = 3)
 
 
 wantch_plot + familywoman_plot + psw_de_plot +
-  plot_annotation(caption = "Note: Gray whiskers and shading represent 80% credible intervals.")
+    plot_annotation(caption = "Note: Gray whiskers and shading represent 80% credible intervals.")
 ```
 
 
 ## Appendices
 \pagebreak
 ```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
-dcpo_input_raw1 %>% 
-  mutate(country = str_replace(country, "’", "'")) %>% 
-  group_by(country) %>% 
-  mutate(years_rank = length(unique(year))) %>% 
-  distinct(country, year, item, cc_rank, years_rank) %>% 
-  group_by(country, year) %>% 
+dcpo_input_raw1 %>%
+  mutate(country = str_replace(country, "’", "'")) %>%
+  group_by(country) %>%
+  mutate(years_rank = length(unique(year))) %>%
+  distinct(country, year, item, cc_rank, years_rank) %>%
+  group_by(country, year) %>%
   summarize(n = n(),
             cc_rank = cc_rank,
-            years_rank = years_rank) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  ggplot(aes(x = year, 
+            years_rank = years_rank) %>%
+  ungroup() %>%
+  distinct() %>%
+  ggplot(aes(x = year,
              y = forcats::fct_reorder(country, years_rank),
-             fill = n)) + 
+             fill = n)) +
   geom_tile() +
   scale_fill_stepsn(colors = rev(hcl.colors(6, "inferno")),
                     n.breaks = 6,
@@ -1075,8 +1026,8 @@ dcpo_input_raw1 %>%
   scale_x_continuous(breaks=seq(1972, 2020, 4),
                      sec.axis = dup_axis()) +
   scale_y_discrete(position = "right") +
-  theme(legend.justification=c(0, 0), 
+  theme(legend.justification=c(0, 0),
         legend.position=c(0.01, 0.01),
-        axis.text.y  = element_text(size = 6)) 
+        axis.text.y  = element_text(size = 6))
 ```
 
