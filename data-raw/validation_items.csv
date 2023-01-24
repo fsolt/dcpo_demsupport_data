@@ -5,7 +5,396 @@ asianb4,auth_family,v142,c(1:4),Government leaders are like the head of a family
 asianb4,auth_morals,v147,c(1:4),"If we have political leaders who are morally upright, we can let them decide everything. ",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
 asianb4,judicial_independence,v145,c(1:4),"When judges decide important cases, they should accept the view of the executive branch. ",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
 asianb4,rule_law4,q149,c(1:4),"When the country is facing a difficult situation, it is ok for the government to disregard the law in order to deal with the situation",1 Strongly agree / 2 Somewhat agree / 3 Somewhat agree / 4 Strongly disagree,Jie Lu and Bruce Dickson(2020)
-afrob1,threestate_231,supdem,"c(2,1,3)","Which of these three statements is closest to your own opinion", 1 Democracy is preferable to any form of government / 2 To people like me it doesn't matter what from of government / 3 In certain situations a non-democratic government can be preferable,Mattes and Bratton(2007)
-afrob1,army5,rejmil,c(5:1),"The army comes in to govern the country", 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007) 
-afrob1,oneparty4a,rejone,c(5:1),"only one political party is allowed to stand for election and hold office", 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007)
-afrob1,strong5,rejdic,c(5:1),"elections and parliament are abolished so that the president can decide everything", 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007)
+afrob1,threestate_231,supdem,"c(2,1,3)",Which of these three statements is closest to your own opinion, 1 Democracy is preferable to any form of government / 2 To people like me it doesn't matter what from of government / 3 In certain situations a non-democratic government can be preferable,Mattes and Bratton(2007)
+afrob1,army5,rejmil,c(5:1),The army comes in to govern the country, 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007) 
+afrob1,oneparty4a,rejone,c(5:1),only one political party is allowed to stand for election and hold office, 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007)
+afrob1,strong5,rejdic,c(5:1),elections and parliament are abolished so that the president can decide everything, 1 Strongly disapprove / 2 Disapprove / 3 Neither approve nor disapprove / 4 Approve / 5 Strongly approve,Mattes and Bratton(2007)
+amb_chile2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,contestation_social,d33,c(10:1),To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes the Chilean political system?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,inclusive_protest,d2,c(1:10),How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of expressing their views? Please read the number., 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_chile2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_chile2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_chile2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_chile2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_chile2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_chile2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_chile2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_colombia2007,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_colombia2007,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_colombia2007,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_colombia2007,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_colombia2007,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_colombia2007,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_colombia2007,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_colombia2007,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_costarica2007,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_costarica2007,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_costarica2007,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_costarica2007,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_costarica2007,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_costarica2007,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_costarica2007,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_costarica2007,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_elsalvador2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_elsalvador2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_elsalvador2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_elsalvador2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_elsalvador2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_elsalvador2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_elsalvador2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_elsalvador2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_guatemala2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_guatemala2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_guatemala2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_guatemala2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_guatemala2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_guatemala2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_guatemala2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_guatemala2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_honduras2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_honduras2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_honduras2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_honduras2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_honduras2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_honduras2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_honduras2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_honduras2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_mexico2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_mexico2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_mexico2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_mexico2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_mexico2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_mexico2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_mexico2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_mexico2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_nicaragua2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_nicaragua2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_nicaragua2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_nicaragua2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_nicaragua2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_nicaragua2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_nicaragua2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_nicaragua2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_panama2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_panama2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_panama2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_panama2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_panama2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_panama2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_panama2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_panama2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_peru2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_peru2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_peru2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_peru2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the
+opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_peru2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_peru2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_peru2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_peru2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_uruguay2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_uruguay2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_uruguay2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_uruguay2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_uruguay2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_uruguay2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_uruguay2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_uruguay2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_venezuela2006,contestation_protest,d32,c(10:1),To what extent do you approve or disapprove of a law that prohibits public protests?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,contestation_social,d33,c(10:1),"To what extent do you approve or disapprove of a law that prohibits meetings of any group that criticizes
+the Chilean political system?", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,contestation_tv,d34,c(10:1),To what extent do you approve or disapprove of the government censoring television programs?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,contestation_book,d36,c(10:1),To what extent do you approve or disapprove of the government censoring books that are in public school libraries?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,contestation_media,d37,c(10:1),To what extent do you approve or disapprove of the government censoring media outlets that criticize it?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,inclusive_vote,d1,c(1:10),"There are people who always speak ill of the form of government in Chile, not only the current government, but the form of government,
+how firmly do you approve or disapprove of the right to vote for these people? Please read me the scale number", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,inclusive_protest,d2,c(1:10),"How strongly do you approve or disapprove of these people being able to hold peaceful demonstrations for the purpose of
+expressing their views? Please read the number.", 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,inclusive_office,d3,c(1:10),How strongly do you approve or disapprove of these people being able to run for public office?, 1 Strongly disapprove 10 strongly approve  ,Carlin and Singer(2011)
+amb_venezuela2006,inclusive_express,d4,c(1:10),How strongly do you approve or disapprove of these people going on television to give a speech?,,Carlin and Singer(2011)
+amb_venezuela2006,limexe_opposite,pop1,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. For the progress of the country, it is necessary that our presidents limit the voice and vote of the opposition parties, [or vice versa], 2. Even if it slows down the progress of the country, our presidents should not limit the voice and the Opposition party vote.",Carlin and Singer(2011)
+amb_venezuela2006,limexe_power,pop4,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Our presidents must have the necessary power so that they can act in favor of the national interest, [or the opposite], 2. The power of our presidents must be limited so that our freedoms are not endangered.",Carlin and Singer(2011)
+amb_venezuela2006,limexe_congress,pop2,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Congress greatly impedes the work of our presidents, and should be ignored, [or vice versa], 2. Even when it hinders the president's work, our presidents should not step over",Carlin and Singer(2011)
+amb_venezuela2006,limexe_judge,pop3,c(1:2),"Taking into account the current situation in the country, would you like
+to tell me which of the following sentences do you agree with the most?","1. Judges often get in the way of our presidents, and should be ignored, [or vice versa], 2. Even though judges
+sometimes get in the way of our presidents, the judges' decisions must always be obeyed.",Carlin and Singer(2011)
+amb_venezuela2006,institution_congress,jc15,c(1:2),"Do you think there can ever be a good enough reason for the president to shut down. Congress, or do you think there can't be a good enough reason for that?",1 yes 2 no,Carlin and Singer(2011)
+amb_venezuela2006,institution_sct,jc16,c(1:2),"Do you think there can ever be a good enough reason for the president to
+dissolve the Constitutional Court or do you think there can never be a good enough
+reason for that?",1 yes 2 no,Carlin and Singer(2011)
+lb1995,stronggov,p35,c(1:2),"Some people say that a bit of a firm hand (“mano dura”) from the
+government is not a bad thing for [Country]. Others say that we don't need the
+government's firm hand. Which statement is closest to your way of thinking?","[1] A little of 'firm hand' from the government is not a bad thing for the country
+[2] 'Firm hand' from the government is not good for the country",
+lb1996,defdemo,p22,c(2:1),Would you be willing to defend democracy if it was under threat?,1 yes 2 no,
+lb1997,demcon,nsp61,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb1998,defdemo,sp31,c(2:1),Would you be willing to defend democracy if it was under threat?,1 yes 2 no,
+lb2000,demcon,p64st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[[1] A national congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2001,demcon,p50st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2001,demeco,p48nas,"c(1,3,2)"," If you had to choose between democracy and economic
+development, which would you say is more important?","Economic development is more important
+[2] Democracy is more important
+[3] The same",
+lb2002,demeco,p35st,"c(2,3,1)"," If you had to choose between democracy and economic
+development, which would you say is more important?",1. Democracy is more important 2. Economic development is more important[3] The same,
+lb2002,demcon,p39st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2003,vcheck,p16st.b,c(1:4),"I would give a blank check to a savior leader who solved the
+problems (P16ST.C)",strong agree 1 strong disagree 4,
+lb2003,undem,p16st.d,c(1:4)," I would not mind a non democratic government in power if it
+could solve the economics problems",strong agree 1 strong disagree 4,
+lb2003,strong_prob,p16gb.e,c(1:4),"(P16GB.E) More than political parties and elections, what we lack is a
+decisive leader who is dedicated to resolving problems",strong agree 1 strong disagree 4,
+lb2004,undem,p22stb,c(1:4)," I would not mind a non democratic government in power if it
+could solve the economic",strong agree 1 strong disagree 4,
+lb2004,demspch,p23n,c(2:1)," There are people who say that discussing political issues publicly
+is relatively good for democracy, while others say that discussing
+political issues publicly hurts democracy. With which of these two
+statements are you more in agreement?","[1] Discussion of political issues publicly is relatively good for
+democracy
+[2] Discussion of political issues publicly hurts democracy",
+lb2005,demcon,p21st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2005,,p26st,c(5:1),"How do you think things are in (country)? Can one criticize
+and speak out without restraint?",[1] Always 5 never,
+lb2006,demcon,p26st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2006,vcheck?,p28nf,c(4:1),"Which of the following statements is closest to your view? Choose statement
+A. We should be more active in questioning the actions of our leaders.
+B. As citizens, we should show more respect for authority.",1 Agree strongly with A2 Agree with A 3 Agree with B 4 Agree strongly with B,
+lb2008,demeco,p14st,"c(2,3,1)"," If you had to choose between democracy and economic
+development, which would you say is more important?",1. Economic development is more important2. Democracy is more important [3] The same,
+lb2008,strdif_law???,q17st.a ,c(1:4)," If the country experiences serious difficulties, Do you strongly agree (1), agree
+(2), disagree (3) or strongly disagree (4) that the president should..Not be limited by the law","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2008,strdif_force,q17st.b,c(1:4),Maintain order with the force,,
+lb2008,strdif_media,q17st.c,c(1:4),Control the media,,
+lb2008,strdif_hcheck,q17st.d,c(1:4),Put the congress and parties to the side,,
+lb2008,demcon,q58st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2008,dem_pro??,q84n.b,c(1:4),"Do you strongly agree(1), agree(2), disagree (3) or strongly disagree (4) with every one of the next statements: The street protest They only produce mayhem and destruction","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2009,demeco,q19st,"c(2,3,1)","If you had to choose between democracy and economic development with out democracy, which would you say is more important?",1. Democracy is more important 2. Economic development is more important[3] The same,
+lb2009,contestation_media,q20n.c,c(1:4),"Do you strongly agree(1), agree(2), disagree (3) or strongly disagree (4) with every one of the next statements: The government most have the
+power to close a media when publicize thinks that not like them…..","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2009,strdif_hcheck,q20st.d,c(1:4),"Do you strongly agree(1), agree(2), disagree (3) or strongly disagree (4) with every one of the next statements: When there is a hard situation in (country), is ok if the government pass over the law, the parliament and other institutions to solve the problement..","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2009,demcon,q27st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2010,strdif_hcheck,q14st.b,c(1:4),"Do you strongly agree(1), agree(2), disagree (3) or strongly disagree (4) with every one of the next statements: When there is a hard situation in (country), is ok if the government pass over the law, the parliament and other institutions to solve the problement..","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2010,demcon,q21st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2011,demcon,q23st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2013,demcon,q42st,c(2:1),"There are people who say that without a national congress there can be
+no democracy, while others say that democracy can work without a national congress. Which phrase is closer to your way of thinking?","[1] Without a National Congress there can be no democracy
+[2] Democracy can work without a national congress",
+lb2013,demexp,q43gbs.e,c(1:4),"Do you strongly agree(1), agree(2), disagree (3) or strongly disagree (4) with every one of the next statements:E We should get rid of elections and parliaments and have experts make decisions on behalf of the people","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2016,undem,p44stm.b,c(1:4),"I wouldn't mind if an undemocratic government came to power
+if it can solved the problems.","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2016,strdif_media,p44stm.d,c(1:4),In case of difficulties it is allright for the president to control the media ,"strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2020,undem,q20stm.b,c(1:4),"I wouldn't mind if an undemocratic government came to power
+if it can solved the problems.","strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
+lb2020,strdif_media,q20stm.d,c(1:4),In case of difficulties it is allright for the president to control the media ,"strongly agree (1), agree (2), disagree (3) or strongly disagree (4)",
