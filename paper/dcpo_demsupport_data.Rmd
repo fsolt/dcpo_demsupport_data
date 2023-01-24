@@ -80,10 +80,11 @@ validation_plot <- function(v_data_raw, v_var, neg = FALSE,
         theta_results <- get("theta_results", envir = .GlobalEnv)
     
     v_val <- str_extract(v_var, "\\d+") %>% 
-                          as.numeric() %>%
-                          `/`(2) %>% 
-                          `+`(1)
-    
+      as.numeric() %>%
+      median(x = 1:.) %>% 
+      `+`(1) %>% 
+      floor()
+
     validation_formatted <- v_data_raw %>% 
         DCPOtools::format_dcpo(scale_q = v_var, # these arguments are required
                                scale_cp = 1)    # but they don't matter here
