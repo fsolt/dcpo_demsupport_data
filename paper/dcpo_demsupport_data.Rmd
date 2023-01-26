@@ -6,13 +6,15 @@ output:
     fig_caption: true
     latex_engine: pdflatex
     template: svm-latex-ms2.tex
-title: "Dimensionality, Conditionality, and Definition: Why [Recent?] Latent Variable Measures of Democratic Support Are Invalid [idk]"
+title: "Support for Democracy Is Multidimensional: Why Unidimensional Latent Variable Measures of Democratic Support Are Invalid"
 thanks: "Corresponding author: [frederick-solt@uiowa.edu](mailto:frederick-solt@uiowa.edu).  Current version: `r format(Sys.time(), '%B %d, %Y')`."
 author:
 - name: Yuehong Cassandra Tai
   affiliation: Pennsylvania State University
 - name: Yue Hu
   affiliation: Tsinghua University
+- name: Hyein Ko
+  affiliation: University of Iowa
 - name: Byung-Deuk Woo
   affiliation: Pohang University of Science and Technology
 - name: Frederick Solt
@@ -23,7 +25,7 @@ keywords: "democracy, democratic support, public opinion, political culture, mea
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 fontsize: 11pt
 spacing: double
-bibliography: dcpo-dem_support_data.bib
+bibliography: dcpodemsupportdata.bib
 # csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-political-science-association.csl
 biblio-style: apalike
 citecolor: black
@@ -68,7 +70,7 @@ library(rsdmx)
 
 # define functions
 validation_plot <- function(v_data_raw,
-                            lab_x = .44, lab_y = 99,
+                            lab_x = .45, lab_y = 92,
                             theta_summary, theta_results) {
     
     # defaults per https://stackoverflow.com/a/49167744/2620381
@@ -104,9 +106,12 @@ validation_plot <- function(v_data_raw,
                              scale_cp = 1) %>% # but they don't matter
       pluck("data") %>% 
       mutate(item0 = str_remove(item, " \\d or higher"),
-             title = factor(title) %>% 
-               fct_inorder()) %>% 
+             title = factor(title, 
+                            levels = v_data_raw %>%
+                              pull(title) %>%
+                              unique())) %>% 
       right_join(v_vars, by = "item0") %>%
+      arrange(title) %>% 
       filter(str_detect(item, paste(v_val, "or higher"))) %>%
       mutate(iso2c = countrycode::countrycode(country,
                                               origin = "country.name",
@@ -651,14 +656,10 @@ res_c <- theta_summary %>%
 save(theta_summary, file = here::here("data","theta_summary.rda"))
 ```
 
-```{r dcpo_results, cache = TRUE}
+```{r theta_results, cache = TRUE}
 theta_results <- extract_dcpo_results(dcpo_input,
                                       dcpo_output,
                                       par = "theta")
-
-alpha_summary <- summarize_dcpo_results(dcpo_input,
-                                        dcpo_output,
-                                        par = "alpha")
 ```
 
 
@@ -739,8 +740,8 @@ ggplot(data = c_sum, aes(x = year, y = mean)) +
   theme(legend.position = "none") +
   coord_cartesian(xlim = c(1985, 2020), ylim = c(0, 1)) +
   labs(x = NULL, y = "DSD Scores") +
-  geom_ribbon(data = c_res, aes(ymin = q10, ymax = q90, linetype=NA), alpha = .25) +
-  geom_line(data = c_res) +
+  geom_ribbon(data = c_sum, aes(ymin = q10, ymax = q90, linetype=NA), alpha = .25) +
+  geom_line(data = c_sum) +
   facet_wrap(~country, nrow = 2) +
   theme(axis.text.x  = element_text(size=7,
                                     angle = 90,
@@ -766,38 +767,75 @@ In the left panel of Figure&nbsp;\ref{conv_plot}, we examine the four-point ques
 Then, in the center panel, we look at the question that provides the most data-rich cross-section in the source data, which asked whether respondents felt "men generally make better political leaders than women" and was included in Pew Global's Spring 2007 survey.
 Finally, in the right panel, to evaluate how well the PGE scores capture change over time, we focus on the item with the largest number of observations for a single country in the source data, which asked respondents to the U.S. General Social Survey whether they agreed or disagreed that "most men are better suited emotionally for politics than are most women."
 In every case, the correlations---estimated taking into account the uncertainty in the measures---are in the expected direction and very strong.
-<!-- ^[ -->
-<!-- The uncertainty in the PGE score and in the percentage in the population who would agree with the item does not substantially affect the correlation with the political leadership question, but failing to account for this uncertainty would overstate the correlation with the Pew item, at $R =$ `r with(internal_poliequal, cor(prop, mean)) %>% round(2)`, and the U.S. GSS item, at $R =$ `r with(internal_us, cor(prop, mean, use = "pairwise.complete.obs")) %>% round(2)`. -->
-<!-- We take up the issue of the importance of taking uncertainty into account when working with the PGE data in a subsequent section.] -->
-
-```{r polyarchy, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=6}
-v_titles <- "data-raw/validation_items_fs.csv" %>%
+```{r v_data, include=FALSE, cache=TRUE}
+v_titles <- here("data-raw", "validation_items_fs.csv") %>%
     read_csv(col_types = "ccccccc") %>%
     select(item, title, neg, group, svy_grp) %>%
     distinct() %>% 
     mutate(title = paste0(svy_grp, ": ", title))
 
-v_raw <- "data-raw/validation_items_fs.csv" %>%
+v_raw <- here("data-raw", "validation_items_fs.csv") %>%
     read_csv(col_types = "ccccccc") %>%
     DCPOtools::dcpo_setup(datapath = here("..",
                                           "data",
                                           "dcpo_surveys")) %>%
     left_join(v_titles, by = "item")
+```
 
+
+```{r polyarchy, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=TRUE}
 v_vars_poly <- v_raw %>%
     filter(group == "contest" | group == "participation") %>% 
     arrange(group, title) 
 
-validation_plot(v_vars_poly) +
+validation_plot(v_vars_poly, lab_x = .5) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 9),
+        strip.text.x = element_text(size=8),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
+```{r liberties, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{polyarchy}", fig.height=4.5}
+
+v_vars_lib <- v_raw %>%
+    filter(str_detect(group, "free")) %>% 
+    arrange(desc(group), title) 
+
+validation_plot(v_vars_lib) +
   theme_bw() +
   theme(legend.position="none",
         axis.text  = element_text(size=8),
         axis.title = element_text(size=9),
         plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=8),
         strip.background = element_blank()) +
   labs(x = "Unidimensional Democratic Support",
        y = "% Agreeing")
 ```
+
+```{r institutions, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{polyarchy}", fig.height=3}
+
+v_vars_inst <- v_raw %>%
+    filter(group == "rule_of_law" | group == "no_leg") %>% 
+    arrange(desc(group), title) 
+
+validation_plot(v_vars_inst) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=8),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
 
 ## Appendices
 \pagebreak
