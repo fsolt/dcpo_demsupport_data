@@ -67,128 +67,98 @@ library(ggthemes)
 library(rsdmx)
 
 # define functions
-validation_plot <- function(v_data_raw, v_var, neg = FALSE,
-                            lab_x, lab_y, show_n = FALSE,
+validation_plot <- function(v_data_raw,
+                            lab_x = .44, lab_y = 99,
                             theta_summary, theta_results) {
     
-    if (missing(lab_x)) lab_x <- .7
-    if (missing(lab_y)) lab_y <- .95
     # defaults per https://stackoverflow.com/a/49167744/2620381
     if ("theta_summary" %in% ls(envir = .GlobalEnv) & missing(theta_summary))
         theta_summary <- get("theta_summary", envir = .GlobalEnv)
     if ("theta_results" %in% ls(envir = .GlobalEnv) & missing(theta_results))
         theta_results <- get("theta_results", envir = .GlobalEnv)
-    
-    v_val <- str_extract(v_var, "\\d+") %>% 
-      as.numeric() %>%
-      median(x = 1:.) %>% 
-      `+`(1) %>% 
-      floor()
 
-    validation_formatted <- v_data_raw %>% 
-        DCPOtools::format_dcpo(scale_q = v_var, # these arguments are required
-                               scale_cp = 1)    # but they don't matter here
+    median_val <- Vectorize(function(x) median(1:x),
+                            vectorize.args = "x")
     
-    if (neg)
-      validation_summarized <- validation_formatted$data %>%
-      filter(item == paste(v_var, v_val, "or higher")) %>%
+    v_vars <- v_data_raw %>% 
+      select(item0 = item) %>% 
+      unique() %>% 
+      mutate(v_val = str_extract(item0, "\\d+") %>% 
+               as.numeric() %>% 
+               {median_val(.) + 1} %>%
+               floor())
+    
+    # v_val <- str_extract(v_vars, "\\d+") %>% 
+    #   as.numeric() %>%
+    #   median(x = 1:.) %>% 
+    #   `+`(1) %>% 
+    #   floor()
+
+    # v_vals <- v_vars %>% 
+    #   mutate(value = str_extract("\\d+") %>% 
+    #            as.numeric(),
+    #          v_var2 = {median_val(value) + 1} %>% floor())
+    
+    validation_summarized <- v_data_raw %>% 
+      DCPOtools::format_dcpo(scale_q = v_vars$item0[[1]], # these arguments are required
+                             scale_cp = 1) %>% # but they don't matter
+      pluck("data") %>% 
+      mutate(item0 = str_remove(item, " \\d or higher"),
+             title = factor(title) %>% 
+               fct_inorder()) %>% 
+      right_join(v_vars, by = "item0") %>%
+      filter(str_detect(item, paste(v_val, "or higher"))) %>%
       mutate(iso2c = countrycode::countrycode(country,
                                               origin = "country.name",
                                               destination = "iso2c"),
-             prop = 1-y_r/n_r,
+             prop = if_else(neg, 1-y_r/n_r, y_r/n_r),
              se = sqrt((prop*(1-prop))/n),
              prop_90 = prop + qnorm(.9)*se,
              prop_10 = prop - qnorm(.9)*se) %>%
-      left_join(theta_summary %>% select(-kk, -tt), by = c("country", "year"))
-    else
-      validation_summarized <- validation_formatted$data %>%
-      filter(item == paste(v_var, v_val, "or higher")) %>%
-      mutate(iso2c = countrycode::countrycode(country,
-                                              origin = "country.name",
-                                              destination = "iso2c"),
-             prop = y_r/n_r,
-             se = sqrt((prop*(1-prop))/n),
-             prop_90 = prop + qnorm(.9)*se,
-             prop_10 = prop - qnorm(.9)*se) %>%
-      left_join(theta_summary %>% select(-kk, -tt), by = c("country", "year"))
+      inner_join(theta_summary %>% select(-kk, -tt), by = c("country", "year"))
     
-    if ("title" %in% names(v_data_raw)) {
-      v_title <- v_data_raw %>% 
-        filter(item == v_var) %>% 
-        pull(title) %>% 
-        first()
-    } else {
-      v_title <- v_var
-    } 
+    # if ("title" %in% names(v_data_raw)) {
+    #   v_title <- v_data_raw %>% 
+    #     filter(item == v_var) %>% 
+    #     pull(title) %>% 
+    #     first()
+    # } else {
+    #   v_title <- v_var
+    # } 
     
-    if (neg)
-      validation_cor <- bind_rows(theta_results,
-                                  .id = "iter") %>%
+    validation_cor <- theta_results %>%
       right_join(validation_summarized %>%
-                   transmute(country = country,
-                             year = year,
-                             prop = 1 - y_r/n_r,
-                             se = sqrt((prop*(1-prop))/n)),
+                   select(country, year, title, prop, se),
                  by = c("country", "year")) %>% 
       rowwise() %>% 
       mutate(sim = rnorm(1, mean = prop, sd = se)) %>% 
       ungroup() %>% 
-      group_split(iter) %>% 
-      map(~with(.x, cor(theta, sim))) %>%
-      unlist() %>%
-      mean(na.rm = TRUE) %>%
-      round(2) %>%
-      paste("R =", .) 
-    else
-      validation_cor <- bind_rows(theta_results,
-                                  .id = "iter") %>%
-      right_join(validation_summarized %>%
-                   transmute(country = country,
-                             year = year,
-                             prop = y_r/n_r,
-                             se = sqrt((prop*(1-prop))/n)),
-                 by = c("country", "year")) %>% 
-      rowwise() %>% 
-      mutate(sim = rnorm(1, mean = prop, sd = se)) %>% 
-      ungroup() %>% 
-      group_split(iter) %>% 
-      map(~with(.x, cor(theta, sim))) %>%
-      unlist() %>%
-      mean(na.rm = TRUE) %>%
-      round(2) %>%
-      paste("R =", .)  
-    
-    validation_n <- paste("n =", nrow(validation_summarized))
-    
-    if (show_n == TRUE)
-      validation_lab <- paste0(validation_cor,
-                               "\n",
-                               validation_n)
-    else
-      validation_lab <- validation_cor
-        
-    validation_label <- tibble(mean = lab_x,
-                               prop = lab_y,
-                               label = validation_lab)
+      select(title, theta, sim, draw) %>% 
+      nest(data = c(theta, sim)) %>% 
+      mutate(r = lapply(data, function(df) cor(df) %>% nth(2)) %>% 
+               unlist()) %>%
+      select(-data) %>% 
+      group_by(title) %>% 
+      summarize(r = paste("R =", round(mean(r), 2)))
+
    
-   validation_summarized %>%
-       ggplot(aes(x = mean,
-                  y = prop * 100)) +
-       geom_segment(aes(x = q10, xend = q90,
-                        y = prop * 100, yend = prop * 100),
-                    na.rm = TRUE,
-                    alpha = .2) +
-       geom_segment(aes(x = mean, xend = mean,
-                        y = prop_90 * 100, yend = prop_10 * 100),
-                    na.rm = TRUE,
-                    alpha = .2) +
-     geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) +
-     geom_label(data = validation_label, aes(label = label), size = 3) +
-     # geom_text(aes(label = iso2c), size = 2) +
-     ggtitle(v_title)
+    validation_summarized %>%
+      ggplot(aes(x = mean,
+                 y = prop * 100)) +
+      geom_segment(aes(x = q10, xend = q90,
+                       y = prop * 100, yend = prop * 100),
+                   na.rm = TRUE,
+                   alpha = .2) +
+      geom_segment(aes(x = mean, xend = mean,
+                       y = prop_90 * 100, yend = prop_10 * 100),
+                   na.rm = TRUE,
+                   alpha = .2) +
+      geom_smooth(method = 'lm', formula = 'y ~ x', se = FALSE) +
+      facet_wrap(~ title, ncol = 4) +
+      geom_label(data = validation_cor, aes(x = lab_x,
+                                            y = lab_y,
+                                            label = r), size = 3)
 }
-
-
 
 set.seed(324)
 ```
@@ -800,7 +770,34 @@ In every case, the correlations---estimated taking into account the uncertainty 
 <!-- The uncertainty in the PGE score and in the percentage in the population who would agree with the item does not substantially affect the correlation with the political leadership question, but failing to account for this uncertainty would overstate the correlation with the Pew item, at $R =$ `r with(internal_poliequal, cor(prop, mean)) %>% round(2)`, and the U.S. GSS item, at $R =$ `r with(internal_us, cor(prop, mean, use = "pairwise.complete.obs")) %>% round(2)`. -->
 <!-- We take up the issue of the importance of taking uncertainty into account when working with the PGE data in a subsequent section.] -->
 
+```{r polyarchy, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=6}
+v_titles <- "data-raw/validation_items_fs.csv" %>%
+    read_csv(col_types = "ccccccc") %>%
+    select(item, title, neg, group, svy_grp) %>%
+    distinct() %>% 
+    mutate(title = paste0(svy_grp, ": ", title))
 
+v_raw <- "data-raw/validation_items_fs.csv" %>%
+    read_csv(col_types = "ccccccc") %>%
+    DCPOtools::dcpo_setup(datapath = here("..",
+                                          "data",
+                                          "dcpo_surveys")) %>%
+    left_join(v_titles, by = "item")
+
+v_vars_poly <- v_raw %>%
+    filter(group == "contest" | group == "participation") %>% 
+    arrange(group, title) 
+
+validation_plot(v_vars_poly) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
 
 ## Appendices
 \pagebreak
