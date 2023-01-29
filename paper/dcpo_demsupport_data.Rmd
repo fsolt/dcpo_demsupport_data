@@ -1,36 +1,39 @@
 ---
 output: 
-  pdf_document:
-    citation_package: natbib
-    keep_tex: true
-    fig_caption: true
-    latex_engine: pdflatex
-    template: svm-latex-ms2.tex
-title: "Support for Democracy Is Multidimensional: Why Unidimensional Latent Variable Measures of Democratic Support Are Invalid"
-thanks: "Corresponding author: [frederick-solt@uiowa.edu](mailto:frederick-solt@uiowa.edu).  Current version: `r format(Sys.time(), '%B %d, %Y')`."
-author:
-- name: Yuehong Cassandra Tai
-  affiliation: Pennsylvania State University
-- name: Yue Hu
-  affiliation: Tsinghua University
-- name: Hyein Ko
-  affiliation: University of Iowa
-- name: Byung-Deuk Woo
-  affiliation: Pohang University of Science and Technology
-- name: Frederick Solt
-  affiliation: University of Iowa
-anonymous: false
-abstract: "[0/150 words]"
-keywords: "democracy, democratic support, public opinion, political culture, measurement"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
-fontsize: 11pt
-spacing: double
-bibliography: dcpodemsupportdata.bib
-# csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-political-science-association.csl
-biblio-style: apalike
+  bookdown::pdf_document2:
+    fig_caption: yes
+    keep_tex: yes
+    toc: no
+    number_sections: yes
+    latex_engine: xelatex
+    pandoc_args: --lua-filter=multibib.lua
+  
+title: |
+  | Support for Democracy Is Multidimensional: 
+  | Why Unidimensional Latent Variable Measures
+  | of Democratic Support Are Invalid
+  
+  
+# abstract: "Do democratic regimes depend on public support to avoid backsliding? Does public support, in turn, respond thermostatically to changes in democracy? Two prominent recent studies (Claassen 2020a, 2020b) reinvigorated the classic hypothesis on the positive relationship between public support for democracy and regime survival---and challenged its reciprocal counterpart---by using a latent variable approach to measure mass democratic support from cross-national survey data. Both studies, however, used only the point estimates of democratic support; we show that incorporating the concomitant measurement uncertainty into these analyses reveals that there is no support for either study's conclusion. Efforts to minimize the uncertainty by incorporating additional survey data still fail to yield evidence in support of either hypothesis. These results underscore the need both for more nuanced analyses of the relationships between public support and democracy and for taking measurement uncertainty into account when working with latent variables. [147/150 words]"
+# keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
+
+date: " "
+editor_options: 
+  markdown: 
+    wrap: sentence
+tables: true # enable longtable and booktabs
+citation_package: natbib
+citeproc: false
+fontsize: 12pt
+indent: true
+linestretch: 1.5 # double spacing using linestretch 1.5
+bibliography:
+  text: dcpo-demsupport-data.bib
+  app: dcpo-demsupport-data-app.bib
+biblio-style: apsr
 citecolor: black
 linkcolor: black
-endnotes: yes
+endnote: no
 header-includes:
       - \usepackage{array}
       - \usepackage{caption}
@@ -43,7 +46,45 @@ header-includes:
       - \usepackage{tabularx}
       - \usepackage{threeparttable}
       - \usepackage{wrapfig}
+      - \usepackage{fullpage}
+      - \usepackage{pdflscape} #\usepackage{lscape} better for printing, page displayed vertically, content in landscape mode, \usepackage{pdflscape} better for screen, page displayed horizontally, content in landscape mode
+      - \newcommand{\blandscape}{\begin{landscape}}
+      - \newcommand{\elandscape}{\end{landscape}}
+      - \usepackage{titlesec}
+      - \titleformat*{\section}{\normalsize\bfseries}
+      - \titleformat*{\subsection}{\normalsize\itshape}
+      - \usepackage{titling} #use \maketitle repeatedly
 ---
+
+\pagenumbering{gobble} 
+
+# Authors {-}
+
+- Yuehong 'Cassandra' Tai, ORCID: https://orcid.org/0000-0001-7303-7443, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, yhcasstai@psu.edu
+- Yue Hu, corresponding author, ORCID: https://orcid.org/0000-0002-2829-3971, Associate Professor, Department of Political Science, Tsinghua University, yuehu@tsinghua.edu.cn
+- Hyein Ko, ORCID: https://orcid.org/0000-0002-9497-9656, Doctoral Candidate, Department of Political Science, University of Iowa, hyein-ko@uiowa.edu
+- Byung-Deuk Woo, ORCID: https://orcid.org/0000-0001-6902-7576, Postdoctoral Researcher, Institute of Social Data Science, Pohang University of Science and Technology, byungdeukwoo@gmail.com
+- Frederick Solt, ORCID: https://orcid.org/0000-0002-3154-6132, Associate Professor, Department of Political Science, University of Iowa, frederick-solt@uiowa.edu
+
+\pagebreak
+
+\renewcommand{\baselinestretch}{1}
+\selectfont
+\maketitle
+\renewcommand{\baselinestretch}{1.5}
+\selectfont
+
+\begin{abstract}
+blah blah blah
+\end{abstract}
+
+
+\pagebreak
+
+
+
+
+\pagenumbering{arabic}
 
 ```{r setup, include=FALSE}
 options(tinytex.verbose = TRUE)
@@ -52,6 +93,7 @@ knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
   warning = FALSE,
+  cache = TRUE,
   dpi = 600,
   fig.width=7,
   fig.height = 2.5
@@ -70,7 +112,7 @@ library(rsdmx)
 
 # define functions
 validation_plot <- function(v_data_raw,
-                            lab_x = .45, lab_y = 92,
+                            lab_x = .38, lab_y = 92,
                             theta_summary, theta_results) {
     
     # defaults per https://stackoverflow.com/a/49167744/2620381
@@ -162,13 +204,14 @@ validation_plot <- function(v_data_raw,
       facet_wrap(~ title, ncol = 4) +
       geom_label(data = validation_cor, aes(x = lab_x,
                                             y = lab_y,
-                                            label = r), size = 3)
+                                            label = r),
+                 size = 2)
 }
 
 set.seed(324)
 ```
 
-```{r dcpo_input_raw, include=FALSE, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "surveys_demsupport.csv"))}
+```{r dcpo_input_raw, include=FALSE, cache.extra = tools::md5sum(here::here("data-raw", "surveys_demsupport.csv"))}
 survey_file <- list.files(here("data-raw"),
                           full.names = TRUE) %>% 
   str_subset("surveys.*\\.csv")
@@ -338,13 +381,251 @@ back_to_numeric <- function(string_number) {
 covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) * 100}
 ```
 
-## The Latent Variable Approach to Measuring Democratic Support 
+We know a lot about support for democracy...
 
-We build on the data presented in @Claassen2020a and the larger set collected by @TaiHuSolt2022.
+A number of recent and prominent works have taken advantage of advances in computing power and software for Bayesian estimation together with new latent variable models of public opinion to estimate democratic support across many countries and over long spans of time.
+In this approach, responses to many survey questions on democratic support are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020].
+@Claassen2020a finds democratic support so estimated responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
+Using the same data, @Claassen2020b concludes that democratic support has a positive effect on subsequent democratic change.
+Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two papers and shows that their conclusions are unsupported.
+With a similarly expanded dataset of latent variable estimates of democratic support, @Claassen2022 examines the relationship of democratic support to the performance of democratic governments and concludes that poor government performance does not erode support for democracy.
+
+Several critiques of this line of research have already been raised.
+@Hu2022 reveals that the latent variable measure of democratic support used in the several of these works is flawed by errors in the coding of survey questions used as indicators; correcting these errors yields no support for the conclusions reached in @Claassen2020a.
+@Tannenberg2022 [, 602] demonstrates that support for democracy in several indicator questions is biased downward in more autocratic countries due to fear of government reprisal and argues that the resulting latent variable likely suffers from this bias as well.
+These critiques are of the 'garbage-in, garbage-out' variety.
+That is, they identify problems with the indicator survey questions or their coding that then yield problems in the latent variable that is estimated from these questions.
+
+Here, we offer a more fundamental criticism of this body of work.
+Specifically, we note that the latent variable estimates on which it depends themselves depend on the assumption that democratic support falls along a single dimension.
+However, as alluded above, much research on the topic argues that democratic support is a more complex and multidimensional phenomenon.
+
+
+# The Latent Variable Approach to Measuring Democratic Support {-} 
+
+"Democratic support is measured using survey questions that ask respondents to: evaluate the appropriateness or desirability of democracy; compare democracy to some undemocratic alternative; or evaluate one of these undemocratic forms of government."
+
+We expand on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
 In all, we identified `r n_items` survey items that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.^[
 The complete list of survey items is included in online Appendix A.]
 Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
 These data are sparse, but they do include `r n_cy` country-years for which we have at least _some_ information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
+
+
+
+```{r dcpo_chunk_options, cache=TRUE}
+evaluate <- TRUE
+```
+
+```{r dcpo_input, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
+dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
+                                     scale_q = most_common_item,
+                                     scale_cp = 2)
+save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
+```
+
+```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
+iter <- 1000
+
+dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
+dcpo_output <- dcpo$sample(
+  data = dcpo_input[1:13], 
+  max_treedepth = 14,
+  adapt_delta = 0.99,
+  step_size = 0.005,
+  seed = 324, 
+  chains = 4, 
+  parallel_chains = 4,
+  iter_warmup = iter/2,
+  iter_sampling = iter/2,
+  refresh = iter/50
+)
+results_path <- here::here(file.path("data", 
+                                     iter, 
+                                     {str_replace_all(Sys.time(), "[- :]", "") %>%
+                                         str_replace("\\d{2}$", "")}))
+dir.create(results_path, 
+           showWarnings = FALSE, 
+           recursive = TRUE)
+dcpo_output$save_data_file(dir = results_path,
+                           random = FALSE)
+dcpo_output$save_output_files(dir = results_path,
+                              random = FALSE)
+```
+
+```{r dcpo_results, cache=FALSE}
+if (!exists("results_path")) {
+  latest <- "202301131531"
+  results_path <- here::here("data", "1000", latest)
+  
+  # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
+  if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
+    dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
+    osf_retrieve_node("XXXXX") %>% 
+      osf_ls_files() %>% 
+      filter(name == latest) %>% 
+      osf_download(path = here::here("data", "1000"))
+  }
+  
+  if(!file.exists(here::here("data", "dcpo_output.rds"))) {
+    dcpo_output <- as_cmdstan_fit(here::here(results_path,
+                                         list.files(results_path, pattern = "csv$")))
+    
+    dcpo_output$save_object(here::here("data", "dcpo_output.rds"))
+  }
+}
+
+dcpo_output <- readRDS(here::here("data", "dcpo_output.rds"))
+
+```
+
+```{r dcpo_summary}
+load(file = here::here("data", "dcpo_input.rda"))
+theta_summary <- DCPOtools::summarize_dcpo_results(dcpo_input,
+                                                   dcpo_output,
+                                                   "theta")
+
+res_cy <- nrow(theta_summary) %>% 
+  scales::comma()
+
+res_c <- theta_summary %>% 
+  pull(country) %>% 
+  unique() %>% 
+  length()
+
+save(theta_summary, file = here::here("data","theta_summary.rda"))
+```
+
+```{r theta_results}
+theta_results <- extract_dcpo_results(dcpo_input,
+                                      dcpo_output,
+                                      par = "theta")
+```
+
+
+# Testing the Validity of Democratic Support as a Unidimensional Latent Variable {-}
+
+Such future research, however, depends on the validity of the PGE scores.
+Like @Caughey2019 [684-685], we provide evidence of our measure's validity with convergent validation and construct validation.
+Convergent validation refers to showing that a measure is empirically associated with alternative indicators of the same concept [@Adcock2001, 540].
+Here, we compare PGE scores to responses to individual source-data survey items that were used to generate our estimates, that is, we provide an 'internal' validation test [see, e.g., @Caughey2019, 689; @Solt2020c, 10].
+In the left panel of Figure&nbsp;\ref{conv_plot}, we examine the four-point question on political leaders mentioned above, the most common item in the source data across all country-years.
+Then, in the center panel, we look at the question that provides the most data-rich cross-section in the source data, which asked whether respondents felt "men generally make better political leaders than women" and was included in Pew Global's Spring 2007 survey.
+Finally, in the right panel, to evaluate how well the PGE scores capture change over time, we focus on the item with the largest number of observations for a single country in the source data, which asked respondents to the U.S. General Social Survey whether they agreed or disagreed that "most men are better suited emotionally for politics than are most women."
+In every case, the correlations---estimated taking into account the uncertainty in the measures---are in the expected direction and very strong.
+
+```{r v_data, include=FALSE}
+v_titles <- here("data-raw", "validation_items_fs.csv") %>%
+    read_csv(col_types = "ccccccc") %>%
+    select(item, title, neg, group, svy_grp) %>%
+    distinct() %>% 
+    mutate(title = paste0(svy_grp, ": ", title))
+
+v_raw <- here("data-raw", "validation_items_fs.csv") %>%
+    read_csv(col_types = "ccccccc") %>%
+    DCPOtools::dcpo_setup(datapath = here("..",
+                                          "data",
+                                          "dcpo_surveys")) %>%
+    left_join(v_titles, by = "item")
+```
+
+
+```{r polyarchy, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE}
+v_vars_poly <- v_raw %>%
+    filter(group == "contest" | group == "participation") %>% 
+    arrange(group, title) 
+
+validation_plot(v_vars_poly, lab_x = .5, lab_y = 15) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 9),
+        strip.text.x = element_text(size=5),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
+```{r liberties, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4.5}
+
+v_vars_lib <- v_raw %>%
+    filter(str_detect(group, "free")) %>% 
+    arrange(desc(group), title) 
+
+validation_plot(v_vars_lib) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
+```{r institutions, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3}
+
+v_vars_inst <- v_raw %>%
+    filter(group == "rule_of_law" | group == "no_leg") %>% 
+    arrange(desc(group), title) 
+
+validation_plot(v_vars_inst) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
+```{r conditions, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{conditions}", fig.height=3}
+
+v_vars_cond <- v_raw %>%
+    filter(str_detect(group, "pref_")) %>% 
+    arrange(desc(group), title) 
+
+validation_plot(v_vars_cond, lab_x = .45, lab_y = 10) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support",
+       y = "% Agreeing")
+```
+
+# Conclusions {-}
+
+\pagebreak
+# References {-}
+
+::: {#refs-text}
+:::
+
+\pagebreak
+
+\renewcommand{\baselinestretch}{1}
+\selectfont
+\maketitle
+\renewcommand{\baselinestretch}{1.5}
+\selectfont
+
+\pagenumbering{arabic}
+\renewcommand*{\thepage}{A\arabic{page}}
+
+\setcounter{figure}{0}
+\renewcommand*{\thefigure}{A\arabic{figure}}
+
+# Appendices  {-}
+
+## The Unidimensional Latent Variable of Democratic Support {-}
 
 ```{r item_and_country_plots, fig.height = 3.5, fig.width=7, fig.cap = "Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}"}
 items_plot <- dcpo_input_raw1 %>%
@@ -561,9 +842,38 @@ if (n_data_poor < 20) {
 
 ```
 
+```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
+dcpo_input_raw1 %>%
+  mutate(country = str_replace(country, "’", "'")) %>%
+  group_by(country) %>%
+  mutate(years_rank = length(unique(year))) %>%
+  distinct(country, year, item, cc_rank, years_rank) %>%
+  group_by(country, year) %>%
+  summarize(n = n(),
+            cc_rank = cc_rank,
+            years_rank = years_rank) %>%
+  ungroup() %>%
+  distinct() %>%
+  ggplot(aes(x = year,
+             y = forcats::fct_reorder(country, years_rank),
+             fill = n)) +
+  geom_tile() +
+  scale_fill_stepsn(colors = rev(hcl.colors(6, "inferno")),
+                    n.breaks = 6,
+                    show.limits = TRUE,
+                    right = FALSE,
+                    name = "Observations") +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks=seq(1972, 2020, 4),
+                     sec.axis = dup_axis()) +
+  scale_y_discrete(position = "right") +
+  theme(legend.justification=c(0, 0),
+        legend.position=c(0.01, 0.01),
+        axis.text.y  = element_text(size = 6))
+```
+
 The most frequently-asked item in the data we collected appears in `r length(most_common_item_surveys)` different survey datasets, covering a total of `r most_common_item_cy` different country-years.
 It asks respondents whether they strongly disagree, disagree, agree, or strongly agree with the statement, "Democracy may have its problems but it is still the best form of government."
-
 
 The left panel of Figure&nbsp;\ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
 `r top_country_cy` leads in this regard; it was observed in `r top_country_cy_obs` different years.
@@ -577,91 +887,6 @@ In addition to countries already mentioned, Japan and the Philippines were also 
 The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy.
 In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
-
-```{r dcpo_chunk_options, cache=TRUE}
-evaluate <- TRUE
-```
-
-```{r dcpo_input, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
-dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
-                                     scale_q = most_common_item,
-                                     scale_cp = 2)
-save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
-```
-
-```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
-iter <- 1000
-
-dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
-dcpo_output <- dcpo$sample(
-  data = dcpo_input[1:13], 
-  max_treedepth = 14,
-  adapt_delta = 0.99,
-  step_size = 0.005,
-  seed = 324, 
-  chains = 4, 
-  parallel_chains = 4,
-  iter_warmup = iter/2,
-  iter_sampling = iter/2,
-  refresh = iter/50
-)
-results_path <- here::here(file.path("data", 
-                                     iter, 
-                                     {str_replace_all(Sys.time(), "[- :]", "") %>%
-                                         str_replace("\\d{2}$", "")}))
-dir.create(results_path, 
-           showWarnings = FALSE, 
-           recursive = TRUE)
-dcpo_output$save_data_file(dir = results_path,
-                           random = FALSE)
-dcpo_output$save_output_files(dir = results_path,
-                              random = FALSE)
-```
-
-```{r dcpo_results}
-if (!exists("results_path")) {
-  latest <- "202301131531"
-  results_path <- here::here("data", "1000", latest)
-  
-  # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
-  if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
-    dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
-    osf_retrieve_node("XXXXX") %>% 
-      osf_ls_files() %>% 
-      filter(name == latest) %>% 
-      osf_download(path = here::here("data", "1000"))
-  }
-}
-
-dcpo_output <- as_cmdstan_fit(here::here(results_path,
-                                         list.files(results_path, pattern = "csv$")))
-
-
-```
-
-```{r dcpo_summary, cache=TRUE}
-load(file = here::here("data", "dcpo_input.rda"))
-theta_summary <- DCPOtools::summarize_dcpo_results(dcpo_input,
-                                                   dcpo_output,
-                                                   "theta")
-
-res_cy <- nrow(theta_summary) %>% 
-  scales::comma()
-
-res_c <- theta_summary %>% 
-  pull(country) %>% 
-  unique() %>% 
-  length()
-
-save(theta_summary, file = here::here("data","theta_summary.rda"))
-```
-
-```{r theta_results, cache = TRUE}
-theta_results <- extract_dcpo_results(dcpo_input,
-                                      dcpo_output,
-                                      par = "theta")
-```
-
 
 ```{r cs_plot, fig.cap="DSD Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
 
@@ -723,7 +948,6 @@ The dispersion parameters of the survey items indicate that all of them load wel
 The result is estimates, in all `r res_cy` country-years spanned by the source data, of support for democracy.
 Figure&nbsp;\ref{cs_mry} displays the most recent available DSD score for each of the `r res_c` countries and territories in the dataset.
 
-
 The latest scores for `r bottom5` have them as the places where the public expresses the lowest support for democracy.
 
 ```{r ts_plots, fig.cap="DSD Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
@@ -751,122 +975,8 @@ ggplot(data = c_sum, aes(x = year, y = mean)) +
   plot_annotation(caption = "Note: Countries are ordered by their DSD scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
 ```
 
-## Democratic Support as a Latent Variable: Validation Tests
-1. dispersion of different items
-1. meaning:
-    - liberal democratic institutions vs strong-man rule
-    - emancipative values vs their absence
-1. 
+# References {-}
 
-
-Such future research, however, depends on the validity of the PGE scores.
-Like @Caughey2019 [684-685], we provide evidence of our measure's validity with convergent validation and construct validation.
-Convergent validation refers to showing that a measure is empirically associated with alternative indicators of the same concept [@Adcock2001, 540].
-Here, we compare PGE scores to responses to individual source-data survey items that were used to generate our estimates, that is, we provide an 'internal' validation test [see, e.g., @Caughey2019, 689; @Solt2020c, 10].
-In the left panel of Figure&nbsp;\ref{conv_plot}, we examine the four-point question on political leaders mentioned above, the most common item in the source data across all country-years.
-Then, in the center panel, we look at the question that provides the most data-rich cross-section in the source data, which asked whether respondents felt "men generally make better political leaders than women" and was included in Pew Global's Spring 2007 survey.
-Finally, in the right panel, to evaluate how well the PGE scores capture change over time, we focus on the item with the largest number of observations for a single country in the source data, which asked respondents to the U.S. General Social Survey whether they agreed or disagreed that "most men are better suited emotionally for politics than are most women."
-In every case, the correlations---estimated taking into account the uncertainty in the measures---are in the expected direction and very strong.
-```{r v_data, include=FALSE, cache=TRUE}
-v_titles <- here("data-raw", "validation_items_fs.csv") %>%
-    read_csv(col_types = "ccccccc") %>%
-    select(item, title, neg, group, svy_grp) %>%
-    distinct() %>% 
-    mutate(title = paste0(svy_grp, ": ", title))
-
-v_raw <- here("data-raw", "validation_items_fs.csv") %>%
-    read_csv(col_types = "ccccccc") %>%
-    DCPOtools::dcpo_setup(datapath = here("..",
-                                          "data",
-                                          "dcpo_surveys")) %>%
-    left_join(v_titles, by = "item")
-```
-
-
-```{r polyarchy, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=TRUE}
-v_vars_poly <- v_raw %>%
-    filter(group == "contest" | group == "participation") %>% 
-    arrange(group, title) 
-
-validation_plot(v_vars_poly, lab_x = .5) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 9),
-        strip.text.x = element_text(size=8),
-        strip.background = element_blank()) +
-  labs(x = "Unidimensional Democratic Support",
-       y = "% Agreeing")
-```
-
-```{r liberties, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{polyarchy}", fig.height=4.5}
-
-v_vars_lib <- v_raw %>%
-    filter(str_detect(group, "free")) %>% 
-    arrange(desc(group), title) 
-
-validation_plot(v_vars_lib) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11),
-        strip.text.x = element_text(size=8),
-        strip.background = element_blank()) +
-  labs(x = "Unidimensional Democratic Support",
-       y = "% Agreeing")
-```
-
-```{r institutions, cache = TRUE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{polyarchy}", fig.height=3}
-
-v_vars_inst <- v_raw %>%
-    filter(group == "rule_of_law" | group == "no_leg") %>% 
-    arrange(desc(group), title) 
-
-validation_plot(v_vars_inst) +
-  theme_bw() +
-  theme(legend.position="none",
-        axis.text  = element_text(size=8),
-        axis.title = element_text(size=9),
-        plot.title = element_text(hjust = 0.5, size = 11),
-        strip.text.x = element_text(size=8),
-        strip.background = element_blank()) +
-  labs(x = "Unidimensional Democratic Support",
-       y = "% Agreeing")
-```
-
-
-## Appendices
-\pagebreak
-```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
-dcpo_input_raw1 %>%
-  mutate(country = str_replace(country, "’", "'")) %>%
-  group_by(country) %>%
-  mutate(years_rank = length(unique(year))) %>%
-  distinct(country, year, item, cc_rank, years_rank) %>%
-  group_by(country, year) %>%
-  summarize(n = n(),
-            cc_rank = cc_rank,
-            years_rank = years_rank) %>%
-  ungroup() %>%
-  distinct() %>%
-  ggplot(aes(x = year,
-             y = forcats::fct_reorder(country, years_rank),
-             fill = n)) +
-  geom_tile() +
-  scale_fill_stepsn(colors = rev(hcl.colors(6, "inferno")),
-                    n.breaks = 6,
-                    show.limits = TRUE,
-                    right = FALSE,
-                    name = "Observations") +
-  labs(x = NULL, y = NULL) +
-  scale_x_continuous(breaks=seq(1972, 2020, 4),
-                     sec.axis = dup_axis()) +
-  scale_y_discrete(position = "right") +
-  theme(legend.justification=c(0, 0),
-        legend.position=c(0.01, 0.01),
-        axis.text.y  = element_text(size = 6))
-```
-
+::: {#refs-app}
+:::
 
