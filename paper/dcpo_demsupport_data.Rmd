@@ -4,7 +4,7 @@ output:
     fig_caption: yes
     keep_tex: yes
     toc: no
-    number_sections: yes
+    number_sections: no
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
   
@@ -80,9 +80,6 @@ blah blah blah
 
 
 \pagebreak
-
-
-
 
 \pagenumbering{arabic}
 
@@ -384,9 +381,9 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 We know a lot about support for democracy...
 
 A number of recent and prominent works have taken advantage of advances in computing power and software for Bayesian estimation together with new latent variable models of public opinion to estimate democratic support across many countries and over long spans of time.
-In this approach, responses to many survey questions on democratic support are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020].
-@Claassen2020a finds democratic support so estimated responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
-Using the same data, @Claassen2020b concludes that democratic support has a positive effect on subsequent democratic change.
+In this approach, responses to many survey questions on democratic support are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020c].
+@Claassen2020a concludes that democratic support so estimated has a positive effect on subsequent democratic change.
+Using the same data, @Claassen2020b finds democratic support responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
 Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two papers and shows that their conclusions are unsupported.
 With a similarly expanded dataset of latent variable estimates of democratic support, @Claassen2022 examines the relationship of democratic support to the performance of democratic governments and concludes that poor government performance does not erode support for democracy.
 
@@ -396,10 +393,14 @@ Several critiques of this line of research have already been raised.
 These critiques are of the 'garbage-in, garbage-out' variety.
 That is, they identify problems with the indicator survey questions or their coding that then yield problems in the latent variable that is estimated from these questions.
 
-Here, we offer a more fundamental criticism of this body of work.
-Specifically, we note that the latent variable estimates on which it depends themselves depend on the assumption that democratic support falls along a single dimension.
-However, as alluded above, much research on the topic argues that democratic support is a more complex and multidimensional phenomenon.
-
+We offer a more fundamental criticism of this body of work.
+Specifically, we note that the latent variable estimates on which it depends themselves depend on the assumption that democratic support falls along a single dimension: that some people support democracy wholeheartedly, others oppose it fully, and everyone else is somewhere between.
+As alluded above, however, much research on the topic argues that democratic support is a more complex, multidimensional phenomenon.
+Here, we test the validity of the sort of unidimensional measure used in recent latent-variable-driven research by comparing it to responses to questions drawn from many surveys used in the broader literature to map the dimensionality of support for democracy.
+The results are striking.
+Across countries and years, the latent variable of democratic support is essentially orthogonal to these measures of supporting contestation and participation; civil liberties; and institutional constraints on executive power; as well as of prioritizing democracy and political freedom over the economy, economic equality, and order.
+Democratic support is simply not well captured in a latent variable constrained to a single dimension.
+Further, researchers using latent variables must be attentive to issues of multidimensionality and provide ample validation for these measures.
 
 # The Latent Variable Approach to Measuring Democratic Support {-} 
 
@@ -623,11 +624,16 @@ validation_plot(v_vars_cond, lab_x = .45, lab_y = 10) +
 \setcounter{figure}{0}
 \renewcommand*{\thefigure}{A\arabic{figure}}
 
-# Appendices  {-}
+\vspace{-.9in}
+\begin{center}
+\begin{Large}
+Appendices
+\end{Large}
+\end{center}
 
-## The Unidimensional Latent Variable of Democratic Support {-}
+# The Unidimensional Latent Variable of Democratic Support {-}
 
-```{r item_and_country_plots, fig.height = 3.5, fig.width=7, fig.cap = "Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}"}
+```{r itemcountry, fig.cap="Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}", fig.height=3.5, cache=FALSE}
 items_plot <- dcpo_input_raw1 %>%
   distinct(country, year, item) %>%
   count(item) %>%
@@ -842,7 +848,7 @@ if (n_data_poor < 20) {
 
 ```
 
-```{r obs_by_cy, fig.height = 9, fig.width = 6.5, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}"}
+```{r obs, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}", fig.height = 9}
 dcpo_input_raw1 %>%
   mutate(country = str_replace(country, "’", "'")) %>%
   group_by(country) %>%
@@ -888,7 +894,7 @@ The lower right panel counts the countries observed in each year and reveals tha
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy.
 In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
 
-```{r cs_plot, fig.cap="DSD Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
+```{r cs, fig.cap="DSD Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
 
 n_panes <- 2
 axis_text_size <- 10
@@ -950,7 +956,7 @@ Figure&nbsp;\ref{cs_mry} displays the most recent available DSD score for each o
 
 The latest scores for `r bottom5` have them as the places where the public expresses the lowest support for democracy.
 
-```{r ts_plots, fig.cap="DSD Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
+```{r ts, fig.cap="DSD Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
 countries <- c("Finland", "China", "Philippines", "Bangladesh",
                "Malaysia", "Turkey", "United Kingdom", "South Korea",
                "Belgium", "Spain", "United States", "Chile", 
@@ -975,6 +981,7 @@ ggplot(data = c_sum, aes(x = year, y = mean)) +
   plot_annotation(caption = "Note: Countries are ordered by their DSD scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
 ```
 
+\pagebreak
 # References {-}
 
 ::: {#refs-app}
