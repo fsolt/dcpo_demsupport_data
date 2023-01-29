@@ -515,13 +515,13 @@ Finally, in the right panel, to evaluate how well the PGE scores capture change 
 In every case, the correlations---estimated taking into account the uncertainty in the measures---are in the expected direction and very strong.
 
 ```{r v_data, include=FALSE}
-v_titles <- here("data-raw", "validation_items_fs.csv") %>%
+v_titles <- here("data-raw", "validation_items.csv") %>%
     read_csv(col_types = "ccccccc") %>%
     select(item, title, neg, group, svy_grp) %>%
     distinct() %>% 
     mutate(title = paste0(svy_grp, ": ", title))
 
-v_raw <- here("data-raw", "validation_items_fs.csv") %>%
+v_raw <- here("data-raw", "validation_items.csv") %>%
     read_csv(col_types = "ccccccc") %>%
     DCPOtools::dcpo_setup(datapath = here("..",
                                           "data",
