@@ -60,7 +60,7 @@ header-includes:
 
 # Authors {-}
 
-- Yuehong 'Cassandra' Tai, ORCID: https://orcid.org/0000-0001-7303-7443, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, yhcasstai@psu.edu
+- Yuehong Cassandra Tai, ORCID: https://orcid.org/0000-0001-7303-7443, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, yhcasstai@psu.edu
 - Yue Hu, corresponding author, ORCID: https://orcid.org/0000-0002-2829-3971, Associate Professor, Department of Political Science, Tsinghua University, yuehu@tsinghua.edu.cn
 - Hyein Ko, ORCID: https://orcid.org/0000-0002-9497-9656, Doctoral Candidate, Department of Political Science, University of Iowa, hyein-ko@uiowa.edu
 - Byung-Deuk Woo, ORCID: https://orcid.org/0000-0001-6902-7576, Postdoctoral Researcher, Institute of Social Data Science, Pohang University of Science and Technology, byungdeukwoo@gmail.com
@@ -378,10 +378,11 @@ back_to_numeric <- function(string_number) {
 covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) * 100}
 ```
 
-We know a lot about support for democracy...
+Fears of growing threats to liberal democracy have spurred renewed attention to the breadth and depth of citizens' support for democracy in countries around the world.
+@Bryan2023
 
-A number of recent and prominent works have taken advantage of advances in computing power and software for Bayesian estimation together with new latent variable models of public opinion to estimate democratic support across many countries and over long spans of time.
-In this approach, responses to many survey questions on democratic support are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020c].
+Recent prominent works have sought to untangle the relationships between democratic support and democratic governance by taking advantage of advances in computing power and software for Bayesian estimation together with new latent variable models of public opinion to estimate democratic support across many countries and over long spans of time.
+In this approach, responses to many survey questions are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020c].
 @Claassen2020a concludes that democratic support so estimated has a positive effect on subsequent democratic change.
 Using the same data, @Claassen2020b finds democratic support responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
 Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two papers and shows that their conclusions are unsupported.
@@ -407,8 +408,7 @@ Further, researchers using latent variables must be attentive to issues of multi
 "Democratic support is measured using survey questions that ask respondents to: evaluate the appropriateness or desirability of democracy; compare democracy to some undemocratic alternative; or evaluate one of these undemocratic forms of government."
 
 We expand on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
-In all, we identified `r n_items` survey items that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.^[
-The complete list of survey items is included in online Appendix A.]
+In all, we identified `r n_items` survey items that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
 Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
 These data are sparse, but they do include `r n_cy` country-years for which we have at least _some_ information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
 
@@ -506,14 +506,10 @@ theta_results <- extract_dcpo_results(dcpo_input,
 
 # Testing the Validity of Democratic Support as a Unidimensional Latent Variable {-}
 
-Such future research, however, depends on the validity of the PGE scores.
 Like @Caughey2019 [684-685], we provide evidence of our measure's validity with convergent validation and construct validation.
 Convergent validation refers to showing that a measure is empirically associated with alternative indicators of the same concept [@Adcock2001, 540].
-Here, we compare PGE scores to responses to individual source-data survey items that were used to generate our estimates, that is, we provide an 'internal' validation test [see, e.g., @Caughey2019, 689; @Solt2020c, 10].
-In the left panel of Figure&nbsp;\ref{conv_plot}, we examine the four-point question on political leaders mentioned above, the most common item in the source data across all country-years.
-Then, in the center panel, we look at the question that provides the most data-rich cross-section in the source data, which asked whether respondents felt "men generally make better political leaders than women" and was included in Pew Global's Spring 2007 survey.
-Finally, in the right panel, to evaluate how well the PGE scores capture change over time, we focus on the item with the largest number of observations for a single country in the source data, which asked respondents to the U.S. General Social Survey whether they agreed or disagreed that "most men are better suited emotionally for politics than are most women."
-In every case, the correlations---estimated taking into account the uncertainty in the measures---are in the expected direction and very strong.
+
+
 
 ```{r v_data, include=FALSE}
 v_titles <- here("data-raw", "validation_items.csv") %>%
