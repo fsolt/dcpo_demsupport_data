@@ -385,10 +385,10 @@ Recent prominent works have sought to untangle the relationships between democra
 In this approach, responses to many survey questions are combined to overcome the scattered collection of data available on any single question; the differences among the questions are accounted for with careful modeling [@Claassen2019; @Solt2020c].
 @Claassen2020a concludes that democratic support so estimated has a positive effect on subsequent democratic change.
 Using the same data, @Claassen2020b finds democratic support responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
-Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two papers and shows that their conclusions are unsupported.
+Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two papers and shows that neither of their conclusions are supported.
 With a similarly expanded dataset of latent variable estimates of democratic support, @Claassen2022 examines the relationship of democratic support to the performance of democratic governments and concludes that poor government performance does not erode support for democracy.
 
-Several critiques of this line of research have already been raised.
+Several critiques of this impressive line of research have already been raised.
 @Hu2022 reveals that the latent variable measure of democratic support used in the several of these works is flawed by errors in the coding of survey questions used as indicators; correcting these errors yields no support for the conclusions reached in @Claassen2020a.
 @Tannenberg2022 [, 602] demonstrates that support for democracy in several indicator questions is biased downward in more autocratic countries due to fear of government reprisal and argues that the resulting latent variable likely suffers from this bias as well.
 These critiques are of the 'garbage-in, garbage-out' variety.
@@ -401,7 +401,8 @@ Here, we test the validity of the sort of unidimensional measure used in recent 
 The results are striking.
 Across countries and years, the latent variable of democratic support is essentially orthogonal to these measures of supporting contestation and participation; civil liberties; and institutional constraints on executive power; as well as of prioritizing democracy and political freedom over the economy, economic equality, and order.
 Democratic support is simply not well captured in a latent variable constrained to a single dimension.
-Further, researchers using latent variables must be attentive to issues of multidimensionality and provide ample validation for these measures.
+More generally, this finding highlights how researchers creating latent variable measures must be attentive to issues of multidimensionality and provide ample validation.
+The novel approach to estimating latent variables across countries and over time is a powerful tool, but it does not alone solve all the difficulties of measuring public attitudes.
 
 # The Latent Variable Approach to Measuring Democratic Support {-} 
 
@@ -506,9 +507,14 @@ theta_results <- extract_dcpo_results(dcpo_input,
 
 # Testing the Validity of Democratic Support as a Unidimensional Latent Variable {-}
 
-Like @Caughey2019 [684-685], we provide evidence of our measure's validity with convergent validation and construct validation.
-Convergent validation refers to showing that a measure is empirically associated with alternative indicators of the same concept [@Adcock2001, 540].
+To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of survey questions that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
+Because, following the existing works employing such a measure, we did not include these survey questions as indicators when we estimated the latent variable, these constitute "external" validation tests [see @Caughey2019, 684-685].
 
+Where the indicators used to estimate the latent variable expressly ask respondents to evaluate "democracy" or a specific undemocratic alternative, the questions we use for these tests probe further.
+"fully contested elections with full suffrage and the absence of massive fraud, combined with effective guarantees of civil liberties, including freedom of speech, assembly, and association" (Collier & Levitsky, 1997, p. 434).
+The questions we use in these tests asked respondents their attitudes toward the two dimensions 
+
+We start with survey questions
 
 
 ```{r v_data, include=FALSE}
@@ -527,7 +533,7 @@ v_raw <- here("data-raw", "validation_items.csv") %>%
 ```
 
 
-```{r polyarchy, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE}
+```{r polyarchy, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE}
 v_vars_poly <- v_raw %>%
     filter(group == "contest" | group == "participation") %>% 
     arrange(group, title) 
@@ -544,7 +550,7 @@ validation_plot(v_vars_poly, lab_x = .5, lab_y = 15) +
        y = "% Agreeing")
 ```
 
-```{r liberties, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4.5}
+```{r liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4.5}
 
 v_vars_lib <- v_raw %>%
     filter(str_detect(group, "free")) %>% 
@@ -562,7 +568,7 @@ validation_plot(v_vars_lib) +
        y = "% Agreeing")
 ```
 
-```{r institutions, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3}
+```{r institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3}
 
 v_vars_inst <- v_raw %>%
     filter(group == "rule_of_law" | group == "no_leg") %>% 
@@ -580,7 +586,7 @@ validation_plot(v_vars_inst) +
        y = "% Agreeing")
 ```
 
-```{r conditions, cache = FALSE, fig.cap="Construct Validation: Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{conditions}", fig.height=3}
+```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{conditions}", fig.height=3}
 
 v_vars_cond <- v_raw %>%
     filter(str_detect(group, "pref_")) %>% 
