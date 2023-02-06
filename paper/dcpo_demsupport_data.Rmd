@@ -515,8 +515,7 @@ theta_results <- extract_dcpo_results(dcpo_input,
 
 To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of survey questions that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
 Because, following the existing works employing such a measure, we did not include these survey questions as indicators when we estimated the latent variable, these constitute "external" validation tests [see @Caughey2019, 684-685].
-
-Where the indicators used to estimate the latent variable expressly ask respondents to evaluate "democracy" or a specific undemocratic alternative, the questions we use for these tests probe further.
+Where the indicators used to estimate the latent variable expressly ask respondents to evaluate "democracy" or a specific undemocratic alternative, however, the questions we use for these tests probe further.
 "fully contested elections with full suffrage and the absence of massive fraud, combined with effective guarantees of civil liberties, including freedom of speech, assembly, and association" (Collier & Levitsky, 1997, p. 434).
 The questions we use in these tests asked respondents their attitudes toward the two dimensions
 
@@ -554,6 +553,8 @@ validation_plot(v_vars_poly, lab_x = .5, lab_y = 15) +
        y = "% Agreeing")
 ```
 
+
+
 ```{r liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4.5}
 
 v_vars_lib <- v_raw %>%
@@ -571,6 +572,17 @@ validation_plot(v_vars_lib) +
   labs(x = "Unidimensional Democratic Support",
        y = "% Agreeing")
 ```
+
+Next, we consider the survey questions that examine the level of support for civil liberties.
+Again drawing on multi-wave cross-national surveys, we compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
+Scatterplots of the aggregate responses to these questions against the unidimensional latent variable of democratic support are presented in Figure \@ref(fig:liberties).
+All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
+For example, across five waves of the Asian Barometer (2003-2018), the unidimensional latent variable of democratic support has a _positive_ relationship ($R = 0.28$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
+Support for 'democracy' in the abstract appears not to conflict with favoring government censorship in those countries and years. 
+The strongest relationship with democratic support so measured is found with an item on protests from the surveys composing the Consolidation of Democracy in Central and Eastern Europe dataset, which asked respondents the extent of their agreement with "the government passing a law to forbid all public protest demonstrations."
+That correlation reaches only $R = −0.39$, and that in a rather thin evidentiary base of just 21 country-years.
+Even then, it stands out as an exception rather than the rule.
+The unidimensional latent variable of democratic support does not capture much of the variation across countries and over time of citizen demand that civil liberties are respected. 
 
 ```{r institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3}
 
@@ -590,6 +602,8 @@ validation_plot(v_vars_inst) +
        y = "% Agreeing")
 ```
 
+Figure \@ref(fig:institutions)
+
 ```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{conditions}", fig.height=3}
 
 v_vars_cond <- v_raw %>%
@@ -607,6 +621,11 @@ validation_plot(v_vars_cond, lab_x = .45, lab_y = 10) +
   labs(x = "Unidimensional Democratic Support",
        y = "% Agreeing")
 ```
+
+As mentioned above, recent research has documented that many who proclaim support for democracy in the abstract nevertheless have other preferences---such as those regarding policy or partisanship---that they consider to be more important priorities [see @Graham2020; @Simonovits2022].
+Survey questions on the public's prioritization of democracy are relatively rare, but we found seven relevant items.
+Most simply asked respondents to choose between democracy or political freedom on the one hand and maintaining order, reducing economic inequality, or spurring economic development on the other, though the AmericasBarometer directly asked, "would a military coup be justified under the following circumstances: when social protest is high."
+Figure \@ref(fig:conditions) shows that the unidimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
 
@@ -1433,7 +1452,7 @@ validation_plot(v_vars_poly, lab_x = .9, lab_y = 15,
        y = "% Agreeing")
 ```
 
-Figure \@ref(fig:m5-polyarchy) shows that, when estimated in this smaller dataset with Claassen's [-@Claassen2019] Model 5, the unidimensional latent variable of democratic support exhibits moderate correlations in the expected direction with two of the validation items: the CDCEE's question on associating democracy with a multi-party system (third panel from the left in the top row) and the AmericasBarometer question on agreement that women should be as involved in politics as men (second panel from the left on the bottom row).
+Figure \@ref(fig:m5-polyarchy) shows that, when estimated in this smaller dataset with Claassen's [-@Claassen2019] Model 5, the unidimensional latent variable of democratic support exhibits moderate correlations in the expected direction with two of the validation items: the CDCEE's question on associating democracy with a multi-party system (third panel from the left in the top row) and the AmericasBarometer question on agreement that women should be as involved in politics as men (second panel from the left on the bottom row).
 In both cases, the number of country-years observed is less than 25, which cautions against placing very much weight on these two comparisons.
 Still, even in light of these two moderate relationships, the overall picture remains the same as that presented in the text: the unidimensional latent variable does not capture much of the public's attitudes toward contestation or participation.
 
