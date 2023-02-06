@@ -10,8 +10,8 @@ output:
   
 title: |
   | Support for Democracy Is Multidimensional: 
-  | Why Unidimensional Latent Variable Measures
-  | of Democratic Support Are Invalid
+  | Why Unidimensional Latent Variable Measures of
+  | Democratic Support Are Invalid
   
   
 # abstract: "Do democratic regimes depend on public support to avoid backsliding? Does public support, in turn, respond thermostatically to changes in democracy? Two prominent recent studies (Claassen 2020a, 2020b) reinvigorated the classic hypothesis on the positive relationship between public support for democracy and regime survival---and challenged its reciprocal counterpart---by using a latent variable approach to measure mass democratic support from cross-national survey data. Both studies, however, used only the point estimates of democratic support; we show that incorporating the concomitant measurement uncertainty into these analyses reveals that there is no support for either study's conclusion. Efforts to minimize the uncertainty by incorporating additional survey data still fail to yield evidence in support of either hypothesis. These results underscore the need both for more nuanced analyses of the relationships between public support and democracy and for taking measurement uncertainty into account when working with latent variables. [147/150 words]"
@@ -47,7 +47,7 @@ header-includes:
       - \usepackage{threeparttable}
       - \usepackage{wrapfig}
       - \usepackage{fullpage}
-      - \usepackage{pdflscape} #\usepackage{lscape} better for printing, page displayed vertically, content in landscape mode, \usepackage{pdflscape} better for screen, page displayed horizontally, content in landscape mode
+      - \usepackage{lscape} #\usepackage{lscape} better for printing, page displayed vertically, content in landscape mode, \usepackage{pdflscape} better for screen, page displayed horizontally, content in landscape mode
       - \newcommand{\blandscape}{\begin{landscape}}
       - \newcommand{\elandscape}{\end{landscape}}
       - \usepackage{titlesec}
@@ -56,29 +56,31 @@ header-includes:
       - \usepackage{titling} #use \maketitle repeatedly
 ---
 
-\pagenumbering{gobble} 
+\pagenumbering{gobble}
 
-# Authors {-}
+# Authors {.unnumbered}
 
-- Yuehong Cassandra Tai, ORCID: https://orcid.org/0000-0001-7303-7443, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, yhcasstai@psu.edu
-- Yue Hu, corresponding author, ORCID: https://orcid.org/0000-0002-2829-3971, Associate Professor, Department of Political Science, Tsinghua University, yuehu@tsinghua.edu.cn
-- Hyein Ko, ORCID: https://orcid.org/0000-0002-9497-9656, Doctoral Candidate, Department of Political Science, University of Iowa, hyein-ko@uiowa.edu
-- Byung-Deuk Woo, ORCID: https://orcid.org/0000-0001-6902-7576, Postdoctoral Researcher, Institute of Social Data Science, Pohang University of Science and Technology, byungdeukwoo@gmail.com
-- Frederick Solt, ORCID: https://orcid.org/0000-0002-3154-6132, Associate Professor, Department of Political Science, University of Iowa, frederick-solt@uiowa.edu
+-   Yuehong Cassandra Tai, ORCID: <https://orcid.org/0000-0001-7303-7443>, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, [yhcasstai\@psu.edu](mailto:yhcasstai@psu.edu){.email}
+-   Yue Hu, corresponding author, ORCID: <https://orcid.org/0000-0002-2829-3971>, Associate Professor, Department of Political Science, Tsinghua University, [yuehu\@tsinghua.edu.cn](mailto:yuehu@tsinghua.edu.cn){.email}
+-   Hyein Ko, ORCID: <https://orcid.org/0000-0002-9497-9656>, Doctoral Candidate, Department of Political Science, University of Iowa, [hyein-ko\@uiowa.edu](mailto:hyein-ko@uiowa.edu){.email}
+-   Byung-Deuk Woo, ORCID: <https://orcid.org/0000-0001-6902-7576>, Postdoctoral Researcher, Institute of Social Data Science, Pohang University of Science and Technology, [byungdeukwoo\@gmail.com](mailto:byungdeukwoo@gmail.com){.email}
+-   Frederick Solt, ORCID: <https://orcid.org/0000-0002-3154-6132>, Associate Professor, Department of Political Science, University of Iowa, [frederick-solt\@uiowa.edu](mailto:frederick-solt@uiowa.edu){.email}
 
 \pagebreak
 
+```{=tex}
 \renewcommand{\baselinestretch}{1}
 \selectfont
 \maketitle
 \renewcommand{\baselinestretch}{1.5}
 \selectfont
+```
 
+```{=tex}
 \begin{abstract}
 blah blah blah
 \end{abstract}
-
-
+```
 \pagebreak
 
 \pagenumbering{arabic}
@@ -98,14 +100,21 @@ knitr::opts_chunk$set(
 # If `DCPOtools` is not yet installed:
 # remotes::install_github("fsolt/DCPOtools")
 
-library(DCPOtools)
-library(cmdstanr)
-library(tidyverse)
-library(here)
-library(countrycode)
-library(patchwork)
-library(ggthemes)
-library(rsdmx)
+if (!require(pacman)) install.packages("pacman")
+library(pacman)
+# load all the packages you will use below 
+p_load(
+  DCPOtools,
+  cmdstanr,
+  tidyverse,
+  here,
+  countrycode,
+  patchwork,
+  ggthemes,
+  rsdmx,
+  osfr,
+  kableExtra
+) 
 
 # define functions
 validation_plot <- function(v_data_raw,
@@ -171,7 +180,7 @@ validation_plot <- function(v_data_raw,
     # } 
     
     validation_cor <- theta_results %>%
-      right_join(validation_summarized %>%
+      inner_join(validation_summarized %>%
                    select(country, year, title, prop, se),
                  by = c("country", "year")) %>% 
       rowwise() %>% 
@@ -404,16 +413,14 @@ Democratic support is simply not well captured in a latent variable constrained 
 More generally, this finding highlights how researchers creating latent variable measures must be attentive to issues of multidimensionality and provide ample validation.
 The novel approach to estimating latent variables across countries and over time is a powerful tool, but it does not alone solve all the difficulties of measuring public attitudes.
 
-# The Latent Variable Approach to Measuring Democratic Support {-} 
+# The Latent Variable Approach to Measuring Democratic Support {.unnumbered}
 
 "Democratic support is measured using survey questions that ask respondents to: evaluate the appropriateness or desirability of democracy; compare democracy to some undemocratic alternative; or evaluate one of these undemocratic forms of government."
 
 We expand on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
 In all, we identified `r n_items` survey items that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
 Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
-These data are sparse, but they do include `r n_cy` country-years for which we have at least _some_ information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
-
-
+These data are sparse, but they do include `r n_cy` country-years for which we have at least *some* information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
 
 ```{r dcpo_chunk_options, cache=TRUE}
 evaluate <- TRUE
@@ -504,18 +511,16 @@ theta_results <- extract_dcpo_results(dcpo_input,
                                       par = "theta")
 ```
 
-
-# Testing the Validity of Democratic Support as a Unidimensional Latent Variable {-}
+# Testing the Validity of Democratic Support as a Unidimensional Latent Variable {.unnumbered}
 
 To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of survey questions that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
 Because, following the existing works employing such a measure, we did not include these survey questions as indicators when we estimated the latent variable, these constitute "external" validation tests [see @Caughey2019, 684-685].
 
 Where the indicators used to estimate the latent variable expressly ask respondents to evaluate "democracy" or a specific undemocratic alternative, the questions we use for these tests probe further.
 "fully contested elections with full suffrage and the absence of massive fraud, combined with effective guarantees of civil liberties, including freedom of speech, assembly, and association" (Collier & Levitsky, 1997, p. 434).
-The questions we use in these tests asked respondents their attitudes toward the two dimensions 
+The questions we use in these tests asked respondents their attitudes toward the two dimensions
 
 We start with survey questions
-
 
 ```{r v_data, include=FALSE}
 v_titles <- here("data-raw", "validation_items.csv") %>%
@@ -531,7 +536,6 @@ v_raw <- here("data-raw", "validation_items.csv") %>%
                                           "dcpo_surveys")) %>%
     left_join(v_titles, by = "item")
 ```
-
 
 ```{r polyarchy, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE}
 v_vars_poly <- v_raw %>%
@@ -604,36 +608,40 @@ validation_plot(v_vars_cond, lab_x = .45, lab_y = 10) +
        y = "% Agreeing")
 ```
 
-# Conclusions {-}
+# Conclusions {.unnumbered}
 
 \pagebreak
-# References {-}
+
+# References {.unnumbered}
 
 ::: {#refs-text}
 :::
 
 \pagebreak
 
+```{=tex}
 \renewcommand{\baselinestretch}{1}
 \selectfont
 \maketitle
-\renewcommand{\baselinestretch}{1.5}
 \selectfont
-
+```
+```{=tex}
 \pagenumbering{arabic}
 \renewcommand*{\thepage}{A\arabic{page}}
-
+```
+```{=tex}
 \setcounter{figure}{0}
 \renewcommand*{\thefigure}{A\arabic{figure}}
-
+```
+```{=tex}
 \vspace{-.9in}
 \begin{center}
 \begin{Large}
 Appendices
 \end{Large}
 \end{center}
-
-# The Unidimensional Latent Variable of Democratic Support {-}
+```
+# Appendix A: The Unidimensional Latent Variable of Democratic Support {.unnumbered}
 
 ```{r itemcountry, fig.cap="Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}", fig.height=3.5, cache=FALSE}
 items_plot <- dcpo_input_raw1 %>%
@@ -883,7 +891,7 @@ dcpo_input_raw1 %>%
 The most frequently-asked item in the data we collected appears in `r length(most_common_item_surveys)` different survey datasets, covering a total of `r most_common_item_cy` different country-years.
 It asks respondents whether they strongly disagree, disagree, agree, or strongly agree with the statement, "Democracy may have its problems but it is still the best form of government."
 
-The left panel of Figure&nbsp;\ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
+The left panel of Figure \ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
 `r top_country_cy` leads in this regard; it was observed in `r top_country_cy_obs` different years.
 Thanks in part to sustained interest in democratic support in the LatinoBarometer and the Americas Barometer, most Latin America countries were surveyed in at least 25 years.
 Germany, Poland, Ukraine, and Russia were all surveyed in more than 20 years.
@@ -896,7 +904,7 @@ The lower right panel counts the countries observed in each year and reveals tha
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy.
 In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
 
-```{r cs, fig.cap="DSD Scores, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
+```{r cs, fig.cap="The Unidimensional Latent Variable of Democratic Support, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
 
 n_panes <- 2
 axis_text_size <- 10
@@ -949,16 +957,16 @@ bottom5 <- p1_data %>%
 
 ```
 
-We estimated the model using the `DCPOtools` package for R [@Solt2020a], running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
+We estimated the model using the `DCPOtools` and `DCPO` packages for R [@Solt2019; @Solt2020a], running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
 The $\hat{R}$ diagnostic had a maximum value of 1.01, indicating that the model converged.
-The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Appendix A).
+The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Table A1).
 
 The result is estimates, in all `r res_cy` country-years spanned by the source data, of support for democracy.
-Figure&nbsp;\ref{cs_mry} displays the most recent available DSD score for each of the `r res_c` countries and territories in the dataset.
+Figure \ref{cs_mry} displays the most recent available DSD score for each of the `r res_c` countries and territories in the dataset.
 
 The latest scores for `r bottom5` have them as the places where the public expresses the lowest support for democracy.
 
-```{r ts, fig.cap="DSD Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
+```{r ts, fig.cap="The Unidimensional Latent Variable of Democratic Support Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
 countries <- c("Finland", "China", "Philippines", "Bangladesh",
                "Malaysia", "Turkey", "United Kingdom", "South Korea",
                "Belgium", "Spain", "United States", "Chile", 
@@ -983,9 +991,514 @@ ggplot(data = c_sum, aes(x = year, y = mean)) +
   plot_annotation(caption = "Note: Countries are ordered by their DSD scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
 ```
 
+\clearpage
 \pagebreak
-# References {-}
+\noindent Table A1: Indicators Used in the Unidimensional Latent Variable Model of Democratic Support
+
+```{r dsd_items}
+alpha_results <- summarize_dcpo_results(dcpo_input,
+                                        dcpo_output = dcpo_output,
+                                        pars = "alpha") %>% 
+  transmute(item = question,
+            dispersion = mean)
+
+beta_results <- summarize_dcpo_results(dcpo_input,
+                                       dcpo_output,
+                                       "beta") %>% 
+  group_by(question) %>% 
+  summarize(difficulties0 = paste0(sprintf("%.2f", round(mean, 2)),
+                                   collapse = ", ")) %>% 
+  mutate(item = question,
+         cp = if_else(str_detect(item, "threestate"),
+                      2, 
+                      as.numeric(str_extract(item, "\\d+")) - 1),
+         term = str_glue("(( ?-?[0-9].[0-9][0-9]?,?){{{cp}}})"),
+         difficulties = str_extract(difficulties0, 
+                                    term) %>%
+           str_replace(",$", "") %>% 
+           str_trim()) %>% 
+  transmute(item, difficulties)
+                                    
+items_summary <- dcpo_input_raw1 %>%
+  dplyr::select(country, year, item, survey) %>%
+  distinct() %>%
+  separate(survey, c("surv1", "surv2", "surv3"), sep=", ", fill = "left") %>%
+  pivot_longer(cols = starts_with("surv"), values_to = "survey") %>%
+  filter(!is.na(survey)) %>% 
+  group_by(item) %>% 
+  mutate(survey = str_extract(survey, "^[a-z]*"),
+         all_surveys = paste0(unique(survey), collapse = ", ")) %>% 
+  ungroup() %>% 
+  distinct(country, year, item, .keep_all = TRUE) %>% 
+  group_by(item) %>% 
+  mutate(n_cy = n()) %>% 
+  ungroup() %>%
+  distinct(item, n_cy, all_surveys) %>% 
+  left_join(surveys %>%
+              select(item, question_text, response_categories) %>%
+              distinct(item, .keep_all = TRUE),
+            by = "item") %>% 
+  left_join(alpha_results, by = "item") %>% 
+  left_join(beta_results, by = "item") %>% 
+  arrange(-n_cy)
+```
+
+```{r dsd_items_table}  
+items_summary %>% 
+  transmute(`Survey\nItem\nCode` = item,
+            `Country-Years` = as.character(n_cy),
+            `Question Text` = str_replace(question_text, "([^(]*)\\(.*", "\\1"),
+            `Response Categories` = response_categories,
+            `Dispersion` = dispersion,
+            `Difficulties`= difficulties,
+            `Survey Dataset Codes` = all_surveys) %>% 
+  modelsummary::datasummary_df(output = "kableExtra",
+                               longtable = TRUE) %>% 
+  # modelsummary::datasummary_df(output = "kableExtra",
+  #                              note = "",
+  #                              longtable = TRUE,
+  #                              caption = "Indicators Used in the Unidimensional Model of Democratic Support") %>%
+  kableExtra::column_spec(1, width = "7em") %>%
+  kableExtra::column_spec(2, width = "4em") %>%
+  kableExtra::column_spec(3, width = "13em") %>%
+  kableExtra::column_spec(4, width = "16em") %>%
+  kableExtra::column_spec(5, width = "4em") %>%
+  kableExtra::column_spec(c(6, 7), width = "8em") %>% 
+  kableExtra::kable_styling(font_size = 7) %>%
+  kableExtra::kable_styling(latex_options = c("repeat_header")) %>%
+  kableExtra::kable_styling(latex_options = "striped")
+```
+
+\clearpage
+\pagebreak
+# Appendix B: Validation Survey Items
+
+\noindent Table A2: Survey Items Used in Validation Tests
+
+```{r v_items, cache=FALSE}
+v_items <- v_raw %>%
+  dplyr::select(country, year, item, survey) %>%
+  distinct() %>%
+  separate(survey, c("surv1", "surv2", "surv3"), sep=", ", fill = "left") %>%
+  pivot_longer(cols = starts_with("surv"), values_to = "survey") %>%
+  filter(!is.na(survey)) %>% 
+  group_by(item) %>% 
+  mutate(survey = str_extract(survey, "^[a-z]*"),
+         all_surveys = paste0(unique(survey), collapse = ", ")) %>% 
+  distinct(country, year, item, .keep_all = TRUE) %>% 
+  mutate(n_cy = n()) %>% 
+  ungroup() %>%
+  distinct(item, n_cy, all_surveys) %>% 
+  left_join(here("data-raw", "validation_items.csv") %>%
+              read_csv(col_types = "ccccccc") %>%
+              mutate(title = paste0(svy_grp, ": ", title)) %>% 
+              select(item, title,
+                     question_text, group) %>%
+              distinct(title, .keep_all = TRUE),
+            by = "item") %>%
+  arrange(title) %>% 
+  select(title, n_cy, question_text)
+```
+
+```{r v_items_table, cache=FALSE}  
+v_items %>% 
+  transmute(`Title` = title,
+            `Country-Years` = as.character(n_cy),
+            `Question Text` = question_text) %>% 
+  modelsummary::datasummary_df(output = "kableExtra",
+                               longtable = TRUE) %>% # ,
+  #                              note = "",
+  #                              caption = "Survey Items Used in Validation Tests") %>% 
+  kableExtra::column_spec(1, width = "14em") %>%
+  kableExtra::column_spec(2, width = "4em") %>%
+  kableExtra::column_spec(3, width = "45em") %>%
+  kableExtra::kable_styling(font_size = 7) %>%
+  kableExtra::kable_styling(latex_options = c("repeat_header")) %>%
+  kableExtra::kable_styling(latex_options = "striped")
+```
+
+\clearpage
+\pagebreak
+# Appendix C: Results with an Alternate Latent Variable and Restricted Set of Indicator Data
+
+To provide the best test of the unidimensional latent variable approach for measuring democratic support, in main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
+However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see @Claassen2020a; @Claassen2020b; @Tai2022; @Claassen2022].
+To verify our findings, we replicate the figures of the text while instead using this latter latent variable of democratic support with corrections for the data-entry errors identified in @Hu2022.
+
+```{r m5_functions}
+summarize_cm5_results <- function(cm5_input,
+                                  cm5_output,
+                                  pars = c("theta"),
+                                  probs = c(.1, .9)) {
+    
+    question <- country <- year <- parameter <- variable <- kk <- tt <- qq <- rr <- NULL
+    
+    dat <- cm5_input$data
+    
+    qcodes <- dat %>%
+        dplyr::transmute(item = item,
+                         qq = as.numeric(as.factor(item))) %>% 
+        unique()
+    
+    kcodes <- dat %>%
+        dplyr::transmute(country = country,
+                         kk = as.numeric(as.factor(country))) %>% 
+        unique()
+    
+    tcodes <- tibble(year = min(dat$year):max(dat$year),
+                     tt = year - min(year) + 1)
+    
+    ktcodes <- dat %>%
+        dplyr::group_by(country) %>%
+        dplyr::summarize(first_yr = min(year),
+                         last_yr = max(year))
+    
+    if ("R6" %in% class(cm5_output)) {
+        fit <- cm5_output
+        
+        summary_measures <- c("mean", "median", "sd", "mad", "rhat", "ess_bulk", "ess_tail")
+        
+        res <- map_df(pars, function(par) {
+            if (par == "theta") {
+                fit$summary("theta",
+                            ~posterior::quantile2(., probs = probs),
+                            summary_measures) %>%
+                    dplyr::mutate(tt = as.numeric(gsub("theta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       variable)),
+                                  kk = as.numeric(gsub("theta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       variable))) %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::left_join(tcodes, by = "tt") %>%
+                    dplyr::left_join(ktcodes, by = "country") %>%
+                    dplyr::filter(year >= first_yr) %>% # & year <= last_yr
+                    dplyr::arrange(kk, tt) %>%
+                    dplyr::select(country, year,
+                                  starts_with("me"),
+                                  sd, mad, starts_with("q"),
+                                  rhat, starts_with("ess"),
+                                  variable, kk, tt)
+            } else if (par == "sigma") {
+                fit$summary("sigma",
+                            ~posterior::quantile2(., probs = probs),
+                            summary_measures) %>%
+                    dplyr::mutate(tt = as.numeric(gsub("sigma\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       variable)),
+                                  kk = as.numeric(gsub("sigma\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       variable))) %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::left_join(tcodes, by = "tt") %>%
+                    dplyr::mutate(year = if_else(tt == 1,
+                                                 as.integer(year),
+                                                 as.integer(min(year, na.rm = TRUE) + tt - 1))) %>%
+                    dplyr::left_join(ktcodes, by = "country") %>%
+                    dplyr::filter(year >= first_yr & year <= last_yr) %>%
+                    dplyr::arrange(kk, tt) %>%
+                    dplyr::select(country, year,
+                                  starts_with("me"),
+                                  sd, mad, starts_with("q"),
+                                  rhat, starts_with("ess"),
+                                  variable, kk, tt)
+            } else if (par == "alpha") {
+                fit$summary("alpha",
+                            ~posterior::quantile2(., probs = probs),
+                            summary_measures) %>%
+                    dplyr::mutate(qq = as.numeric(gsub("alpha\\[(\\d+)]",
+                                                       "\\1",
+                                                       variable))) %>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::arrange(qq) %>%
+                    dplyr::select(question, n, everything())
+            } else if (par == "beta") {
+                fit$summary("beta",
+                            ~posterior::quantile2(., probs = probs),
+                            summary_measures) %>%
+                    dplyr::mutate(rr = as.numeric(gsub("beta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       variable)),
+                                  qq = as.numeric(gsub("beta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       variable)))%>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::arrange(qq, rr) %>%
+                    dplyr::filter(rr <= rr_max) %>%
+                    dplyr::select(question, n, everything())
+            } else if (par == "delta") {
+                fit$summary("delta",
+                            ~posterior::quantile2(., probs = probs),
+                            summary_measures) %>%
+                    dplyr::mutate(qq = as.numeric(gsub("delta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       parameter)),
+                                  kk = as.numeric(gsub("delta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       parameter)))%>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::arrange(qq) %>%
+                    dplyr::select(question, n, country, everything())
+            }
+        })
+    } else {
+        res <- map_df(pars, function(par) {
+            if (par == "theta") {
+                rstan::summary(dcpo_output, pars = "theta", probs = probs) %>%
+                    dplyr::first() %>%
+                    as.data.frame() %>%
+                    tibble::rownames_to_column("parameter") %>%
+                    tibble::as_tibble() %>%
+                    dplyr::mutate(tt = as.numeric(gsub("theta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       parameter)),
+                                  kk = as.numeric(gsub("theta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       parameter))) %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::left_join(tcodes, by = "tt") %>%
+                    dplyr::mutate(year = if_else(tt == 1,
+                                                 as.integer(year),
+                                                 as.integer(min(year, na.rm = TRUE) + tt - 1))) %>%
+                    dplyr::left_join(ktcodes, by = "country") %>%
+                    dplyr::filter(year >= first_yr & year <= last_yr) %>%
+                    dplyr::arrange(kk, tt) %>%
+                    dplyr::select(-first_yr, -last_yr)
+            } else if (par == "sigma") {
+                rstan::summary(dcpo_output, pars = "sigma", probs = probs) %>%
+                    dplyr::first() %>%
+                    as.data.frame() %>%
+                    tibble::rownames_to_column("parameter") %>%
+                    tibble::as_tibble() %>%
+                    dplyr::mutate(tt = as.numeric(gsub("sigma\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       parameter)),
+                                  kk = as.numeric(gsub("sigma\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       parameter))) %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::left_join(tcodes, by = "tt") %>%
+                    dplyr::arrange(kk, tt)
+            } else if (par == "alpha") {
+                rstan::summary(dcpo_output, pars = "alpha", probs = probs) %>%
+                    dplyr::first() %>%
+                    as.data.frame() %>%
+                    tibble::rownames_to_column("parameter") %>%
+                    tibble::as_tibble() %>%
+                    dplyr::mutate(qq = as.numeric(gsub("alpha\\[(\\d+)]",
+                                                       "\\1",
+                                                       parameter))) %>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::arrange(qq)
+            } else if (par == "beta") {
+                rstan::summary(dcpo_output, pars = "beta", probs = probs) %>%
+                    dplyr::first() %>%
+                    as.data.frame() %>%
+                    tibble::rownames_to_column("parameter") %>%
+                    tibble::as_tibble() %>%
+                    dplyr::mutate(rr = as.numeric(gsub("beta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       parameter)),
+                                  qq = as.numeric(gsub("beta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       parameter)))%>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::arrange(qq, rr)
+            } else if (par == "delta") {
+                rstan::summary(dcpo_output, pars = "delta", probs = probs) %>%
+                    dplyr::first() %>%
+                    as.data.frame() %>%
+                    tibble::rownames_to_column("parameter") %>%
+                    tibble::as_tibble() %>%
+                    dplyr::mutate(qq = as.numeric(gsub("delta\\[(\\d+),\\d+\\]",
+                                                       "\\1",
+                                                       parameter)),
+                                  kk = as.numeric(gsub("delta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       parameter)))%>%
+                    dplyr::left_join(qcodes, by = "qq") %>%
+                    dplyr::left_join(kcodes, by = "kk") %>%
+                    dplyr::arrange(qq)
+            }
+        })
+    }
+    
+    return(res)
+}
+
+extract_m5_results <- function(cm5_input,
+                               cm5_output,
+                               par = "theta") {
+  
+    if (!par %in% c("theta")) {
+        errorCondition('extract_m5_results() currently extracts only "theta"')
+    }
+
+    question <- country <- year <- parameter <- variable <- kk <- tt <- qq <- rr <- NULL
+    
+    dat <- cm5_input$data
+    
+    qcodes <- dat %>%
+        dplyr::transmute(item = item,
+                         qq = as.numeric(as.factor(item))) %>% 
+        unique()
+    
+    kcodes <- dat %>%
+        dplyr::transmute(country = country,
+                         kk = as.numeric(as.factor(country))) %>% 
+        unique()
+    
+    tcodes <- tibble(year = min(dat$year):max(dat$year),
+                     tt = year - min(year) + 1)
+    
+    ktcodes <- dat %>%
+        dplyr::group_by(country) %>%
+        dplyr::summarize(first_yr = min(year),
+                         last_yr = max(year))
+
+    if ("R6" %in% class(cm5_output)) {
+        fit <- cm5_output
+
+        suppressWarnings(
+            res <- fit$draws(par,
+                             format = "df") %>%
+                pivot_longer(starts_with(par),
+                             values_to = par) %>%
+                {if (par == "theta") {
+                    dplyr::mutate(., tt = as.numeric(gsub("theta\\[(\\d+),\\d+\\]",
+                                                          "\\1",
+                                                          name)),
+                                  kk = as.numeric(gsub("theta\\[\\d+,(\\d+)\\]",
+                                                       "\\1",
+                                                       name))) %>%
+                        dplyr::left_join(kcodes, by = "kk") %>%
+                        dplyr::left_join(tcodes, by = "tt") %>%
+                        dplyr::mutate(year = if_else(tt == 1,
+                                                     as.integer(year),
+                                                     as.integer(min(year, na.rm = TRUE) + tt - 1))) %>%
+                        dplyr::left_join(ktcodes, by = "country") %>%
+                        dplyr::filter(year >= first_yr & year <= last_yr) %>%
+                        dplyr::arrange(kk, tt) %>%
+                        dplyr::select(country, year, theta, draw = .draw)
+                }}) %>%
+            dplyr::group_split(draw) %>%
+            purrr::map(~select(.x, -draw))
+    } else {
+        message("extract_m5_results() cannot currently handle rstan output")
+    }
+    return(res)
+}
+```
+
+```{r m5_data, include=FALSE}
+m5_path <- here::here("data", "m5")
+
+# Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
+dir.create(m5_path, showWarnings = FALSE, recursive = TRUE)
+osf_retrieve_node("vmxkn") %>%
+    osf_ls_files(pattern = "csv$") %>% 
+    osf_download(path = m5_path,
+                 conflicts = "skip")
+
+
+m5_output <- as_cmdstan_fit(here::here(m5_path,
+                                       list.files(m5_path,
+                                                  pattern = "csv$")))
+
+m5_input <- rio::import(here::here("data",
+                                   "m5",
+                                   "claassen_replication_input.rda"))
+
+m5_theta_summary <- summarize_cm5_results(m5_input,
+                                          m5_output,
+                                          "theta")
+
+m5_theta_results <- extract_m5_results(m5_input,
+                                       m5_output,
+                                       par = "theta")
+```
+
+```{r m5-polyarchy, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items", fig.height=3, cache=FALSE}
+validation_plot(v_vars_poly, lab_x = .9, lab_y = 15,
+                m5_theta_summary, m5_theta_results) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 9),
+        strip.text.x = element_text(size=5),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support Measured by Model 5",
+       y = "% Agreeing")
+```
+
+Figure \@ref(fig:m5-polyarchy) shows that, when estimated in this smaller dataset with Claassen's [-@Claassen2019] Model 5, the unidimensional latent variable of democratic support exhibits moderate correlations in the expected direction with two of the validation items: the CDCEE's question on associating democracy with a multi-party system (third panel from the left in the top row) and the AmericasBarometer question on agreement that women should be as involved in politics as men (second panel from the left on the bottom row).
+In both cases, the number of country-years observed is less than 25, which cautions against placing very much weight on these two comparisons.
+Still, even in light of these two moderate relationships, the overall picture remains the same as that presented in the text: the unidimensional latent variable does not capture much of the public's attitudes toward contestation or participation.
+
+```{r m5-liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items", fig.height=4.5}
+validation_plot(v_vars_lib, lab_x = -1,
+                theta_summary = m5_theta_summary,
+                theta_results = m5_theta_results) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support Measured by Model 5",
+       y = "% Agreeing")
+```
+
+Figure \@ref(fig:m5-liberties) turns to the validation questions on the civil liberties of freedom of speech, freedom of assembly, and freedom of association.
+Here, the only moderate and strong correlations are actually in the oppposite of the expected direction: greater support for democracy is associated with a stronger approval to ban protests and to use the military to repress strikes.
+Again, however, these relationships are found only where data are particularly scant.
+There are only thirteen country-years for which we have these validation questions from the CDCEE and the latent variable of democratic support when estimated as in prior research.
+The other relationships with responses to the civil liberties validation items, while mostly in the expected direction, are only weak.
+
+```{r m5-institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Democratic Institutions Survey Items", fig.height=3}
+validation_plot(v_vars_inst,
+                lab_x = -1,
+                theta_summary = m5_theta_summary,
+                theta_results = m5_theta_results) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support Measured by Model 5",
+       y = "% Agreeing")
+```
+
+In Figure \@ref(fig:m5-institutions), just two of the eight survey questions asking about institutions that constrain the power of the executive exhibit even moderate correlations with the unidimensional latent variable used in previous research.
+Support for the rule of law relates appreciably to this measure of democratic support in only the AfroBarometer; in the AsianBarometer, Latinobarométro, and Pew Global Attitudes surveys, the correlations are very weak.
+Democratic support so measured is similarly weakly related to data from questions tapping support for the legislative branch in the AfroBarometer, AmericasBarometer, and AsianBarometer, with only the Latinobarométro question on whether national legislatures are necessary at all for democracy showing even a moderate relationship.
+
+```{r m5-conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{m5conditions}", fig.height=3}
+validation_plot(v_vars_cond,
+                lab_x = -1, lab_y = 10,
+                theta_summary = m5_theta_summary,
+                theta_results = m5_theta_results) +
+  theme_bw() +
+  theme(legend.position="none",
+        axis.text  = element_text(size=8),
+        axis.title = element_text(size=9),
+        plot.title = element_text(hjust = 0.5, size = 11),
+        strip.text.x = element_text(size=7),
+        strip.background = element_blank()) +
+  labs(x = "Unidimensional Democratic Support Measured by Model 5",
+       y = "% Agreeing")
+```
+
+As when estimated with more data and the superior DCPO model, the more limited unidimensional latent variable democratic support has only very weak relationships with the survey questions that ask respondents to choose between order, economic equality, or economic growth, on the one hand, and democracy or political freedom, on the other.
+
+\pagebreak
+
+# References {.unnumbered}
 
 ::: {#refs-app}
 :::
-
