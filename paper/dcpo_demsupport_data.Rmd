@@ -521,8 +521,8 @@ theta_results <- extract_dcpo_results(dcpo_input,
 # Testing the Validity of Democratic Support as a Unidimensional Latent Variable {.unnumbered}
 
 To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of survey questions that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
-Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate "democracy" or a specific undemocratic alternative---they constitute "external" validation tests [see @Caughey2019, 684-685].
-As in many studies on support for democracy, we use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public constestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
+Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate 'democracy' or a specific undemocratic alternative---they constitute "external" validation tests [see @Caughey2019, 684-685].
+As in many studies on support for democracy, we use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public contestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
 In light of recent concerns that citizens do not always prioritize the  preferences for democracy they express, we also draw on questions that assess democracy's relative importance.
 
 ```{r v_data, include=FALSE}
