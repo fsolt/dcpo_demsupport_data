@@ -78,7 +78,7 @@ header-includes:
 
 ```{=tex}
 \begin{abstract}
-Measuring democratic support as a latent variable requires assuming that it falls along a single dimension from steadfast opposition to wholehearted support.
+Measuring democratic support as a single latent variable requires assuming that it falls along a single dimension from steadfast opposition to wholehearted support.
 This ignores ample evidence that support for democracy is complex and multidimensional.
 Here we provide a series of validation tests of the sort of cross-national time-series latent variable measures employed in recent research by reference to questions on support for liberal democracy and opposition to its erosion from multiwave surveys conducted around the world.
 These tests show that, across countries and years, this latent variable is nearly orthogonal to measures of support for contestation and participation; civil liberties; institutional constraints on executive power; and prioritizing democracy over the economy, economic equality, or order.
