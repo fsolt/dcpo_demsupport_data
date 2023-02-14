@@ -686,6 +686,10 @@ Appendices
 ```
 # Appendix A: The Unidimensional Latent Variable of Democratic Support {.unnumbered}
 
+We created the unidimensional latent variable of democratic support used here by first collecting survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
+Our collection of such questions is similar to but expands on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
+In all, we identified `r n_items` survey items on support for democracy in the abstract that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
+
 ```{r itemcountry, fig.cap="Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}", fig.height=3.5, cache=FALSE}
 items_plot <- dcpo_input_raw1 %>%
   distinct(country, year, item) %>%
@@ -901,6 +905,24 @@ if (n_data_poor < 20) {
 
 ```
 
+Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
+These data are sparse, but they do include `r n_cy` country-years for which we have at least *some* information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
+
+The most frequently-asked item in the data we collected appears in `r length(most_common_item_surveys)` different survey datasets, covering a total of `r most_common_item_cy` different country-years.
+It asks respondents whether they strongly disagree, disagree, agree, or strongly agree with the statement, "Democracy may have its problems but it is still the best form of government," a four-point version of the so-called Churchill item.
+
+The left panel of Figure\nobreakspace{}\ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
+`r top_country_cy` leads in this regard; it was observed in `r top_country_cy_obs` different years.
+Thanks in part to sustained interest in democratic support in the LatinoBarometer and the Americas Barometer, most Latin America countries were surveyed in at least 25 years.
+Germany, Poland, Ukraine, and Russia were all surveyed in more than 20 years.
+At the other end of the spectrum, `r n_data_poorest` countries have only the minimum three survey years required to be included in the source dataset at all.
+
+The upper right panel of this figure shows the twelve countries with the most year-items in the source data.
+It reveals that South Korea enjoys the richest collection of data on support for democracy.
+In addition to countries already mentioned, Japan and the Philippines were also surveyed often and with multiple different items.
+The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
+Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy in the abstract.  Figure\nobreakspace{}\ref{obs_by_cy} provides additional detail on the source data, presenting the number of items observed in each country-year; countries are listed on the right in order of the number of years observed. 
+
 ```{r obs, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}", fig.height = 9}
 dcpo_input_raw1 %>%
   mutate(country = str_replace(country, "’", "'")) %>%
@@ -917,8 +939,8 @@ dcpo_input_raw1 %>%
              y = forcats::fct_reorder(country, years_rank),
              fill = n)) +
   geom_tile() +
-  scale_fill_stepsn(colors = rev(hcl.colors(6, "inferno")),
-                    n.breaks = 6,
+  scale_fill_stepsn(colors = rev(hcl.colors(5, "inferno")),
+                    n.breaks = 5,
                     show.limits = TRUE,
                     right = FALSE,
                     name = "Observations") +
@@ -931,28 +953,11 @@ dcpo_input_raw1 %>%
         axis.text.y  = element_text(size = 6))
 ```
 
-We created the unidimensional latent variable of democratic support used here by first collecting survey questions that asked respondents to choose betweeen democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
-Our collection of such questions is similar to but expands on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
-In all, we identified `r n_items` survey items on support for democracy in the abstract that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
-
-Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
-These data are sparse, but they do include `r n_cy` country-years for which we have at least *some* information about the extent of support for democracy, that is, some `r round(covered_share_of_spanned)`% of the `r spanned_cy` country-years spanned by the data we collected.
-
-The most frequently-asked item in the data we collected appears in `r length(most_common_item_surveys)` different survey datasets, covering a total of `r most_common_item_cy` different country-years.
-It asks respondents whether they strongly disagree, disagree, agree, or strongly agree with the statement, "Democracy may have its problems but it is still the best form of government."
-
-The left panel of Figure\nobreakspace{}\ref{item_country_plots} presents a choropleth map indicating the number of years observed in the source data for each country.
-`r top_country_cy` leads in this regard; it was observed in `r top_country_cy_obs` different years.
-Thanks in part to sustained interest in democratic support in the LatinoBarometer and the Americas Barometer, most Latin America countries were surveyed in at least 25 years.
-Germany, Poland, Ukraine, and Russia were all surveyed in more than 20 years.
-At the other end of the spectrum, `r n_data_poorest` countries have only the minimum three survey years required to be included in the source dataset at all.
-
-The upper right panel of this figure shows the twelve countries with the most year-items in the source data.
-It reveals that South Korea enjoys the richest collection of data on support for democracy.
-In addition to countries already mentioned, Japan and the Philippines were also surveyed often and with multiple different items.
-The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
-Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy.
-In the next section, we describe how we make use of all of this sparse and incomparable survey data to generate complete, comparable time-series using a latent variable model.
+In accordance with the advice offered by @Hu2022 to avoid data-entry errors by automating data collection, we used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
+Then, following the existing literature [Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022], we use this collection of survey data to generate a complete time series using a latent variable model.
+Finally, we estimated a unidimensional latent variable of democratic support from these responses using the DCPO model presented in @Solt2020c, running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
+The $\hat{R}$ diagnostic had a maximum value of 1.01, indicating that the model converged.
+The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Table A1).
 
 ```{r cs, fig.cap="The Unidimensional Latent Variable of Democratic Support, Most Recent Available Year \\label{cs_mry}", fig.height=10, fig.width=8}
 
@@ -998,6 +1003,13 @@ p_theta <- ggplot(p1_data,
 p_theta +
   plot_annotation(caption = "Note: Gray whiskers represent 80% credible intervals.")
 
+top5 <- p1_data %>% 
+  arrange(desc(ranked)) %>% 
+  slice(1:5) %>% 
+  pull(country_year) %>% 
+  str_replace(" \\(.*", "") %>% 
+  knitr::combine_words()
+
 bottom5 <- p1_data %>% 
   arrange(ranked) %>% 
   slice(1:5) %>% 
@@ -1007,39 +1019,9 @@ bottom5 <- p1_data %>%
 
 ```
 
-We estimated the model using the `DCPOtools` and `DCPO` packages for R [@Solt2019; @Solt2020a], running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
-The $\hat{R}$ diagnostic had a maximum value of 1.01, indicating that the model converged.
-The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Table A1).
-
-The result is estimates, in all `r res_cy` country-years spanned by the source data, of support for democracy.
-Figure\nobreakspace{}\ref{cs_mry} displays the most recent available DSD score for each of the `r res_c` countries and territories in the dataset.
-
-The latest scores for `r bottom5` have them as the places where the public expresses the lowest support for democracy.
-
-```{r ts, fig.cap="The Unidimensional Latent Variable of Democratic Support Over Time Within Selected Countries \\label{ts}", fig.height=3.5}
-countries <- c("Finland", "China", "Philippines", "Bangladesh",
-               "Malaysia", "Turkey", "United Kingdom", "South Korea",
-               "Belgium", "Spain", "United States", "Chile", 
-               "Ukraine", "Italy", "Argentina", "Mexico")
-
-c_sum <- theta_summary %>% 
-  filter(country %in% countries)
-
-ggplot(data = c_sum, aes(x = year, y = mean)) +
-  theme_bw() +
-  theme(legend.position = "none") +
-  coord_cartesian(xlim = c(1985, 2020), ylim = c(0, 1)) +
-  labs(x = NULL, y = "DSD Scores") +
-  geom_ribbon(data = c_sum, aes(ymin = q10, ymax = q90, linetype=NA), alpha = .25) +
-  geom_line(data = c_sum) +
-  facet_wrap(~country, nrow = 2) +
-  theme(axis.text.x  = element_text(size=7,
-                                    angle = 90,
-                                    vjust = .45,
-                                    hjust = .95),
-        strip.background = element_rect(fill = "white", colour = "white")) +
-  plot_annotation(caption = "Note: Countries are ordered by their DSD scores in their most recent\navailable year; gray shading represents 80% credible intervals.")
-```
+The result is unidimensional estimates of support for democracy in the abstract in the `r res_cy` country-years spanned by the source data.
+Figure\nobreakspace{}\ref{cs_mry} displays the most recent available score for each of the `r res_c` countries and territories in the dataset.
+The latest scores for `r top5` have them as the places where the public expresses the greatest support for democracy in the abstract on this unidimensional scale; `r bottom5` are the places where the public expresses the least support for democracy by this measure.
 
 \clearpage
 \pagebreak
@@ -1171,8 +1153,8 @@ v_items %>%
 \pagebreak
 # Appendix C: Results with an Alternate Latent Variable and Restricted Set of Indicator Data
 
-To provide the best test of the unidimensional latent variable approach for measuring democratic support, in main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
-However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see @Claassen2020a; @Claassen2020b; @Tai2022; @Claassen2022].
+To provide the best test of the unidimensional latent variable approach for measuring democratic support, in the main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
+However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022].
 To verify our findings, we replicate the figures of the text while instead using this latter latent variable of democratic support with corrections for the data-entry errors identified in @Hu2022.
 
 ```{r m5_functions}
@@ -1487,7 +1469,7 @@ Figure\nobreakspace{}\@ref(fig:m5-polyarchy) shows that, when estimated in this 
 In both cases, the number of country-years observed is less than 25, which cautions against placing very much weight on these two comparisons.
 Still, even in light of these two moderate relationships, the overall picture remains the same as that presented in the text: the unidimensional latent variable does not capture much of the public's attitudes toward contestation or participation.
 
-```{r m5-liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items", fig.height=4.5}
+```{r m5-liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Civil Liberties Survey Items", fig.height=4}
 validation_plot(v_vars_lib, lab_x = -1,
                 theta_summary = m5_theta_summary,
                 theta_results = m5_theta_results) +
@@ -1503,7 +1485,7 @@ validation_plot(v_vars_lib, lab_x = -1,
 ```
 
 Figure\nobreakspace{}\@ref(fig:m5-liberties) turns to the validation questions on the civil liberties of freedom of speech, freedom of assembly, and freedom of association.
-Here, the only moderate and strong correlations are actually in the oppposite of the expected direction: greater support for democracy is associated with a stronger approval to ban protests and to use the military to repress strikes.
+Here, the only moderate and strong correlations are actually in the opposite of the expected direction: greater support for democracy is associated with a stronger approval to ban protests and to use the military to repress strikes.
 Again, however, these relationships are found only where data are particularly scant.
 There are only thirteen country-years for which we have these validation questions from the CDCEE and the latent variable of democratic support when estimated as in prior research.
 The other relationships with responses to the civil liberties validation items, while mostly in the expected direction, are only weak.
@@ -1525,8 +1507,11 @@ validation_plot(v_vars_inst,
 ```
 
 In Figure\nobreakspace{}\@ref(fig:m5-institutions), just two of the eight survey questions asking about institutions that constrain the power of the executive exhibit even moderate correlations with the unidimensional latent variable used in previous research.
-Support for the rule of law relates appreciably to this measure of democratic support in only the AfroBarometer; in the AsianBarometer, Latinobarométro, and Pew Global Attitudes surveys, the correlations are very weak.
-Democratic support so measured is similarly weakly related to data from questions tapping support for the legislative branch in the AfroBarometer, AmericasBarometer, and AsianBarometer, with only the Latinobarométro question on whether national legislatures are necessary at all for democracy showing even a moderate relationship.
+Support for the rule of law relates appreciably to this measure of democratic support in only the Afrobarometer; in the Asian Barometer, Latinobarométro, and Pew Global Attitudes surveys, the correlations are very weak.
+Democratic support so measured is similarly weakly related to data from questions tapping support for the legislative branch in the Afrobarometer, AmericasBarometer, and Asian Barometer, with only the Latinobarométro question on whether national legislatures are necessary at all for democracy showing even a moderate relationship.
+
+The relationships between the more limited unidimensional latent variable of democratic support employed here in this Appendix and the survey questions that ask respondents to choose between order, economic equality, or economic growth, on the one hand, and democracy or political freedom, on the other are shown in Figure\nobreakspace{}\@ref(fig:m5-conditions).
+As when the unidimensional latent variable is estimated with more data and the superior DCPO model, these relationships are only very weak.
 
 ```{r m5-conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{m5conditions}", fig.height=3}
 validation_plot(v_vars_cond,
@@ -1543,10 +1528,6 @@ validation_plot(v_vars_cond,
   labs(x = "Unidimensional Democratic Support Measured by Model 5",
        y = "% Agreeing")
 ```
-
-As when estimated with more data and the superior DCPO model, the more limited unidimensional latent variable democratic support has only very weak relationships with the survey questions that ask respondents to choose between order, economic equality, or economic growth, on the one hand, and democracy or political freedom, on the other.
-
-\pagebreak
 
 # References {.unnumbered}
 
