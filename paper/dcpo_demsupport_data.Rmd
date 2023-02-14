@@ -78,7 +78,12 @@ header-includes:
 
 ```{=tex}
 \begin{abstract}
-blah blah blah
+Measuring democratic support as a latent variable requires assuming that it falls along a single dimension from steadfast opposition to wholehearted support.
+This ignores ample evidence that support for democracy is complex and multidimensional.
+Here we provide a series of validation tests of the sort of cross-national time-series latent variable measures employed in recent research by reference to questions on support for liberal democracy and opposition to its erosion from multiwave surveys conducted around the world.
+These tests show that, across countries and years, this latent variable is nearly orthogonal to measures of support for contestation and participation; civil liberties; institutional constraints on executive power; and prioritizing democracy over the economy, economic equality, or order.
+We conclude that support for democracy in any robust sense is simply not well captured by a unidimensional latent variable.
+Such measures are powerful but researchers must be mindful of their limitations.
 \end{abstract}
 ```
 \pagebreak
@@ -520,7 +525,7 @@ theta_results <- extract_dcpo_results(dcpo_input,
 
 # Testing the Validity of Democratic Support as a Unidimensional Latent Variable {.unnumbered}
 
-To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of survey questions that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
+To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of questions from multi-wave cross-national surveys that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
 Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate 'democracy' or a specific undemocratic alternative---they constitute "external" validation tests [see @Caughey2019, 684-685].
 As in many studies on support for democracy, we use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public contestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
 In light of recent concerns that citizens do not always prioritize the  preferences for democracy they express, we also draw on questions that assess democracy's relative importance.
@@ -601,7 +606,7 @@ validation_plot(v_vars_inst) +
 ```
 
 Next, we consider the survey questions that examine the level of support for civil liberties.
-Again drawing on multi-wave cross-national surveys, we compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
+We compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
 Scatterplots of the aggregate responses to these questions against the unidimensional latent variable of democratic support are presented in Figure\nobreakspace{}\@ref(fig:liberties).
 All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
 For example, across five waves of the Asian Barometer, the unidimensional latent variable of democratic support has a _positive_ relationship ($R~=~0.28$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
@@ -616,7 +621,7 @@ The unidimensional latent variable relates only very weakly with aggregate agree
 Its correlations with items specifically on legislative checks, like the AmericasBarometer's "when the Congress hinders the work of our government, our presidents should govern without the Congress," are perhaps a bit stronger, but remain unimpressive.
 Support for democracy in the abstract, even in the form of a latent variable, has little relationship with support for the checks and balances of horizontal accountability.
 
-```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Conditionality Survey Items \\label{conditions}", fig.height=3}
+```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Prioritization Survey Items \\label{conditions}", fig.height=3}
 
 v_vars_cond <- v_raw %>%
     filter(str_detect(group, "pref_")) %>% 
@@ -640,9 +645,9 @@ Most straightforwardly asked respondents to choose between democracy or politica
 Figure\nobreakspace{}\@ref(fig:conditions) shows that the unidimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
-We draw two conclusions.
+We draw two straightforward conclusions.
 The first reinforces the extensive literature on democratic support. Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, no unidimensional measure will capture it well.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate.
 
 The second is more general.
 Advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
