@@ -655,7 +655,7 @@ Therefore, unidimensional measures---including those used in Claassen [-@Claasse
 The second is more general.
 Advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
 But latent variables of public opinion, no matter how sophisticated, are not guaranteed to be good measures of the concepts that are important to us.
-As with any newly proposed measure, validation tests of these latent variables are crucially important [exemplary works include @Caughey2019, 686-691; @Woo2022, 7-8], and measures that fall short in these tests cannot serve as solid foundations for research.
+As with any newly proposed measure, validation tests of these latent variables are crucially important [exemplars include @Caughey2019, 686-691; @Woo2022, 7-8], and measures that fall short in these tests cannot serve as solid foundations for research.
 
 
 # References {.unnumbered}
