@@ -416,7 +416,7 @@ These critiques are of the 'garbage-in, garbage-out' variety.
 That is, they identify problems with the indicator survey questions or their coding that then yield problems in the latent variable that is estimated from these questions.
 
 We offer a more fundamental criticism of this body of work.
-Specifically, we note that the latent variable estimates on which it depends themselves depend on the assumption that democratic support falls along a single dimension: that some people and publics support democracy wholeheartedly, others oppose it fully, and everyone else is somewhere between.
+Specifically, we note that the latent variable estimates on which it depends themselves depend on the assumption that democratic support falls along a single dimension: that some individuals and some populations support democracy wholeheartedly, others oppose it fully, and everyone else is somewhere between.
 As observed above, however, much research on the topic argues that democratic support is a more complex, multidimensional phenomenon.
 Here, we test the validity of the sort of unidimensional measure used in the recent line of latent-variable-driven research by comparing it to responses to questions drawn from many surveys used in the broader literature to map the dimensions of support for liberal democracy and opposition to its erosion.
 The results of these validation tests are striking.
@@ -486,9 +486,8 @@ if (!exists("results_path")) {
   # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
   if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
     dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
-    osf_retrieve_node("XXXXX") %>% 
-      osf_ls_files() %>% 
-      filter(name == latest) %>% 
+    osf_retrieve_node("ksa4r") %>% 
+      osf_ls_files(pattern = "csv$") %>% 
       osf_download(path = here::here("data", "1000"))
   }
   
