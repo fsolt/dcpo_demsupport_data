@@ -651,7 +651,7 @@ Figure\nobreakspace{}\@ref(fig:conditions) shows that the unidimensional latent 
 # Conclusions {.unnumbered}
 We draw two straightforward conclusions.
 The first reinforces the extensive literature on democratic support. Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research seeking to address concerns of backsliding among liberal democracies.
 
 The second is more general.
 Advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
