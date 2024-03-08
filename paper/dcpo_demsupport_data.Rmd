@@ -7,14 +7,11 @@ output:
     number_sections: no
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
-  
 title: |
-| Support for Democracy Is Multidimensional: 
+  | Support for Democracy Is Multidimensional: 
   | Why Unidimensional Latent Variable Measures of
   | Democratic Support Are Invalid
-  
-  # keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
-
+keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
 date: " "
 editor_options: 
   markdown: 
@@ -52,6 +49,7 @@ header-includes:
       - \titleformat*{\section}{\normalsize\bfseries}
       - \titleformat*{\subsection}{\normalsize\itshape}
       - \usepackage{titling} #use \maketitle repeatedly
+      - \usepackage{underscore}
 ---
 
 \pagenumbering{gobble}
@@ -654,7 +652,7 @@ Figure\nobreakspace{}\@ref(fig:conditions) shows that the unidimensional latent 
 # Conclusions {.unnumbered}
 We draw two straightforward conclusions.
 The first reinforces the extensive literature on democratic support. Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research seeking to address concerns of backsliding among liberal democracies.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
 
 The second is more general.
 Advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
@@ -1107,13 +1105,14 @@ items_summary %>%
     kableExtra::kable_styling(latex_options = "striped")
 ```
 
+
 \clearpage
 \pagebreak
 # Appendix B: Validation Survey Items
 
 \noindent Table A2: Survey Items Used in Validation Tests
 
-```{r v_items, cache=FALSE}
+```{r v_items}
 v_items <- v_raw %>%
     dplyr::select(country, year, item, survey) %>%
     distinct() %>%
@@ -1138,15 +1137,15 @@ v_items <- v_raw %>%
     select(title, n_cy, question_text)
 ```
 
-```{r v_items_table, cache=FALSE}  
+```{r v_items_table}  
 v_items %>% 
-    transmute(`Title` = title,
+    transmute(`Title` = str_replace(title,
+                                    "&",
+                                    "and"),
               `Country-Years` = as.character(n_cy),
               `Question Text` = question_text) %>% 
     modelsummary::datasummary_df(output = "kableExtra",
-                                 longtable = TRUE) %>% # ,
-    #                              note = "",
-    #                              caption = "Survey Items Used in Validation Tests") %>% 
+                                 longtable = TRUE) %>%
     kableExtra::column_spec(1, width = "14em") %>%
     kableExtra::column_spec(2, width = "4em") %>%
     kableExtra::column_spec(3, width = "45em") %>%
