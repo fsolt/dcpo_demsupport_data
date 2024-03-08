@@ -399,7 +399,7 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 Recent threats to liberal democracy have manifested as the slow erosion of institutions and norms rather than the sudden and violent takeover of power, the acts of politicians and elected officials rather than admirals and generals.
 Considering that the ostensible backing for these antidemocratic office holders is some substantial share of the electorate, understanding the breadth and depth of citizen support for democracy is as important as ever.
 On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [, 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
-But on the other, a great deal of evidence indicates that is these expressions of support for democracy do not run very deep, that such claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it [see, e.g., @Bratton2002; @Schedler2007; @Carlin2011; @KiewietdeJonge2016; @Bryan2023].
+But on the other, a great deal of evidence indicates that these expressions of support for democracy do not run very deep, that such claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it [see, e.g., @Bratton2002; @Schedler2007; @Carlin2011; @KiewietdeJonge2016; @Bryan2023].
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
 Against this backdrop, a number of prominent recent works have sought to better investigate democratic support as well as its relationships with democratic governance by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
@@ -420,7 +420,7 @@ We start by noting that the latent variable estimates are based on the assumptio
 This underlying assumption raises an important question about how democracy itself is conceptualized.
 Scholarly understandings of democracy point not to a single definition of the term but instead to multiple meanings.
 The Varieties of Democracy (V-Dem) project, for example, anchors its measures in the theoretical ground staked by @Dahl1971; it conceptualizes and measures democracy in a multifacated way that distinguishes among five distinct democratic components---electoral, liberal, participatory, deliberative, and egalitarian [@VDem2023data; @VDem2023codebook]. 
-Similarly, prior research in comparative public opinion has cautiously avoided ascribing a single meaning to democracy to the public.  
+Similarly, prior research in comparative public opinion has cautiously avoided ascribing a single meaning of democracy to the public.
 @Bratton2002 [, 5], for example, argued on the basis of Afrobarometer data that respondents in different countries tend to assign "distinctive, homegrown meanings to democracy."
 Much research on democratic support further underscores the importance of not simply assuming that survey questions regarding support for democracy will mean the same thing to everyone [see, e.g., @Schedler2007; @Konig2022].
 These works indicate that support for democracy is a complex and multidimensional phenomenon, contradicting the recent scholarship employing a unidimensional latent variable to measure democratic support. 
@@ -533,7 +533,7 @@ theta_results <- extract_dcpo_results(dcpo_input,
 To test the validity of the unidimensional latent variable measure of democratic support, we compare it to a range of questions from multi-wave cross-national surveys that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
 Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate 'democracy' or a specific undemocratic alternative---they constitute "external" validation tests [see @Caughey2019, 684-685].
 We use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public contestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
-These criteria of liberal democracy not only comprise "the central construct in the literature on citizen preference for democracy" [@Konig2022, 2026] but are also highly related to concerns for backsliding [e.g., @Ananda2023; @Gora2022; @Meyerrose2023]. 
+These criteria of liberal democracy not only comprise "the central construct in the literature on citizen preference for democracy" [@Konig2022, 2026] but are also directly implicated in the recent apprehensions regarding democratic backsliding [e.g., @Ananda2023; @Gora2022; @Meyerrose2023]. 
 In light of recent concerns that citizens do not always prioritize the preferences for democracy they express, we also draw on questions that assess democracy's relative importance.
 
 ```{r v_data, include=FALSE}
@@ -650,15 +650,16 @@ Most straightforwardly asked respondents to choose between democracy or politica
 Figure\nobreakspace{}\@ref(fig:conditions) shows that the unidimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
-We draw two straightforward conclusions.
-The first reinforces the extensive literature on democratic support. Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
-
-The second is more general.
-Advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
+We draw two straightforward conclusions, the first methodological and the second substantive.
+From a methodological standpoint, we note that advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
 But latent variables of public opinion, no matter how sophisticated, are not guaranteed to be good measures of the concepts that are important to us.
-As with any newly proposed measure, validation tests of these latent variables are crucially important [exemplars include @Caughey2019, 686-691; @Woo2022, 7-8], and measures that fall short in these tests cannot serve as solid foundations for research.
+That the latent variable of public opinion we examine here bears little relationship to survey items more directly tapping the concept this variable was meant to describe underscores that, as with any newly proposed measure, validation tests of such latent variables are crucially important [exemplars include @Caughey2019, 686-691; @Woo2022, 7-8].
+Measures that fall short in---or are not even subjected to---validation tests cannot serve as solid foundations for research.
 
+Substantively, our findings reinforce the extensive literature on democratic support.
+Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
+Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
 
 # References {.unnumbered}
 
