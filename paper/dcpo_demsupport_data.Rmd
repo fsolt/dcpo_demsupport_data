@@ -394,7 +394,7 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 
 Recent threats to liberal democracy have manifested as the slow erosion of institutions and norms rather than the sudden and violent takeover of power, as the acts of politicians and elected officials rather than admirals and generals.
 In this context, considering that the ostensible backing for these antidemocratic office holders is some substantial share of the electorate, understanding the breadth and depth of citizen support for democracy is as important as ever.
-On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [, 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
+On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [pp. 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
 But on the other, a great deal of evidence indicates that is these expressions of support for democracy do not run very deep, that such claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it [see, e.g., @Schedler2007; @Carlin2011; @KiewietdeJonge2016; @Bryan2023].
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
