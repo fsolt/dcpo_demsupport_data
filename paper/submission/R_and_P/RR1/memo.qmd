@@ -1,0 +1,39 @@
+---
+format:
+  pdf:
+    number-sections: false
+
+bibliography: ../../../p_dcpo_dem_data.bib
+tables: true # enable longtable and booktabs
+fontsize: 12pt
+indent: true
+geometry: margin=1in
+linestretch: 1.5 # double spacing using linestretch 1.5
+colorlinks: true
+
+execute:
+  echo: false
+  message: false
+  warning: false
+  dpi: 300
+    
+title: |
+  | Fit Multiple Pegs in One Hole: 
+  | Why Unidimensional Latent Variable Measures of
+  | Democratic Support Are Invalid
+subtitle: |
+  Memo to Editor and Reviewers
+---
+
+We want to thank the Editor and the reviewers for their helpful comments and suggestions.
+We have made specific revisions corresponding to your constructive comments and suggestions for improvement.
+Here we set out a list of the specific points raised in the reviews and our responses to them below, roughly in the order they appear in the text:
+
+
+
+Thank you once more for the opportunity to make these revisions.
+We think the paper is now stronger as a result of your comments and that it will even better promote open science standards in our discipline.
+We hope you all agree.
+
+
+# Reference {-}
