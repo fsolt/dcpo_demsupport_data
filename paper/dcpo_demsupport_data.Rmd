@@ -23,7 +23,7 @@ fontsize: 12pt
 indent: true
 linestretch: 1.5 # double spacing using linestretch 1.5
 bibliography:
-  text: dcpo-demsupport-data.bib
+  text: [dcpo-demsupport-data.bib, p_dcpo_dem_data.bib]
   app: dcpo-demsupport-data-app.bib
 biblio-style: apsr
 citecolor: black
@@ -398,7 +398,7 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 
 Recent threats to liberal democracy have manifested as the slow erosion of institutions and norms rather than the sudden and violent takeover of power, the acts of politicians and elected officials rather than admirals and generals.
 Considering that the ostensible backing for these antidemocratic office holders is some substantial share of the electorate, understanding the breadth and depth of citizen support for democracy is as important as ever.
-On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [, 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
+On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [pp. 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
 But on the other, a great deal of evidence indicates that these expressions of support for democracy do not run very deep, that such claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it [see, e.g., @Bratton2002; @Schedler2007; @Carlin2011; @KiewietdeJonge2016; @Bryan2023].
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
@@ -408,7 +408,7 @@ But can this goal truly be achieved?
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
 @Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no support for its conclusions. 
-@Tannenberg2022 [, 602] shows that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
+@Tannenberg2022 [p. 602] shows that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
 
 Why doesn’t this well-developed method yield a stable, consistent, and comparable outcome as expected? 
 There are three possible reasons: 
@@ -426,10 +426,10 @@ In this way, despite variations in wording or format, latent variable estimation
 Finally, a third possible reason why the new methods do not perform as expected is when their underlying assumptions are violated. 
 In the context of "support for democracy," if people's understanding and prioritization of democracy do not align along a single, unified latent dimension, then any attempt to convert their democratic support into a unidimensional scale is bound to fail.
 
-Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [XXX Crow 2010]. 
+Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [@Crow2010]. 
 Even within the same country or region, individuals from distinct cultural and political contexts may ascribe "distinctive, homegrown meanings to democracy" [@Bratton2002, p. 5; see also @Schedler2007; @Konig2022]. 
-Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [XXX Ferrin and Kriesi 2016]. 
-In the U.S., the youth weighted social justice vis-\grave{a}-vis free election differently when considering democracy [XXX Flanagan et al. 2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
+Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016]. 
+In the U.S., the youth weighted social justice vis-\grave{a}-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
 
 One way to investigate whether this misalignment in dimensions is causing the shortcomings of the new methods is to examine the associations between the outcomes of latent-variable analysis and people's opinions on specific democratic aspects, such as participation, civil liberties, and institutions. 
 If the new method successfully captures the common component of democratic support, the outcome should correlate with people's support for at least some of these specific aspects. 
@@ -785,7 +785,7 @@ Support for democracy is a complex, multidimensional concept, and many who profe
 Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
 Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
 
-Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuShi2020 provides a summary of these established efforts and introduces a new approach using global barometer surveys.]
+Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuChu2022 provides a summary of these established efforts and introduces a new approach using global barometer surveys.]
 These studies contribute to understanding the psychological and sociological mechanisms behind the formation of democratic support, though many still treat democratic support as a unidimensional scale---whether framed as support/opposition or support for procedural/outcome aspects of democracy.
 Given the country-level findings in this paper, it would be valuable for future research to explore whether similar issues arise with respondent-level indicators of democratic support.
 Such within-country discoveries could offer new insights into the formation and evolution of democratic support and help explain the inconsistencies in existing studies. 
