@@ -785,7 +785,9 @@ Support for democracy is a complex, multidimensional concept, and many who profe
 Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
 Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
 
-Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuChu2022 provides a summary of these established efforts and introduces a new approach using global barometer surveys.]
+Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuChu2022 provides a summary of these established efforts and introduces a new approach using global barometer surveys.
+The latent-variable-driven approach is also recently applied to levels lower than countries. 
+See more methodological details in @CaugheyWarshaw2015 and demonstrations in @CaugheyWarshaw2016; @CaugheyWarshaw2018a.]
 These studies contribute to understanding the psychological and sociological mechanisms behind the formation of democratic support, though many still treat democratic support as a unidimensional scale---whether framed as support/opposition or support for procedural/outcome aspects of democracy.
 Given the country-level findings in this paper, it would be valuable for future research to explore whether similar issues arise with respondent-level indicators of democratic support.
 Such within-country discoveries could offer new insights into the formation and evolution of democratic support and help explain the inconsistencies in existing studies. 

@@ -29,7 +29,22 @@ We want to thank the Editor and the reviewers for their helpful comments and sug
 We have made specific revisions corresponding to your constructive comments and suggestions for improvement.
 Here we set out a list of the specific points raised in the reviews and our responses to them below, roughly in the order they appear in the text:
 
+- **The "why".** 
+    As the editor pointed out, both reviewers hope us not only demonstrate but also address why the unidimensional measurement of democratic support is invalid.
+    The reviewers also kindly pointed out several potential reasons for us.
+    In the current version, we follow R1's suggestion to discuss three situations that the unidimensional measurement would not work and evaluate which is most likely behind the later findings in the introduction (p.XXX).
+    We appreciate the reviewers pushing us on this point, so that we could clarify what the latent-variable-analysis approach can solve and what it cannot at the very beginning of the study. 
+    We also take this chance to explain how question format (raised by R1) and question variance (raised by R2) may affect the outcome measurement.
 
+- **Implication to within country studies.**
+    R2 pointed out, "[i]t would be interesting to address the issue of whether the same issues apply to respondent-level indicators of support for democracy."
+    We could not agree more.
+    As the reviewer indicated, there has been a well-developed and still ongoing line of research studying the determinants of democratic support below the country level.
+    
+    We believe the country-level studies and studies on lower levels may serve different purposes. 
+    While the latter can explore the concrete sources and mechanisms of democratic support, the former may relate more to the populational force for democratization, as @PetersonEtAl2022 addressed in terms of political interest.
+    Although this paper mainly focus on the country level, in the current version (pp. XXXX), we point out to the readers of the scholarly effort at lower levels and avaliability of relevant methods (not exactly at the individual but already available for within-country research).
+    We also discuss the implication of our findings on studies at lower levels.
 
 Thank you once more for the opportunity to make these revisions.
 We think the paper is now stronger as a result of your comments and that it will even better promote open science standards in our discipline.
