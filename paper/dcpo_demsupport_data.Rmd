@@ -8,7 +8,7 @@ output:
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
 title: |
-  | Support for Democracy Is Multidimensional: 
+  | Fit Multiple Pegs in One Hole: 
   | Why Unidimensional Latent Variable Measures of
   | Democratic Support Are Invalid
 keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
