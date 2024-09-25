@@ -431,6 +431,16 @@ Even within the same country or region, individuals from distinct cultural and p
 Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016]. 
 In the U.S., the youth weighted social justice vis-\grave{a}-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
 
+
+To capture this multidimensionality in democratic support, it is better to use multidimensional measures that assess latent variables across different components within the same theme.
+In studies on mass ideology, for example, multidimensional measurements analyze ideological preferences within specific policy areas, such as economic or social issue domains, rather than relying on a one-dimensional left-right scale [@CaugheyWarshaw2016; @Treier2009nature].
+Similarly, in the context of democracy, rather than forcing all items into a one-dimensional "oppose-support" democracy scale, multidimensional measures evaluate public support by examining attitudes toward different components, such as checks and balances and the civil rights and liberties guaranteed by institutions.
+
+However, despite the clear multidimensionality of democratic support, unidimensional measures divide public opinion into simple opposing or supporting scales.
+These unidimensional measures place disproportionate weight on abstract questions commonly asked in surveys, failing to capture the complexity of public attitudes toward liberal democracy in concrete terms.
+Previous studies on multidimensional public opinion have shown that individuals or countries may hold liberal views on one dimension (e.g., economic issues) but conservative views on another (e.g., social issues), and a unidimensional measure fails to account for these potential negative correlations between attitudes across different domains [@CaugheyWarshaw2016; @Treier2009nature].
+Neglecting this multidimensionality can lead to inaccurate inferences about key political outcomes, such as voting behavior, government responsiveness, and democratization.
+
 One way to investigate whether this misalignment in dimensions is causing the shortcomings of the new methods is to examine the associations between the outcomes of latent-variable analysis and people's opinions on specific democratic aspects, such as participation, civil liberties, and institutions. 
 If the new method successfully captures the common component of democratic support, the outcome should correlate with people's support for at least some of these specific aspects. 
 However, if the latent variable analysis is forcing the multidimensional support into a unidimensional measurement, it is likely that the resulting measure will not correlate with any concrete support for democratic aspects. 
@@ -779,6 +789,11 @@ From a methodological standpoint, we note that advances in computer hardware and
 But latent variables of public opinion, no matter how sophisticated, are not guaranteed to be good measures of the concepts that are important to us.
 That the latent variable of public opinion we examine here bears little relationship to survey items more directly tapping the concept this variable was meant to describe underscores that, as with any newly proposed measure, validation tests of such latent variables are crucially important [exemplars include @Caughey2019, 686-691; @Woo2022, 7-8].
 Measures that fall short in---or are not even subjected to---validation tests cannot serve as solid foundations for research.
+
+To better capture the multidimensionality of democratic support, two potential approaches can be considered.
+The first is a confirmatory method, where separate one-dimensional models are fitted to distinct subsets of items, as illustrated by @CaugheyWarshaw2016 in their study of the multidimensional nature of public ideology.
+The second option is an exploratory approach, such as that employed by @Pan2018china, to reveal the underlying dimensions.
+A more recent advancement in this field is @BerwickCaughey2024’s article, which utilizes an exploratory group-level Bayesian IRT model to map the dynamic multidimensionality of public opinion within and cross country contexts.
 
 Substantively, our findings reinforce the extensive literature on democratic support.
 Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
