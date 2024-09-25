@@ -45,6 +45,28 @@ Here we set out a list of the specific points raised in the reviews and our resp
     While the latter can explore the concrete sources and mechanisms of democratic support, the former may relate more to the populational force for democratization, as @PetersonEtAl2022 addressed in terms of political interest.
     Although this paper mainly focus on the country level, in the current version (pp. XXXX), we point out to the readers of the scholarly effort at lower levels and avaliability of relevant methods (not exactly at the individual but already available for within-country research).
     We also discuss the implication of our findings on studies at lower levels.
+    
+- **Multidimensional alternatives.**
+    The editor recommended that we explain a multidimensional measure in concrete terms and how it differs from a unidimensional measure.
+    Reviewer 2 also made a similar suggestion, asking for potential alternatives for measuring multidimensional democratic support.
+    Reviewer 2 further suggested that we discuss why exactly we believe unidimensional latent variables measures are invalid.
+    We greatly appreciate these valuable suggestions. 
+    
+    In our revision, drawing on the literature on multidimensionality in public opinion and multidimensional measures, we clarify on Page [xx] that multidimensional measures refer to the measurement of latent variables across different components within the same theme.
+    For example, in our study, rather than constraining all items to a one-dimensional "oppose-support" democracy scale, multidimensional measures evaluate public support for democracy by examining attitudes toward different components, such as the two dimensions proposed by [-@Dahl1971, 3-4]: public contestation and inclusive participation, along with the civil rights and liberties guaranteed by institutions.
+    
+      In studies assessing mass ideology, multidimensional measurements analyze ideological preferences within specific policy areas, such as economic or social issue domains, rather than relying solely on a one-dimensional left-right scale [@CaugheyWarshaw2016; Treier2009nature].
+    Research shows that neglecting the multidimensionality of public opinion can lead to inaccurate predictions of voting behavior and government responsiveness.
+    This occurs because individuals or countries may hold left-wing views on one dimension (e.g., economic issues) but right-wing views on another (e.g., social issues), and a unidimensional measure fails to capture the potential negative correlations between attitudes across these domains. 
+    
+    Similarly, democratic support is not simply divided into opposing or supporting camps.
+    Due to varying priorities, beliefs, or the influence of a country's culture and history, the public may express support for democracy in the abstract while also endorsing government censorship, banning protests, or opposing women's involvement, as we observed in our validation tests.
+    Unidimensional measures tend to place disproportionate weight on abstract democratic concepts that are commonly asked in surveys, overlooking the multidimensional nature of public democratic support.
+    
+    In terms of alternative measurement methods, one approach is a confirmatory method, fitting separate one-dimensional models to distinct subsets of items, as demonstrated by @CaugheyWarshaw2016 in their analysis of the multidimensional nature of public ideology.
+    Another potential approach is an exploratory method, such as that used by @Pan2018china, to uncover the underlying dimensions.
+    The most recent development in this area is @BerwickCaughey2024’s article employing an exploratory approach in group-level Bayesian IRT model to map the dynamic multidimentions in policy preference and ideology at both individual and country levels.
+
 
 Thank you once more for the opportunity to make these revisions.
 We think the paper is now stronger as a result of your comments and that it will even better promote open science standards in our discipline.
