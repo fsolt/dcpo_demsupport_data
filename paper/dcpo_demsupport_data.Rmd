@@ -403,7 +403,7 @@ But on the other, a great deal of evidence indicates that these expressions of s
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
 Against this backdrop, a number of prominent recent works have sought to better investigate democratic support by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
-Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022]. 
+Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; details about indicators used in their unidimentional measures can be found in their supplementary documents]. 
 But can this goal truly be achieved? 
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
@@ -415,7 +415,7 @@ There are three possible reasons:
 First, the abstract nature of the question fails to capture the truly comparable component. 
 A general question about support does not clearly define what "democracy" actually means, and therefore cannot reliably prompt respondents to associate the question with the features of liberal democracy that can be compared across countries and over time. 
 Second, and closely related to the first point, the question format itself may contribute to the problem. 
-As will be shown later, most surveys gather data on democratic support using Churchill-style questions, which force respondents to place themselves on a scale between complete support and full opposition. 
+As will be shown later, most surveys gather data on democratic support using Churchill-style questions asking public attitude in the abstract without considering concrete components in democracy, which force respondents to place themselves on a scale between complete support and full opposition. 
 When the meaning of democracy is not consistent, respondents' answers may be based on different cognition or experiences. 
 
 To some extent, the novel latent-variable methods are designed to address these issues. 
