@@ -8,7 +8,7 @@ output:
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
 title: |
-  | Support for Democracy Is Multidimensional: 
+  | Fit Multiple Pegs in One Hole: 
   | Why Unidimensional Latent Variable Measures of
   | Democratic Support Are Invalid
 keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
@@ -23,7 +23,7 @@ fontsize: 12pt
 indent: true
 linestretch: 1.5 # double spacing using linestretch 1.5
 bibliography:
-  text: dcpo-demsupport-data.bib
+  text: [dcpo-demsupport-data.bib, p_dcpo_dem_data.bib]
   app: dcpo-demsupport-data-app.bib
 biblio-style: apsr
 citecolor: black
@@ -234,12 +234,12 @@ survey_file <- list.files(here("data-raw"),
 surveys <- read_csv(survey_file,
                     col_types = "ccccccc")
 
-dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
-                                        datapath = here("..",
-                                                        "data",
-                                                        "dcpo_surveys"),
-                                        file = here("data",
-                                                    "dcpo_input_raw.csv"))
+# dcpo_input_raw <- DCPOtools::dcpo_setup(vars = surveys,
+#                                         datapath = here("..",
+#                                                         "data",
+#                                                         "dcpo_surveys"),
+#                                         file = here("data",
+#                                                     "dcpo_input_raw.csv"))
 ```
 
 ```{r summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "dcpo_input_raw.csv"))}
@@ -398,34 +398,54 @@ covered_share_of_spanned <- {back_to_numeric(n_cy)/back_to_numeric(spanned_cy) *
 
 Recent threats to liberal democracy have manifested as the slow erosion of institutions and norms rather than the sudden and violent takeover of power, the acts of politicians and elected officials rather than admirals and generals.
 Considering that the ostensible backing for these antidemocratic office holders is some substantial share of the electorate, understanding the breadth and depth of citizen support for democracy is as important as ever.
-On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [, 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
+On one hand, the breadth of that support for democracy remains truly impressive: @Anderson2021 [pp. 971-972], for example, estimates that some 90\% of humanity agrees that democracy is the best form of government [see also, e.g., @KirschWelzel2019; @Wuttke2022].
 But on the other, a great deal of evidence indicates that these expressions of support for democracy do not run very deep, that such claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it [see, e.g., @Bratton2002; @Schedler2007; @Carlin2011; @KiewietdeJonge2016; @Bryan2023].
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
-Against this backdrop, a number of prominent recent works have sought to better investigate democratic support as well as its relationships with democratic governance by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
-In this approach, responses to many different survey questions are combined to overcome the sparse and scattered collection of data available on any single question tapping support for democracy; the differences among the various questions used as indicators are accounted for with careful modeling [@Claassen2019; @Solt2020c].
-The first of these works, @Claassen2020a, concludes that democratic support so estimated has a positive effect on subsequent democratic change.
-Using the same data, @Claassen2020b finds democratic support responds thermostatically to changes in democracy, with democratic retrenchment triggering renewed support.
-Again employing these same latent variable estimates of democratic support as well as new estimates generated from additional data on the same set of survey questions, @Tai2022 revisits the analyses of these two articles and demonstrates that the conclusions of both are unsupported.
-With a similarly expanded dataset of latent variable estimates of democratic support, @Claassen2022 examines the relationship of democratic support to the performance of democratic governments and concludes that poor government performance does not erode support for democracy.
+Against this backdrop, a number of prominent recent works have sought to better investigate democratic support by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
+Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; details about indicators used in their unidimentional measures can be found in their supplementary documents]. 
+But can this goal truly be achieved? 
 
-Several critiques of this impressive line of research have already been raised.
-@Hu2022 reveals that the latent variable measure of democratic support used in the several of these works is flawed by errors in the coding of survey questions used as indicators; a replication of @Claassen2020a correcting these errors yields no support for its conclusions.
-@Tannenberg2022 [, 602] demonstrates that support for democracy in several indicator questions is biased downward in more autocratic countries due to fear of government reprisal and argues that the resulting latent variable likely suffers from this bias as well.
-These critiques are of the 'garbage-in, garbage-out' variety.
-That is, they identify problems with the indicator survey questions or their coding that then yield problems in the latent variable that is estimated from these questions.
+Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
+@Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no support for its conclusions. 
+@Tannenberg2022 [p. 602] shows that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
 
-We offer a more fundamental criticism of this body of work. 
-We start by noting that the latent variable estimates are based on the assumption that democratic support falls along a single dimension: some individuals and some populations support democracy wholeheartedly, others fully oppose democracy, and everyone else is somewhere in between these two poles. 
-This underlying assumption raises an important question about how democracy itself is conceptualized.
-Scholarly understandings of democracy point not to a single definition of the term but instead to multiple meanings.
-The Varieties of Democracy (V-Dem) project, for example, anchors its measures in the theoretical ground staked by @Dahl1971; it conceptualizes and measures democracy in a multifacated way that distinguishes among five distinct democratic components---electoral, liberal, participatory, deliberative, and egalitarian [@VDem2023data; @VDem2023codebook]. 
-Similarly, prior research in comparative public opinion has cautiously avoided ascribing a single meaning of democracy to the public.
-@Bratton2002 [, 5], for example, argued on the basis of Afrobarometer data that respondents in different countries tend to assign "distinctive, homegrown meanings to democracy."
-Much research on democratic support further underscores the importance of not simply assuming that survey questions regarding support for democracy will mean the same thing to everyone [see, e.g., @Schedler2007; @Konig2022].
-These works indicate that support for democracy is a complex and multidimensional phenomenon, contradicting the recent scholarship employing a unidimensional latent variable to measure democratic support. 
+Why doesn’t this well-developed method yield a stable, consistent, and comparable outcome as expected? 
+There are three possible reasons: 
+First, the abstract nature of the question fails to capture the truly comparable component. 
+A general question about support does not clearly define what "democracy" actually means, and therefore cannot reliably prompt respondents to associate the question with the features of liberal democracy that can be compared across countries and over time. 
+Second, and closely related to the first point, the question format itself may contribute to the problem. 
+As will be shown later, most surveys gather data on democratic support using Churchill-style questions asking public attitude in the abstract without considering concrete components in democracy, which force respondents to place themselves on a scale between complete support and full opposition. 
+When the meaning of democracy is not consistent, respondents' answers may be based on different cognition or experiences. 
 
-Here, we test the validity of the sort of unidimensional measure used in the recent line of latent-variable-driven research by comparing it to responses to questions drawn from many surveys used in the broader literature to map the dimensions of support for liberal democracy and opposition to its erosion.
+To some extent, the novel latent-variable methods are designed to address these issues. 
+As long as the questions, regardless of their format, *aim to measure the same underlying latent dimension*, these methods employ statistical tools to map diverse responses onto a common scale and estimate the probability that a respondent with a given level of the latent variable would answer different questions in a particular way. 
+The differences in question format, style, and other aspects are accounted for with parameters such as difficulty and discrimination. 
+In this way, despite variations in wording or format, latent variable estimation helps place respondents on a shared latent scale.
+
+Finally, a third possible reason why the new methods do not perform as expected is when their underlying assumptions are violated. 
+In the context of "support for democracy," if people's understanding and prioritization of democracy do not align along a single, unified latent dimension, then any attempt to convert their democratic support into a unidimensional scale is bound to fail.
+
+Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [@Crow2010]. 
+Even within the same country or region, individuals from distinct cultural and political contexts may ascribe "distinctive, homegrown meanings to democracy" [@Bratton2002, p. 5; see also @Schedler2007; @Konig2022]. 
+Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016]. 
+In the U.S., the youth weighted social justice vis-\grave{a}-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
+
+
+To capture this multidimensionality in democratic support, it is better to use multidimensional measures that assess latent variables across different components within the same theme.
+In studies on mass ideology, for example, multidimensional measurements analyze ideological preferences within specific policy areas, such as economic or social issue domains, rather than relying on a one-dimensional left-right scale [@CaugheyWarshaw2016; @Treier2009nature].
+Similarly, in the context of democracy, rather than forcing all items into a one-dimensional "oppose-support" democracy scale, multidimensional measures evaluate public support by examining attitudes toward different components, such as checks and balances and the civil rights and liberties guaranteed by institutions.
+
+However, despite the clear multidimensionality of democratic support, unidimensional measures divide public opinion into simple opposing or supporting scales.
+These unidimensional measures place disproportionate weight on abstract questions commonly asked in surveys, failing to capture the complexity of public attitudes toward liberal democracy in concrete terms.
+Previous studies on multidimensional public opinion have shown that individuals or countries may hold liberal views on one dimension (e.g., economic issues) but conservative views on another (e.g., social issues), and a unidimensional measure fails to account for these potential negative correlations between attitudes across different domains [@CaugheyWarshaw2016; @Treier2009nature].
+Neglecting this multidimensionality can lead to inaccurate inferences about key political outcomes, such as voting behavior, government responsiveness, and democratization.
+
+One way to investigate whether this misalignment in dimensions is causing the shortcomings of the new methods is to examine the associations between the outcomes of latent-variable analysis and people's opinions on specific democratic aspects, such as participation, civil liberties, and institutions. 
+If the new method successfully captures the common component of democratic support, the outcome should correlate with people's support for at least some of these specific aspects. 
+However, if the latent variable analysis is forcing the multidimensional support into a unidimensional measurement, it is likely that the resulting measure will not correlate with any concrete support for democratic aspects. 
+In this study, we use this approach to assess the validity of the unidimensional measure by comparing it to responses from various surveys used in the broader literature to map the dimensions of support for liberal democracy and opposition to its erosion.
+
 The results of these validation tests are striking.
 Across countries and years, the latent variable of democratic support is essentially orthogonal to these measures of supporting contestation and participation; civil liberties; and institutional constraints on executive power; as well as of prioritizing democracy and political freedom over the economy, economic equality, and order.
 Support for democracy in any sort of robust sense is simply not well captured in a latent variable constrained to a single dimension, and research employing such latent variables is therefore best viewed with profound skepticism.
@@ -444,6 +464,119 @@ Finally, we estimated a unidimensional latent variable of democratic support fro
 The resulting set of unidimensional latent variable estimates comprises 2,937 country-year observations in 136 countries.
 Full details on our collection of survey-question indicators of democratic support and on the resulting latent variable estimates can be found in Appendix A.
 The very similar results to the tests below that are obtained when using the estimates generated by Model 5 from the smaller dataset of indicator questions employed in Claassen [-@Claassen2020a; -@Claassen2020b], and @Tai2022 are presented in Appendix C.
+
+```{r most_common}
+# required chunk to run `dcpo_input` next
+
+most_common_item <- dcpo_input_raw1 %>% 
+    count(item) %>% 
+    arrange(-n) %>% 
+    slice_head() %>% 
+    pull(item)
+
+most_common_item_cy <- dcpo_input_raw1 %>% 
+    filter(item == most_common_item) %>%
+    distinct(country, year) %>%
+    nrow()
+
+most_common_item_surveys <- dcpo_input_raw1 %>%
+    filter(item == most_common_item) %>%
+    distinct(survey) %>%
+    pull(survey) %>% 
+    str_split(", ") %>% 
+    unlist() %>% 
+    unique() %>% 
+    sort()
+
+top_country_cyi <- dcpo_input_raw1 %>% 
+    distinct(country, year, item) %>%
+    count(country) %>%
+    arrange(-n) %>% 
+    slice_head() %>%
+    pull(country)
+
+top_country_cyi_obs <- dcpo_input_raw1 %>%
+    filter(country == top_country_cyi) %>%
+    distinct(country, year, item) %>%
+    nrow()
+
+top_country_cy <- dcpo_input_raw1 %>% 
+    count(country, year) %>% 
+    count(country) %>% 
+    arrange(-n) %>% 
+    slice_head() %>% 
+    pull(country)
+
+top_country_cy_obs <- dcpo_input_raw1 %>%
+    filter(country == top_country_cy) %>%
+    distinct(country, year) %>%
+    nrow()
+
+countries_cp <- dcpo_input_raw1 %>%
+    mutate(country = if_else(stringr::str_detect(country, "United"),
+                             stringr::str_replace(country, "((.).*) ((.).*)", "\\2.\\4."),
+                             country),
+           country = stringr::str_replace(country, "South", "S.")) %>% 
+    distinct(country, year, item) %>%
+    count(country) %>% 
+    arrange(desc(n)) %>% 
+    head(12) %>% 
+    pull(country)
+
+countries_cbyp <- dcpo_input_raw1 %>%
+    mutate(country = if_else(stringr::str_detect(country, "United"),
+                             stringr::str_replace(country, "((.).*) ((.).*)", "\\2.\\4."),
+                             country),
+           country = stringr::str_replace(country, "South", "S.")) %>% 
+    distinct(country, year) %>%
+    count(country) %>% 
+    arrange(desc(n)) %>% 
+    head(12) %>% 
+    pull(country)
+
+adding <- setdiff(countries_cbyp, countries_cp) %>% 
+    knitr::combine_words()
+
+dropping <- setdiff(countries_cp, countries_cbyp) %>% 
+    knitr::combine_words()
+
+y_peak_year <- dcpo_input_raw1 %>%
+    distinct(country, year) %>%
+    count(year, name = "nn") %>% 
+    filter(nn == max(nn)) %>% 
+    pull(year)
+
+y_peak_nn <- dcpo_input_raw1 %>%
+    distinct(country, year) %>%
+    count(year, name = "nn") %>% 
+    filter(nn == max(nn)) %>% 
+    pull(nn)
+
+data_poorest <- dcpo_input_raw1 %>%
+    distinct(country, year) %>%
+    count(country) %>%
+    arrange(n) %>%
+    filter(n == min(n)) %>%
+    pull(country) %>% 
+    knitr::combine_words() %>% 
+    paste0("---", ., "---")
+
+wordify_numeral <- function(x) setNames(c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", " seventeen", "eighteen", "nineteen"), 1:19)[x]
+
+n_data_poor <- {data_poorest %>%
+        str_split(",") %>% 
+        first()} %>% 
+    length() 
+
+if (n_data_poor < 20) {
+    n_data_poorest <- n_data_poor %>% 
+        wordify_numeral()
+} else {
+    n_data_poorest <- n_data_poor
+    data_poorest <- " "
+}
+
+```
 
 ```{r dcpo_input, eval=FALSE, include=FALSE, results=FALSE}
 dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
@@ -483,7 +616,7 @@ dcpo_output$save_output_files(dir = results_path,
 
 ```{r dcpo_results, cache=FALSE}
 if (!exists("results_path")) {
-    latest <- "202301131531"
+    latest <- "202301151607"
     results_path <- here::here("data", "1000", latest)
     
     # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
@@ -545,8 +678,8 @@ v_titles <- here("data-raw", "validation_items.csv") %>%
 
 v_raw <- here("data-raw", "validation_items.csv") %>%
     read_csv(col_types = "ccccccc") %>%
-    DCPOtools::dcpo_setup(datapath = here("..",
-                                          "data",
+    DCPOtools::dcpo_setup(datapath = here("..
+                                          data",
                                           "dcpo_surveys")) %>%
     left_join(v_titles, by = "item")
 ```
@@ -650,16 +783,30 @@ Most straightforwardly asked respondents to choose between democracy or politica
 Figure\nobreakspace{}\@ref(fig:conditions) shows that the unidimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
+
 We draw two straightforward conclusions, the first methodological and the second substantive.
 From a methodological standpoint, we note that advances in computer hardware and Bayesian software have made estimating latent variables a powerful tool for studying public opinion.
 But latent variables of public opinion, no matter how sophisticated, are not guaranteed to be good measures of the concepts that are important to us.
 That the latent variable of public opinion we examine here bears little relationship to survey items more directly tapping the concept this variable was meant to describe underscores that, as with any newly proposed measure, validation tests of such latent variables are crucially important [exemplars include @Caughey2019, 686-691; @Woo2022, 7-8].
 Measures that fall short in---or are not even subjected to---validation tests cannot serve as solid foundations for research.
 
+To better capture the multidimensionality of democratic support, two potential approaches can be considered.
+The first is a confirmatory method, where separate one-dimensional models are fitted to distinct subsets of items, as illustrated by @CaugheyWarshaw2016 in their study of the multidimensional nature of public ideology.
+The second option is an exploratory approach, such as that employed by @Pan2018china, to reveal the underlying dimensions.
+A more recent advancement in this field is @BerwickCaughey2024’s article, which utilizes an exploratory group-level Bayesian IRT model to map the dynamic multidimensionality of public opinion within and cross country contexts.
+
 Substantively, our findings reinforce the extensive literature on democratic support.
 Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
 Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies: support for democracy in any robust sense is simply not well captured by a unidimensional latent variable.
 Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
+
+Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuChu2022 provides a summary of these established efforts and introduces a new approach using global barometer surveys.
+The latent-variable-driven approach is also recently applied to levels lower than countries. 
+See more methodological details in @CaugheyWarshaw2015 and demonstrations in @CaugheyWarshaw2016; @CaugheyWarshaw2018a.]
+These studies contribute to understanding the psychological and sociological mechanisms behind the formation of democratic support, though many still treat democratic support as a unidimensional scale---whether framed as support/opposition or support for procedural/outcome aspects of democracy.
+Given the country-level findings in this paper, it would be valuable for future research to explore whether similar issues arise with respondent-level indicators of democratic support.
+Such within-country discoveries could offer new insights into the formation and evolution of democratic support and help explain the inconsistencies in existing studies. 
+
 
 # References {.unnumbered}
 
@@ -798,117 +945,6 @@ cby_map <- world_map %>%
     scale_x_continuous(expand=c(0,0))
 
 cby_map + (countries_plot/ ybc_plot) + plot_layout(widths = c(4, 1))
-```
-
-```{r most_common}
-most_common_item <- dcpo_input_raw1 %>% 
-    count(item) %>% 
-    arrange(-n) %>% 
-    slice_head() %>% 
-    pull(item)
-
-most_common_item_cy <- dcpo_input_raw1 %>% 
-    filter(item == most_common_item) %>%
-    distinct(country, year) %>%
-    nrow()
-
-most_common_item_surveys <- dcpo_input_raw1 %>%
-    filter(item == most_common_item) %>%
-    distinct(survey) %>%
-    pull(survey) %>% 
-    str_split(", ") %>% 
-    unlist() %>% 
-    unique() %>% 
-    sort()
-
-top_country_cyi <- dcpo_input_raw1 %>% 
-    distinct(country, year, item) %>%
-    count(country) %>%
-    arrange(-n) %>% 
-    slice_head() %>%
-    pull(country)
-
-top_country_cyi_obs <- dcpo_input_raw1 %>%
-    filter(country == top_country_cyi) %>%
-    distinct(country, year, item) %>%
-    nrow()
-
-top_country_cy <- dcpo_input_raw1 %>% 
-    count(country, year) %>% 
-    count(country) %>% 
-    arrange(-n) %>% 
-    slice_head() %>% 
-    pull(country)
-
-top_country_cy_obs <- dcpo_input_raw1 %>%
-    filter(country == top_country_cy) %>%
-    distinct(country, year) %>%
-    nrow()
-
-countries_cp <- dcpo_input_raw1 %>%
-    mutate(country = if_else(stringr::str_detect(country, "United"),
-                             stringr::str_replace(country, "((.).*) ((.).*)", "\\2.\\4."),
-                             country),
-           country = stringr::str_replace(country, "South", "S.")) %>% 
-    distinct(country, year, item) %>%
-    count(country) %>% 
-    arrange(desc(n)) %>% 
-    head(12) %>% 
-    pull(country)
-
-countries_cbyp <- dcpo_input_raw1 %>%
-    mutate(country = if_else(stringr::str_detect(country, "United"),
-                             stringr::str_replace(country, "((.).*) ((.).*)", "\\2.\\4."),
-                             country),
-           country = stringr::str_replace(country, "South", "S.")) %>% 
-    distinct(country, year) %>%
-    count(country) %>% 
-    arrange(desc(n)) %>% 
-    head(12) %>% 
-    pull(country)
-
-adding <- setdiff(countries_cbyp, countries_cp) %>% 
-    knitr::combine_words()
-
-dropping <- setdiff(countries_cp, countries_cbyp) %>% 
-    knitr::combine_words()
-
-y_peak_year <- dcpo_input_raw1 %>%
-    distinct(country, year) %>%
-    count(year, name = "nn") %>% 
-    filter(nn == max(nn)) %>% 
-    pull(year)
-
-y_peak_nn <- dcpo_input_raw1 %>%
-    distinct(country, year) %>%
-    count(year, name = "nn") %>% 
-    filter(nn == max(nn)) %>% 
-    pull(nn)
-
-data_poorest <- dcpo_input_raw1 %>%
-    distinct(country, year) %>%
-    count(country) %>%
-    arrange(n) %>%
-    filter(n == min(n)) %>%
-    pull(country) %>% 
-    knitr::combine_words() %>% 
-    paste0("---", ., "---")
-
-wordify_numeral <- function(x) setNames(c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", " seventeen", "eighteen", "nineteen"), 1:19)[x]
-
-n_data_poor <- {data_poorest %>%
-        str_split(",") %>% 
-        first()} %>% 
-    length() 
-
-if (n_data_poor < 20) {
-    n_data_poorest <- n_data_poor %>% 
-        wordify_numeral()
-} else {
-    n_data_poorest <- n_data_poor
-    data_poorest <- " "
-}
-
 ```
 
 Together, the survey items in the source data were asked in `r n_countries` countries in three or more time points over the `r n_years` years from `r year_range`, giving us a total of `r n_cyi` country-year-item observations.
