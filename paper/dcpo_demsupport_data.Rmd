@@ -623,11 +623,11 @@ if (!exists("results_path")) {
     if (!file.exists(file.path(results_path, paste0("dcpo-", latest, "-1.csv")))) {
         dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
         osf_retrieve_node("ksa4r") %>% 
-            osf_ls_files(pattern = "csv$") %>% 
-            osf_download(path = here::here("data", "1000"))
+            osf_ls_files(pattern = "csv") %>% 
+            osf_download(path = results_path)
     }
     
-    if(!file.exists(here::here("data", "dcpo_output.rds"))) {
+    if (!file.exists(here::here("data", "dcpo_output.rds"))) {
         dcpo_output <- as_cmdstan_fit(here::here(results_path,
                                                  list.files(results_path, pattern = "csv$")))
         
