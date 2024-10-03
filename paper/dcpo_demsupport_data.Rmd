@@ -8,7 +8,7 @@ output:
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
 title: |
-  | Fit Multiple Pegs in One Hole: 
+  | Like Multiple Pegs in One Hole: 
   | Why Unidimensional Latent Variable Measures of
   | Democratic Support Are Invalid
 keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
@@ -242,7 +242,7 @@ surveys <- read_csv(survey_file,
 #                                                     "dcpo_input_raw.csv"))
 ```
 
-```{r summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data-raw", "dcpo_input_raw.csv"))}
+```{r summary_stats, cache = TRUE, cache.extra = tools::md5sum(here::here("data", "dcpo_input_raw.csv"))}
 dcpo_input_raw <- read_csv(here("data", "dcpo_input_raw.csv"),
                            col_types = "cdcddcd")
 
@@ -403,7 +403,7 @@ But on the other, a great deal of evidence indicates that these expressions of s
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
 Against this backdrop, a number of prominent recent works have sought to better investigate democratic support by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
-Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; details about indicators used in their unidimentional measures can be found in their supplementary documents]. 
+Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; @Jacob2024; details about indicators used in their unidimensional measures can be found in their supplementary documents]. 
 But can this goal truly be achieved? 
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
