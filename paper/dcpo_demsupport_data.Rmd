@@ -58,8 +58,8 @@ header-includes:
 
 -   Yue Hu, ORCID: <https://orcid.org/0000-0002-2829-3971>, Associate Professor, Department of Political Science, Tsinghua University, [yuehu\@tsinghua.edu.cn](mailto:yuehu@tsinghua.edu.cn){.email}
 -   Yuehong Cassandra Tai, ORCID: <https://orcid.org/0000-0001-7303-7443>, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, [yhcasstai\@psu.edu](mailto:yhcasstai@psu.edu){.email}
--   Hyein Ko, ORCID: <https://orcid.org/0000-0002-9497-9656>, Doctoral Candidate, Department of Political Science, University of Iowa, [hyein-ko\@uiowa.edu](mailto:hyein-ko@uiowa.edu){.email}
--   Byung-Deuk Woo, ORCID: <https://orcid.org/0000-0001-6902-7576>, Postdoctoral Researcher, Institute of Social Data Science, Pohang University of Science and Technology, [byungdeukwoo\@gmail.com](mailto:byungdeukwoo@gmail.com){.email}
+-   Hyein Ko, ORCID: <https://orcid.org/0000-0002-9497-9656>, Postdoctoral Fellow, Department of Political Science, University of Illinois, [hyeink\@illinois.edu](mailto:hyeink@illinois.edu){.email}
+-   Byung-Deuk Woo, ORCID: <https://orcid.org/0000-0001-6902-7576>, Assistant Professor, Department of Political Science and International Studies, Incheon National University, [byungdeukwoo\@inu.ac.kr](mailto:byungdeukwoo@inu.ac.kr){.email}
 -   Frederick Solt, corresponding author, ORCID: <https://orcid.org/0000-0002-3154-6132>, Associate Professor, Department of Political Science, University of Iowa, [frederick-solt\@uiowa.edu](mailto:frederick-solt@uiowa.edu){.email}
 
 \pagebreak
@@ -658,7 +658,7 @@ Measures that fall short in---or are not even subjected to---validation tests ca
 
 Substantively, our findings reinforce the extensive literature on democratic support.
 Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies: support for democracy in any robust sense is simply not well captured by a unidimensional latent variable.
 Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
 
 # References {.unnumbered}
