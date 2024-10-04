@@ -8,8 +8,7 @@ output:
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
 title: |
-  | Like Multiple Pegs in One Hole: 
-  | Why Unidimensional Latent Variable Measures of
+  | Unidimensional Latent Variable Measures of
   | Democratic Support Are Invalid
 keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
 date: " "
@@ -23,7 +22,7 @@ fontsize: 12pt
 indent: true
 linestretch: 1.5 # double spacing using linestretch 1.5
 bibliography:
-  text: [dcpo-demsupport-data.bib, p_dcpo_dem_data.bib]
+  text: dcpo-demsupport-data.bib
   app: dcpo-demsupport-data-app.bib
 biblio-style: apsr
 citecolor: black
@@ -429,16 +428,16 @@ In the context of "support for democracy," if people's understanding and priorit
 Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [@Crow2010]. 
 Even within the same country or region, individuals from distinct cultural and political contexts may ascribe "distinctive, homegrown meanings to democracy" [@Bratton2002, p. 5; see also @Schedler2007; @Konig2022]. 
 Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016]. 
-In the U.S., the youth weighted social justice vis-\grave{a}-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
+In the U.S., the youth weighted social justice vis-à-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
 
 
 To capture this multidimensionality in democratic support, it is better to use multidimensional measures that assess latent variables across different components within the same theme.
-In studies on mass ideology, for example, multidimensional measurements analyze ideological preferences within specific policy areas, such as economic or social issue domains, rather than relying on a one-dimensional left-right scale [@CaugheyWarshaw2016; @Treier2009nature].
+In studies on mass ideology, for example, multidimensional measurements analyze ideological preferences within specific policy areas, such as economic or social issue domains, rather than relying on a one-dimensional left-right scale [@Caughey2018; @Treier2009nature].
 Similarly, in the context of democracy, rather than forcing all items into a one-dimensional "oppose-support" democracy scale, multidimensional measures evaluate public support by examining attitudes toward different components, such as checks and balances and the civil rights and liberties guaranteed by institutions.
 
 However, despite the clear multidimensionality of democratic support, unidimensional measures divide public opinion into simple opposing or supporting scales.
 These unidimensional measures place disproportionate weight on abstract questions commonly asked in surveys, failing to capture the complexity of public attitudes toward liberal democracy in concrete terms.
-Previous studies on multidimensional public opinion have shown that individuals or countries may hold liberal views on one dimension (e.g., economic issues) but conservative views on another (e.g., social issues), and a unidimensional measure fails to account for these potential negative correlations between attitudes across different domains [@CaugheyWarshaw2016; @Treier2009nature].
+Previous studies on multidimensional public opinion have shown that individuals or countries may hold liberal views on one dimension (e.g., economic issues) but conservative views on another (e.g., social issues), and a unidimensional measure fails to account for these potential negative correlations between attitudes across different domains [@Caughey2018; @Treier2009nature].
 Neglecting this multidimensionality can lead to inaccurate inferences about key political outcomes, such as voting behavior, government responsiveness, and democratization.
 
 One way to investigate whether this misalignment in dimensions is causing the shortcomings of the new methods is to examine the associations between the outcomes of latent-variable analysis and people's opinions on specific democratic aspects, such as participation, civil liberties, and institutions. 
@@ -457,13 +456,13 @@ The still novel approach to estimating latent variables across countries and ove
 
 To provide the strongest test of the validity of the unidimensional latent variable of democratic support, we create the best version of such a variable currently possible.
 Following the previous research on this subject, we start by identifying survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
-Our collection of these questions of express support for democracy in the abstract is similar to but expands on the data presented in Claassen [-@Claassen2020a; -@Claassen2020b] and the larger set collected by @Tai2022.
+Our collection of these questions of express support for democracy in the abstract is similar to but expands on the data presented in Claassen [-@Claassen2020a; -@Claassen2020b] and the larger set collected by @Tai2024.
 In all, we identified `r n_items` survey items on support for democracy in the abstract that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
 In accordance with the advice offered by @Hu2022 to avoid data-entry errors by automating data collection, we then used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
 Finally, we estimated a unidimensional latent variable of democratic support from these responses using the DCPO model presented in @Solt2020c; that work shows that this model provides a better fit to survey questions on express support for democracy in the abstract than the model principally employed in the existing research on this topic, Claassen's [-@Claassen2019] Model 5.
 The resulting set of unidimensional latent variable estimates comprises 2,937 country-year observations in 136 countries.
 Full details on our collection of survey-question indicators of democratic support and on the resulting latent variable estimates can be found in Appendix A.
-The very similar results to the tests below that are obtained when using the estimates generated by Model 5 from the smaller dataset of indicator questions employed in Claassen [-@Claassen2020a; -@Claassen2020b], and @Tai2022 are presented in Appendix C.
+The very similar results to the tests below that are obtained when using the estimates generated by Model 5 from the smaller dataset of indicator questions employed in Claassen [-@Claassen2020a; -@Claassen2020b], and @Tai2024 are presented in Appendix C.
 
 ```{r most_common}
 # required chunk to run `dcpo_input` next
@@ -678,8 +677,8 @@ v_titles <- here("data-raw", "validation_items.csv") %>%
 
 v_raw <- here("data-raw", "validation_items.csv") %>%
     read_csv(col_types = "ccccccc") %>%
-    DCPOtools::dcpo_setup(datapath = here("..
-                                          data",
+    DCPOtools::dcpo_setup(datapath = here("..",
+                                          "data",
                                           "dcpo_surveys")) %>%
     left_join(v_titles, by = "item")
 ```
@@ -791,18 +790,18 @@ That the latent variable of public opinion we examine here bears little relation
 Measures that fall short in---or are not even subjected to---validation tests cannot serve as solid foundations for research.
 
 To better capture the multidimensionality of democratic support, two potential approaches can be considered.
-The first is a confirmatory method, where separate one-dimensional models are fitted to distinct subsets of items, as illustrated by @CaugheyWarshaw2016 in their study of the multidimensional nature of public ideology.
+The first is a confirmatory method, where separate one-dimensional models are fitted to distinct subsets of items, as illustrated by @Caughey2018 in its study of the multidimensional nature of public ideology.
 The second option is an exploratory approach, such as that employed by @Pan2018china, to reveal the underlying dimensions.
-A more recent advancement in this field is @BerwickCaughey2024’s article, which utilizes an exploratory group-level Bayesian IRT model to map the dynamic multidimensionality of public opinion within and cross country contexts.
+A more recent advancement in this field is presented in @Berwick2024, which utilizes an exploratory group-level Bayesian IRT model to map the dynamic multidimensionality of public opinion within and across country contexts.
 
 Substantively, our findings reinforce the extensive literature on democratic support.
 Support for democracy is a complex, multidimensional concept, and many who profess to support democracy in the abstract nevertheless also endorse a variety of illiberal and undemocratic actions.
-Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Tai2022, and @Claassen2022---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies: support for democracy in any robust sense is simply not well captured by a unidimensional latent variable.
+Therefore, unidimensional measures---including those used in Claassen [-@Claassen2020a; -@Claassen2020b], @Claassen2022, @Tai2024, and @Jacob2024---are inappropriate both as a general matter and in particular with regard to research on the erosion of liberal democracies: support for democracy in any robust sense is simply not well captured by a unidimensional latent variable.
 Future research on the relationship between public opinion and democratic backsliding will need to take the multidimensionality of democratic support into account.
 
 Moreover, at the individual level, there has been a sustained effort to identify the determinants of democratic support by comparing societies with different socioeconomic and political conditions.^[@LuChu2022 provides a summary of these established efforts and introduces a new approach using global barometer surveys.
 The latent-variable-driven approach is also recently applied to levels lower than countries. 
-See more methodological details in @CaugheyWarshaw2015 and demonstrations in @CaugheyWarshaw2016; @CaugheyWarshaw2018a.]
+See more methodological details in @CaugheyWarshaw2015 and demonstrations in @Caughey2018; @CaugheyWarshaw2018a.]
 These studies contribute to understanding the psychological and sociological mechanisms behind the formation of democratic support, though many still treat democratic support as a unidimensional scale---whether framed as support/opposition or support for procedural/outcome aspects of democracy.
 Given the country-level findings in this paper, it would be valuable for future research to explore whether similar issues arise with respondent-level indicators of democratic support.
 Such within-country discoveries could offer new insights into the formation and evolution of democratic support and help explain the inconsistencies in existing studies. 
@@ -840,7 +839,7 @@ Appendices
 # Appendix A: The Unidimensional Latent Variable of Democratic Support {.unnumbered}
 
 We created the unidimensional latent variable of democratic support used here by first collecting survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
-Our collection of such questions is similar to but expands on the data presented in @Claassen2020a and the larger set collected by @Tai2022.
+Our collection of such questions is similar to but expands on the data presented in @Claassen2020a and the larger set collected by @Tai2024.
 In all, we identified `r n_items` survey items on support for democracy in the abstract that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
 
 ```{r itemcountry, fig.cap="Countries and Years with the Most Observations in the Source Data \\label{item_country_plots}", fig.height=3.5, fig.pos='h', cache=FALSE}
@@ -965,7 +964,7 @@ The lower right panel counts the countries observed in each year and reveals tha
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy in the abstract.  Figure\nobreakspace{}\ref{obs_by_cy} provides additional detail on the source data, presenting the number of items observed in each country-year; countries are listed on the right in order of the number of years observed. 
 
 In accordance with the advice offered by @Hu2022 to avoid data-entry errors by automating data collection, we used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
-Then, following the existing literature [Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022], we use this collection of survey data to generate a complete time series using a latent variable model.
+Then, following the existing literature [Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022; @Jacob2024], we use this collection of survey data to generate a complete time series using a latent variable model.
 Finally, we estimated a unidimensional latent variable of democratic support from these responses using the DCPO model presented in @Solt2020c, running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
 The $\hat{R}$ diagnostic had a maximum value of 1.02, indicating that the model converged.
 The dispersion parameters of the survey items indicate that all of them load well on the latent variable (see Table A1).
@@ -1068,6 +1067,8 @@ p_theta +
 \pagebreak
 \noindent Table A1: Indicators Used in the Unidimensional Latent Variable Model of Democratic Support
 
+Following the previous research using unidimensional latent variable models of democratic support [e.g., @Claassen2019; @Solt2020c; Claassen -@Claassen2020a; -@Claassen2020b; @Claassen2022; @Tai2024; @Jacob2024], we identified the following survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
+
 ```{r dsd_items}
 alpha_results <- summarize_dcpo_results(dcpo_input,
                                         dcpo_output = dcpo_output,
@@ -1149,6 +1150,10 @@ items_summary %>%
 
 \noindent Table A2: Survey Items Used in Validation Tests
 
+The items used in prior research to estimate unidimensional latent variables of democratic support listed in Table A1 ask respondents to choose between democracy in the abstract and an undemocratic alternative or to evaluate either democracy in the abstract or one of these undemocratic alternatives.
+In contrast, the items we use in validation tests here probe commitments to liberal democracy or opposition to actions that undermine it.
+These questions ask respondents the extent of their support for contestation and participation; civil liberties; and institutional constraints on executive power; as well as the extent they prioritize democracy and political freedom over the economy, economic equality, and order.
+
 ```{r v_items}
 v_items <- v_raw %>%
     dplyr::select(country, year, item, survey) %>%
@@ -1196,7 +1201,7 @@ v_items %>%
 # Appendix C: Results with an Alternate Latent Variable and Restricted Set of Indicator Data
 
 To provide the best test of the unidimensional latent variable approach for measuring democratic support, in the main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
-However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022].
+However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see Claassen -@Claassen2020a; -@Claassen2020b; @Claassen2022; @Tai2024; @Jacob2024].
 To verify our findings, we replicate the figures of the text while instead using this latter latent variable of democratic support with corrections for the data-entry errors identified in @Hu2022.
 
 ```{r m5_functions}
