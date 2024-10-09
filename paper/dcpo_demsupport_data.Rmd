@@ -57,9 +57,9 @@ header-includes:
 
 -   Yue Hu, ORCID: <https://orcid.org/0000-0002-2829-3971>, Associate Professor, Department of Political Science, Tsinghua University, [yuehu\@tsinghua.edu.cn](mailto:yuehu@tsinghua.edu.cn){.email}
 -   Yuehong Cassandra Tai, ORCID: <https://orcid.org/0000-0001-7303-7443>, Postdoctoral Fellow, Center for Social Data Analytics, Pennsylvania State University, [yhcasstai\@psu.edu](mailto:yhcasstai@psu.edu){.email}
--   Hyein Ko, ORCID: <https://orcid.org/0000-0002-9497-9656>, Postdoctoral Fellow, Department of Political Science, University of Illinois, [hyeink\@illinois.edu](mailto:hyeink@illinois.edu){.email}
+-   Hyein Ko, ORCID: <https://orcid.org/0000-0002-9497-9656>, Postdoctoral Research Associate, Department of Political Science, University of Illinois Urbana-Champaign, [hyeink\@illinois.edu](mailto:hyeink@illinois.edu){.email}
 -   Byung-Deuk Woo, ORCID: <https://orcid.org/0000-0001-6902-7576>, Assistant Professor, Department of Political Science and International Studies, Incheon National University, [byungdeukwoo\@inu.ac.kr](mailto:byungdeukwoo@inu.ac.kr){.email}
--   Frederick Solt, corresponding author, ORCID: <https://orcid.org/0000-0002-3154-6132>, Associate Professor, Department of Political Science, University of Iowa, [frederick-solt\@uiowa.edu](mailto:frederick-solt@uiowa.edu){.email}
+-   Frederick Solt, corresponding author, ORCID: <https://orcid.org/0000-0002-3154-6132>, Professor, Department of Political Science, University of Iowa, [frederick-solt\@uiowa.edu](mailto:frederick-solt@uiowa.edu){.email}
 
 \pagebreak
 
