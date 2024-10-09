@@ -669,18 +669,24 @@ These criteria of liberal democracy not only comprise "the central construct in 
 In light of recent concerns that citizens do not always prioritize the preferences for democracy they express, we also draw on questions that assess democracy's relative importance.
 
 ```{r v_data, include=FALSE}
-v_titles <- here("data-raw", "validation_items.csv") %>%
-    read_csv(col_types = "ccccccc") %>%
-    select(item, title, neg, group, svy_grp) %>%
-    distinct() %>% 
-    mutate(title = paste0(svy_grp, ": ", title))
-
-v_raw <- here("data-raw", "validation_items.csv") %>%
-    read_csv(col_types = "ccccccc") %>%
-    DCPOtools::dcpo_setup(datapath = here("..",
-                                          "data",
-                                          "dcpo_surveys")) %>%
-    left_join(v_titles, by = "item")
+if (!file.exists(here("data", "v_raw.rda"))) {
+    v_titles <- here("data-raw", "validation_items.csv") %>%
+        read_csv(col_types = "ccccccc") %>%
+        select(item, title, neg, group, svy_grp) %>%
+        distinct() %>% 
+        mutate(title = paste0(svy_grp, ": ", title))
+    
+    v_raw <- here("data-raw", "validation_items.csv") %>%
+        read_csv(col_types = "ccccccc") %>%
+        DCPOtools::dcpo_setup(datapath = here("..",
+                                              "data",
+                                              "dcpo_surveys")) %>%
+        left_join(v_titles, by = "item")
+    
+    save(v_raw, file = here("data", "v_raw.rda"))
+} else {
+    load(here("data", "v_raw.rda"))
+}
 ```
 
 ```{r polyarchy, fig.cap="Correlations Between Democratic Support as a Unidimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE, fig.pos='h'}
