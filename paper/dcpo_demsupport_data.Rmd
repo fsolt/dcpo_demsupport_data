@@ -8,8 +8,8 @@ output:
     latex_engine: xelatex
     pandoc_args: --lua-filter=multibib.lua
 title: |
-  | Unidimensional Latent Variable Measures of
-  | Democratic Support Are Invalid
+  | An Incomplete Recipe: 
+  | Unidimensional Latent Variables Do Not Capture the Full Flavor of Democratic Support
 keywords: "Democratization, public support, regime survival, measurement uncertainty, latent variables."
 date: " "
 editor_options: 
@@ -402,7 +402,7 @@ But on the other, a great deal of evidence indicates that these expressions of s
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
 Against this backdrop, a number of prominent recent works have sought to better investigate democratic support by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
-Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; @Jacob2024; details about indicators used in their unidimensional measures can be found in their supplementary documents]. 
+Researchers expect these advanced methods to extract the "comparable component" of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; @Jacob2024. Details about indicators used in their unidimensional measures can be found in their supplementary documents]. 
 But can this goal truly be achieved? 
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 

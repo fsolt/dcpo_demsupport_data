@@ -15,8 +15,7 @@
 dev/*
 framed.sty
 paper/*cache/*
-data/1000/
-data/dcpo_output*
-data/m5
+data/*
+
 
 
