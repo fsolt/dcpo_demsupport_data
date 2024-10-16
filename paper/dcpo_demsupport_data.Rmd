@@ -427,8 +427,7 @@ In the context of "support for democracy," if people's understanding and priorit
 
 Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [@Crow2010]. 
 Even within the same country or region, individuals from distinct cultural and political contexts may ascribe "distinctive, homegrown meanings to democracy" [@Bratton2002, p. 5; see also @Schedler2007; @Konig2022]. 
-Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016]. 
-In the U.S., the youth weighted social justice vis-à-vis free election differently when considering democracy [@FlanaganEtAl2005].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
+Researchers have found, for instance, that in Europe, people differ in their views on what democracy should prioritize, such as between egalitarian participation and protection of individual rights [@FerrinKriesi2016].^[In addition to differing priorities, people's expectations of democratic performance can also vary. For a more comprehensive discussion, see @LuChu2022[chpt. 1].]
 
 
 To capture this multidimensionality in democratic support, it is better to use multidimensional measures that assess latent variables across different components within the same theme.
