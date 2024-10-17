@@ -78,7 +78,7 @@ Here we set out a list of the specific points raised in the reviews and our resp
     
     In terms of alternatives of the unidimensional measurements, we provides two approaches: a confirmatiory one and a exploratory one (pp. 10--11).
     The former fits separate one-dimensional models to distinct subsets of items and the other can be used to to uncover the underlying dimensions.
-    In particular, we introduce to readers a new method also based on Bayesian IRT models presented in Berwick and Caughey [-@Berwick2024] that can map the dynamic multidimentions in policy preference and ideology at both individual and country levels.
+    In particular, we introduce to readers a new method also based on Bayesian IRT models presented in Berwick and Caughey [-@Berwick2024] that can map the dynamics of multiple dimensions in policy preference and ideology at both individual and country levels.
 
 
 Thank you once more for the opportunity to make these revisions.
