@@ -50,7 +50,7 @@ Here we set out a list of the specific points raised in the reviews and our resp
     In response, and also considering the word limit constraints, we first include references to several articles that offer detailed discussions of these unidimensional indices in the revised version (p. 1).
 
     Our validation tests demonstrate that when the potentially multidimensional support for democracy is compressed into a unidimensional measure, it loses its associations with essential democratic elements. 
-    As shown in the figures on pages 6–9, even at the same level of unidimensional measures, there is considerable variance in responses to specific elements of polyarchy, civil liberties, democratic institutions, or prioritization.
+    As shown in the figures on pages 6–9, even at the same country-year level as the unidimensional measure, there is considerable variance in responses to specific elements of polyarchy, civil liberties, democratic institutions, or prioritization.
     Research on the multidimensional features of public opinion has also consistently found that attitudes across different dimensions can sometimes be negatively related. 
     For instance, in terms of ideology, individuals or countries may hold left-wing views on one dimension (e.g., economic issues) but right-wing views on another (e.g., social issues), which a unidimensional measure cannot capture [@Caughey2018; @Treier2009nature].
     Using a unidimentional latent-variable measure to capture this complex, multidimentional nature is hardly possible.
@@ -60,14 +60,14 @@ Here we set out a list of the specific points raised in the reviews and our resp
     The prevalence of data based on Churchill-style questions—such as agreeing or disagreeing with statements like "Democracy may have its problems, but it is better than any other form of government"—further causes unidimensional measures to overlook nuanced public attitudes toward concrete democratic components, exacerbating the distortion of the multidimensional nature of democratic support.
 
 
-- **Implication to within country studies.**
+- **Implications for individual- and subnational-level studies.**
     R2 pointed out, "[i]t would be interesting to address the issue of whether the same issues apply to respondent-level indicators of support for democracy."
     We could not agree more.
     As the reviewer indicated, there has been a well-developed and still ongoing line of research studying the determinants of democratic support below the country level.
     
     We believe the country-level studies and studies on lower levels may serve different purposes. 
     While the latter can explore the concrete sources and mechanisms of democratic support, the former may relate more to the populational force for democratization, as @PetersonEtAl2022 addressed in terms of political interest.
-    Although this paper mainly focus on the country level, in the current version (footnote 2), we point out to the readers of the scholarly effort at lower levels and avaliability of relevant methods (not exactly at the individual but already available for within-country research).
+    Although this paper mainly focuses on the country-year level, in the current version (footnote 3 at page 11), we point out to the readers the scholarly literature at lower levels and availability of relevant methods (not exactly at the individual but already available for within-country research).
     We also discuss the implication of our findings on studies at lower levels.
 
     
