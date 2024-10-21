@@ -81,6 +81,8 @@ We conclude that support for democracy in any robust sense is simply not well ca
 Such measures are powerful but researchers must be mindful of their limitations.
 \end{abstract}
 ```
+
+_keywords_: democratic support, public opinion, liberal democracy, latent variables, measurement validation
 \pagebreak
 
 \pagenumbering{arabic}
