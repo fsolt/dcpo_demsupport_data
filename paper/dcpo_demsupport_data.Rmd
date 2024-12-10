@@ -840,6 +840,7 @@ Appendices
 \end{Large}
 \end{center}
 ```
+
 # Appendix A: The Unidimensional Latent Variable of Democratic Support {.unnumbered}
 
 We created the unidimensional latent variable of democratic support used here by first collecting survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
@@ -1202,6 +1203,7 @@ v_items %>%
 
 \clearpage
 \pagebreak
+
 # Appendix C: Results with an Alternate Latent Variable and Restricted Set of Indicator Data
 
 To provide the best test of the unidimensional latent variable approach for measuring democratic support, in the main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
