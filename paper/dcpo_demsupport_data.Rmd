@@ -428,7 +428,7 @@ The differences in question format, style, and other aspects are accounted for w
 In this way, despite variations in wording or format, latent variable estimation helps place respondents on a shared latent scale.
 
 Finally, a third possible reason why the new methods do not perform as expected is when their underlying assumption of unidimensionality is violated.
-In the context of "support for democracy," if people's understanding and prioritization of democracy do not align along a single, unified latent dimension, then any attempt to convert their democratic support into a unidimensional scale is bound to fail.
+In the context of "support for democracy," if people's understanding and prioritization of democracy do not align along a single, unified latent dimension, then any attempt to convert their democratic support into a unidimensional scale---a single dimension extracted from a scaling model combining multiple indicators of public attitudes towards democracy---is bound to fail.
 
 Multiple pieces of evidence have suggested that people may weigh different components and aspects of democracy differently [@Crow2010]. 
 Even within the same country or region, individuals from distinct cultural and political contexts may ascribe "distinctive, homegrown meanings to democracy" [@Bratton2002, p. 5; see also @Schedler2007; @Konig2022]. 
