@@ -81,6 +81,8 @@ We conclude that support for democracy in any robust sense is simply not well ca
 Such measures are powerful but researchers must be mindful of their limitations.
 \end{abstract}
 ```
+
+_keywords_: democratic support, public opinion, liberal democracy, latent variables, measurement validation
 \pagebreak
 
 \pagenumbering{arabic}
@@ -402,14 +404,15 @@ But on the other, a great deal of evidence indicates that these expressions of s
 As a systematic review of this literature emphasizes, "it is important to know not just how strongly citizens support democracy, but also _what kind of democracy it is that they support_" [@Konig2022].
 
 Against this backdrop, a number of prominent recent works have sought to better investigate democratic support by taking advantage of new latent variable models of public opinion to estimate support for democracy across many countries and over long spans of time.
+@Claassen2020a and @Claassen2022 are two of the most recent contributions in this area, published in the top journals and attracting widespread attention.
 Researchers expect these advanced methods to extract the 'comparable component' of democratic support as a single variable, enabling deeper exploration of its trends, determinants, and consequences [e.g., @Claassen2019; @Solt2020c; @Claassen2020a; @Claassen2022; @Jacob2024.].^[Details about the indicators used in these works to construct these unidimensional measures can be found in their supplementary documents.]
 But can this goal truly be achieved? 
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
-@Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no support for its conclusions. 
-@Tannenberg2022 [p. 602] shows that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
+Regarding the output of this new approach, @Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no evidence to support the positive effect of public support for democracy on subsequent institutional change, contrary to the original article concluded. 
+Considering the sources to construct the latent-variable-based measurements, @Tannenberg2022[p. 602] indicates that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
 
-Why doesn’t this well-developed method yield a stable, consistent, and comparable outcome as expected? 
+Why doesn't this well-developed method yield a stable, consistent, and comparable outcome as expected? 
 There are three possible reasons: 
 First, the abstract nature of the question fails to capture the truly comparable component. 
 A general question about support does not clearly define what "democracy" actually means, and therefore cannot reliably prompt respondents to associate the question with the features of liberal democracy that can be compared across countries and over time. 
@@ -976,7 +979,7 @@ The dispersion parameters of the survey items indicate that all of them load wel
 
 ```{r obs, fig.cap = "Source Data Observations by Country and Year \\label{obs_by_cy}", fig.height = 9}
 dcpo_input_raw1 %>%
-    mutate(country = str_replace(country, "’", "'")) %>%
+    mutate(country = str_replace(country, "'", "'")) %>%
     group_by(country) %>%
     mutate(years_rank = length(unique(year))) %>%
     distinct(country, year, item, cc_rank, years_rank) %>%
@@ -1014,7 +1017,7 @@ p1_data <- theta_summary %>%
     ungroup() %>%
     arrange(mean) %>%
     transmute(country_year = paste0(country, " (", year, ")") %>% 
-                  str_replace("’", "'"),
+                  str_replace("'", "'"),
               estimate = mean,
               conf.high = q90,
               conf.low = q10,
