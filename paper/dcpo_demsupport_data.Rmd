@@ -409,7 +409,7 @@ Researchers expect these advanced methods to extract the 'comparable component' 
 But can this goal truly be achieved? 
 
 Recent findings have already raised serious doubts about this effort to create a single-variable measure. 
-Regarding the output of this new approach, @Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no evidence to support the positive effect of public support for democracy on subsequent institutional change, contrary to the original article concluded. 
+Regarding the output of this new approach, @HuEtAl2024 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no evidence to support the positive effect of public support for democracy on subsequent institutional change, contrary to the original article concluded. 
 Considering the sources to construct the latent-variable-based measurements, @Tannenberg2022[p. 602] indicates that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
 
 The new approach is supposed to utilize the advantages of the latent variable analysis and Bayesian statistics to achieve dimensionality reduction from batteries of indicator questions and extract the deep, firm kernel of public support of democracy.
@@ -461,7 +461,7 @@ To provide the strongest test of the validity of the unidimensional latent varia
 Following the previous research on this subject, we start by identifying survey questions that asked respondents to choose between democracy and an undemocratic alternative or to evaluate either democracy or one of these undemocratic alternatives. 
 Our collection of these questions of express support for democracy in the abstract is similar to but expands on the data presented in Claassen [-@Claassen2020a; -@Claassen2020b] and the larger set collected by @Tai2024.
 In all, we identified `r n_items` survey items on support for democracy in the abstract that were asked in no fewer than five country-years in countries surveyed at least three times; these items were drawn from `r n_surveys` different survey datasets.
-In accordance with the advice offered by @Hu2022 to avoid data-entry errors by automating data collection, we then used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
+In accordance with the advice offered by @HuEtAl2024 to avoid data-entry errors by automating data collection, we then used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
 Finally, we estimated a unidimensional latent variable of democratic support from these responses using the DCPO model presented in @Solt2020c; that work shows that this model provides a better fit to survey questions on express support for democracy in the abstract than the model principally employed in the existing research on this topic, Claassen's [-@Claassen2019] Model 5.
 The resulting set of unidimensional latent variable estimates comprises 2,937 country-year observations in 136 countries.
 Full details on our collection of survey-question indicators of democratic support and on the resulting latent variable estimates can be found in Appendix A.
@@ -973,7 +973,7 @@ In addition to countries already mentioned, Japan and the Philippines were also 
 The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy in the abstract.  Figure\nobreakspace{}\ref{obs_by_cy} provides additional detail on the source data, presenting the number of items observed in each country-year; countries are listed on the right in order of the number of years observed. 
 
-In accordance with the advice offered by @Hu2022 to avoid data-entry errors by automating data collection, we used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
+In accordance with the advice offered by @HuEtAl2024 to avoid data-entry errors by automating data collection, we used the `DCPOtools` R package [@Solt2019] to compile the responses to these questions.
 Then, following the existing literature [Claassen -@Claassen2020a; -@Claassen2020b; @Tai2022; @Claassen2022; @Jacob2024], we use this collection of survey data to generate a complete time series using a latent variable model.
 Finally, we estimated a unidimensional latent variable of democratic support from these responses using the DCPO model presented in @Solt2020c, running four chains for 1,000 iterations each and discarding the first half as warmup, which left us with 2,000 samples.
 The $\hat{R}$ diagnostic had a maximum value of 1.02, indicating that the model converged.
@@ -1213,7 +1213,7 @@ v_items %>%
 
 To provide the best test of the unidimensional latent variable approach for measuring democratic support, in the main text the latent variable is estimated using the largest indicator dataset currently available and the DCPO model, which @Solt2020c demonstrates fits these data better than the alternatives.
 However, the existing scholarship taking this approach uses a considerably smaller dataset of responses to these indicators and Claassen's [-@Claassen2019] Model 5 [see Claassen -@Claassen2020a; -@Claassen2020b; @Claassen2022; @Tai2024; @Jacob2024].
-To verify our findings, we replicate the figures of the text while instead using this latter latent variable of democratic support with corrections for the data-entry errors identified in @Hu2022.
+To verify our findings, we replicate the figures of the text while instead using this latter latent variable of democratic support with corrections for the data-entry errors identified in @HuEtAl2024.
 
 ```{r m5_functions}
 summarize_cm5_results <- function(cm5_input,
