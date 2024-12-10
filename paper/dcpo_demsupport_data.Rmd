@@ -412,13 +412,15 @@ Recent findings have already raised serious doubts about this effort to create a
 Regarding the output of this new approach, @Hu2022 reveals that the latent variable measure of democratic support used in several of these studies is compromised by errors in the coding of survey questions employed as indicators; a replication of @Claassen2020a correcting these errors finds no evidence to support the positive effect of public support for democracy on subsequent institutional change, contrary to the original article concluded. 
 Considering the sources to construct the latent-variable-based measurements, @Tannenberg2022[p. 602] indicates that responses to certain indicator questions on democratic support are biased downward in more autocratic countries due to fear of government reprisal, and argues that this bias likely affects the resulting latent variable as well. 
 
-Why doesn't this well-developed method yield a stable, consistent, and comparable outcome as expected? 
+The new approach is supposed to utilize the advantages of the latent variable analysis and Bayesian statistics to achieve dimensionality reduction from batteries of indicator questions and extract the deep, firm kernel of public support of democracy.
+Why doesn't this well-developed approach yield a stable, consistent, and comparable outcome as expected? 
 There are three possible reasons: 
 First, the abstract nature of the question fails to capture the truly comparable component. 
 A general question about support does not clearly define what "democracy" actually means, and therefore cannot reliably prompt respondents to associate the question with the features of liberal democracy that can be compared across countries and over time. 
 Second, and closely related to the first point, the question format itself may contribute to the problem. 
-As will be shown later, most surveys gather data on democratic support using Churchill-style questions asking public attitudes in the abstract without considering concrete components in democracy, which force respondents to place themselves on a scale between complete support and full opposition. 
-When the meaning of democracy is not consistent, respondents' answers may be based on different cognition or experiences. 
+As will be shown later, most surveys gather data on democratic support using the so-called "Churchill-style" questions that ask about public attitudes in the abstract, without considering the concrete components of democracy. 
+This type of questions compels respondents to position themselves on a scale between complete support and full opposition, and conventionally researchers would directly added up the responses to these questions to produce a single-dimensional measure without engaging in a scaling exercise.
+However, when the meaning of democracy is not consistent, respondents' answers can be based on different cognition or experiences. 
 
 The novel latent-variable methods are designed to address exactly these issues. 
 To the extent that the questions, regardless of their format, *aim to measure the same underlying latent dimension*, these methods employ statistical tools to map diverse responses onto a common scale and estimate the probability that a respondent with a given level of the latent variable would answer different questions in a particular way. 
