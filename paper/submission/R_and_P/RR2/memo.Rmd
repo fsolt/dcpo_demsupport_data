@@ -14,7 +14,7 @@ title: |
   | the Full Flavor of Democratic Support
 
 subtitle: |
-  Memo to Editor and Reviewers
+  Memo to Reviewer and Editor
 
 date: " "
 editor_options: 
@@ -34,60 +34,24 @@ linkcolor: black
 endnote: no
 ---
 
-We want to thank the Editor and the reviewers for their helpful comments and suggestions.
-We have made specific revisions corresponding to your constructive comments and suggestions for improvement.
-Here we set out a list of the specific points raised in the reviews and our responses to them below, roughly in the order they appear in the text:
+We thank Reviewer 1 for carefully reading our revision and highlighting the narrative issues.
 
-- **The "why" in theory.** 
-    As the editor pointed out, both reviewers ask us to not only demonstrate but also address why the unidimensional measurement of democratic support is invalid.
-    The reviewers also kindly pointed out several potential reasons for us.
-    In the current version, we follow R1's suggestion to discuss three situations that the unidimensional measurement would not work and evaluate which is most likely behind the later findings in the introduction (pp.2--3).
-    We appreciate the reviewers pushing us on this point, so that we could clarify what the latent-variable-analysis approach can solve and what it cannot at the very beginning of the study. 
-    We also take this chance to explain how question format (raised by R1) and question variance (raised by R2) may affect the outcome measurement.
+Based on the reviewer's constructive comments, we have made the following revisions:
 
-- **Why this unidimensional measure fails empirically.**
-    Both reviewers suggested us to provide more details about existing unidimensional indices and discuss, from an empirical perspective, why unidimensional measures fail to correlate with support for features of democracy. 
-    In response, and also considering the word limit constraints, we first include references to several articles that offer detailed discussions of these unidimensional indices in the revised version (p. 1).
+- **Introduction of Primary Illustrative Cases**.
+  In the Introduction of this new revision, we have clearly described Claassen (2020a)'s use and promotion of the new latent-variable approach (p. XXX). 
+  In addition, we explain the major conclusions of this work and address Hu, Tai, and Solt (2024[2022])'s findings on its reliability (p. XXX).
 
-    Our validation tests demonstrate that when the potentially multidimensional support for democracy is compressed into a unidimensional measure, it loses its associations with essential democratic elements. 
-    As shown in the figures on pages 6–9, even at the same country-year level as the unidimensional measure, there is considerable variance in responses to specific elements of polyarchy, civil liberties, democratic institutions, or prioritization.
-    Research on the multidimensional features of public opinion has also consistently found that attitudes across different dimensions can sometimes be negatively related. 
-    For instance, in terms of ideology, individuals or countries may hold left-wing views on one dimension (e.g., economic issues) but right-wing views on another (e.g., social issues), which a unidimensional measure cannot capture [@Caughey2018; @Treier2009nature].
-    Using a unidimentional latent-variable measure to capture this complex, multidimentional nature is hardly possible.
+- **Clarification of Methodology**.
+  Following the reviewer's suggestion, we have provided a clearer description of the new “well-developed method” (p. XXXX) and the “Churchill-style” questions (p. XXX). 
+  These additions should enhance the reader's understanding of the advancements of the new approach compared to conventional indicator-based measurements.
 
-    In the revised version (p. 2), we provide a clearer explanation of this shortcomings of unidimensional measurement and what the consequence would be when the method is imposed. 
-    Specifically, unidimensional measures would disproportionately emphasize abstract public support rather than aspects more closely related to the specific fundamental elements of democracy. 
-    The prevalence of data based on Churchill-style questions—such as agreeing or disagreeing with statements like "Democracy may have its problems, but it is better than any other form of government"—further causes unidimensional measures to overlook nuanced public attitudes toward concrete democratic components, exacerbating the distortion of the multidimensional nature of democratic support.
+- **Definition of Unidimensional Measure**
+  We thank the Reviewer for pointing this out and have included a specific definition of a unidimensional measure based on their feedback (p. XXX).
+  This ensures clarity for readers unfamiliar with the concept.
+  If there are any other concepts or terms that require further clarification, we are also happy to do so.
 
+Thank you once again for the opportunity to improve our paper. 
+We believe it is now stronger as a result of your valuable feedback and hope you agree.
 
-- **Implications for individual- and subnational-level studies.**
-    R2 pointed out, "[i]t would be interesting to address the issue of whether the same issues apply to respondent-level indicators of support for democracy."
-    We could not agree more.
-    As the reviewer indicated, there has been a well-developed and still ongoing line of research studying the determinants of democratic support below the country level.
-    
-    We believe the country-level studies and studies on lower levels may serve different purposes. 
-    While the latter can explore the concrete sources and mechanisms of democratic support, the former may relate more to the populational force for democratization, as @PetersonEtAl2022 addressed in terms of political interest.
-    Although this paper mainly focuses on the country-year level, in the current version (footnote 3 at page 11), we point out to the readers the scholarly literature at lower levels and availability of relevant methods (not exactly at the individual but already available for within-country research).
-    We also discuss the implication of our findings on studies at lower levels.
-
-    
-- **Multidimensional alternatives.**
-    The editor and R2 recommended us to explain a multidimensional measure in concrete terms and how it differs from a unidimensional measure.
-    In this revision (p. 3), we clarify that multidimensional measures refer to the measurement of latent variables across different components within the same theme.
-    For example, rather than constraining all items to a one-dimensional "oppose-support" democracy scale, multidimensional measures evaluate public support for democracy by examining attitudes toward different components, such as the two dimensions of polyarchy proposed by @Dahl1971 [, pp. 3-4]---as illustrated by our validation tests.
-    
-    In terms of alternatives of the unidimensional measurements, we provides two approaches: a confirmatiory one and a exploratory one (pp. 10--11).
-    The former fits separate one-dimensional models to distinct subsets of items and the other can be used to to uncover the underlying dimensions.
-    In particular, we introduce to readers a new method also based on Bayesian IRT models presented in Berwick and Caughey [-@Berwick2024] that can map the dynamics of multiple dimensions in policy preference and ideology at both individual and country levels.
-
-
-Thank you once more for the opportunity to make these revisions.
-We think the paper is now stronger as a result of your comments.
-We hope you all agree.
-
-
-# References {.unnumbered}
-
-::: {#refs-text}
-:::
 
