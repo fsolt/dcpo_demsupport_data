@@ -10,7 +10,7 @@ output:
 
 title: |
   | An Incomplete Recipe: 
-  | Unidimensional Latent Variables Do Not Capture
+  | One-Dimensional Latent Variables Do Not Capture
   | the Full Flavor of Democratic Support
 
 subtitle: |
@@ -35,23 +35,20 @@ endnote: no
 ---
 
 We thank Reviewer 1 for carefully reading our revision and highlighting the narrative issues.
+In particular, R1 suggested that "the setup needs to be cleaner," noting that our prior resubmission dove "too deep into the weeds of two papers" without explanation and introduced various terms without defining them, and the Associate Editor agreed that we could improve the presentation.
 
-Based on the reviewer's constructive comments, we have made the following revisions:
+We revised the introduction at pages 1-3 to address this suggestion, while remaining mindful of R1's previous exhortation "to make clear what the take-away message should be."
+Specifically, we took pains to connect the subsequent paragraphs to the point made in the opening paragraph, that a large literature reveals that "claims to favor democracy in the abstract do not consistently represent either commitments to _liberal_ democracy or opposition to actions that undermine it" (page 1).
+The second paragraph explains that the new one-dimensional latent-variable measures used in a series of prominent works---we note here that the seven works referred to in this paragraph, each less than 5 years old, have already been cited a total of over 600 times---ignore this finding and instead compile survey questions tapping only support for democracy in the abstract.
+The third paragraph explicitly ties these two points together: "we contend that compiling many questions about democracy in the abstract into a single one-dimensional latent variable should not be expected to change the fact that such questions do not accurately assess" the complexity of attitudes toward democracy.
+The fourth then previews our finding that validation tests of "the sort of one-dimensional measure used in the recent line of latent-variable-driven research" against questions "that map the dimensions of support for liberal democracy and opposition to its erosion" reveal little relationship between the two.
+The introduction's last paragraph then states our two take-away messages: that generally researchers using latent variables need to be sure to validate them before use and specifically the works based on the latent variable of democratic support should not be considered credible.
 
-- **Introduction of Primary Illustrative Cases**.
-  In the Introduction of this new revision, we have clearly described Claassen's (2020a) use and promotion of the new latent-variable approach (p. XXX). 
-  In addition, we explain the major conclusions of this work and address Hu, Tai, and Solt's (2024[2022]) findings on its reliability (p. XXX).
+Throughout the introduction, we avoid raising peripheral points (e.g., the multidimensionality of democracy itself offered in the original submission and the weedy details of the Claassen 2020a and Hu, Tai, and Solt 2022 papers in the first revision) and so maintain the clarity of our argument.
+We provide succinct answers to R1's questions about the latent-variable method used in this line of recent works and about the Churchill question in the next section, at page 3.
 
-- **Clarification of Methodology**.
-  Following the reviewer's suggestion, we have provided a clearer description of the new “well-developed method” (p. XXXX) and the “Churchill-style” questions (p. XXX). 
-  These additions should enhance the reader's understanding of the advancements of the new approach compared to conventional indicator-based measurements.
-
-- **Definition of Unidimensional Measure**
-  We thank the Reviewer for pointing this out and have included a specific definition of a unidimensional measure based on their feedback (p. XXX).
-  This ensures clarity for readers unfamiliar with the concept.
-  If there are any other concepts or terms for which we should offer further clarification, we are happy to do so.
 
 Thank you once again for the opportunity to improve our paper. 
-We believe it is now stronger as a result of your valuable feedback and hope you agree.
+We believe it is now stronger as a result of your valuable feedback and hope that you agree.
 
 
