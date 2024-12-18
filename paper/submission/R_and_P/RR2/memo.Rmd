@@ -39,8 +39,8 @@ We thank Reviewer 1 for carefully reading our revision and highlighting the nar
 Based on the reviewer's constructive comments, we have made the following revisions:
 
 - **Introduction of Primary Illustrative Cases**.
-  In the Introduction of this new revision, we have clearly described Claassen (2020a)'s use and promotion of the new latent-variable approach (p. XXX). 
-  In addition, we explain the major conclusions of this work and address Hu, Tai, and Solt (2024[2022])'s findings on its reliability (p. XXX).
+  In the Introduction of this new revision, we have clearly described Claassen's (2020a) use and promotion of the new latent-variable approach (p. XXX). 
+  In addition, we explain the major conclusions of this work and address Hu, Tai, and Solt's (2024[2022]) findings on its reliability (p. XXX).
 
 - **Clarification of Methodology**.
   Following the reviewer's suggestion, we have provided a clearer description of the new “well-developed method” (p. XXXX) and the “Churchill-style” questions (p. XXX). 
@@ -49,7 +49,7 @@ Based on the reviewer's constructive comments, we have made the following revisi
 - **Definition of Unidimensional Measure**
   We thank the Reviewer for pointing this out and have included a specific definition of a unidimensional measure based on their feedback (p. XXX).
   This ensures clarity for readers unfamiliar with the concept.
-  If there are any other concepts or terms that require further clarification, we are also happy to do so.
+  If there are any other concepts or terms for which we should offer further clarification, we are happy to do so.
 
 Thank you once again for the opportunity to improve our paper. 
 We believe it is now stronger as a result of your valuable feedback and hope you agree.
