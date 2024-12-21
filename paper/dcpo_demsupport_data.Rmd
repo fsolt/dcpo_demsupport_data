@@ -549,14 +549,14 @@ if (n_data_poor < 20) {
 
 ```
 
-```{r dcpo_input, eval=FALSE, include=FALSE, results=FALSE}
+```{r dcpo_input, eval=FALSE}
 dcpo_input <- DCPOtools::format_dcpo(dcpo_input_raw1,
                                      scale_q = most_common_item,
                                      scale_cp = 2)
 save(dcpo_input, file = here::here("data", "dcpo_input.rda"))
 ```
 
-```{r dcpo, eval=FALSE, cache=FALSE, include=FALSE, results=FALSE}
+```{r dcpo, eval=FALSE}
 iter <- 1000
 
 dcpo <- cmdstan_model("~/Documents/Projects/DCPO/inst/stan/dcpo.stan")
@@ -598,22 +598,35 @@ if (!exists("results_path")) {
             osf_download(path = results_path)
     }
     
-    if (!file.exists(here::here("data", "dcpo_output.rds"))) {
-        dcpo_output <- as_cmdstan_fit(here::here(results_path,
-                                                 list.files(results_path, pattern = "csv$")))
-        
-        dcpo_output$save_object(here::here("data", "dcpo_output.rds"))
-    }
+    
+    dcpo_output <- cmdstanr::as_cmdstan_fit(here::here(results_path,
+                                                       list.files(results_path, pattern = "csv$")))
+    
 }
-
-dcpo_output <- readRDS(here::here("data", "dcpo_output.rds"))
 ```
 
-```{r dcpo_summary}
+```{r dcpo_summary, eval=FALSE}
+dcpo_output <- readRDS(here::here("data", "dcpo_output.rds"))
 load(file = here::here("data", "dcpo_input.rda"))
 theta_summary <- DCPOtools::summarize_dcpo_results(dcpo_input,
                                                    dcpo_output,
                                                    "theta")
+
+save(theta_summary, file = here::here("data", "theta_summary.rda"))
+```
+
+```{r theta_results, eval=FALSE}
+theta_results <- extract_dcpo_results(dcpo_input,
+                                      dcpo_output,
+                                      par = "theta")
+
+saveRDS(theta_results, file = here::here("data", "theta_results.rds"))
+```
+
+```{r load_data}
+load(here::here("data", "dcpo_input.rda"))
+load(here::here("data", "theta_summary.rda"))
+theta_results <- readRDS(here::here("data", "theta_results.rds"))
 
 res_cy <- nrow(theta_summary) %>% 
     scales::comma()
@@ -622,23 +635,10 @@ res_c <- theta_summary %>%
     pull(country) %>% 
     unique() %>% 
     length()
-
-save(theta_summary, file = here::here("data","theta_summary.rda"))
 ```
 
-```{r theta_results}
-theta_results <- extract_dcpo_results(dcpo_input,
-                                      dcpo_output,
-                                      par = "theta")
-```
 
 # Testing the Validity of Democratic Support as a One-dimensional Latent Variable {.unnumbered}
-
-To test the validity of the one-dimensional latent variable measure of democratic support, we compare it to a range of questions from multi-wave cross-national surveys that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
-Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate 'democracy' or a specific undemocratic alternative in the abstract---they constitute "external" validation tests [see @Caughey2019, 684-685].
-We use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public contestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
-These criteria of liberal democracy not only comprise "the central construct in the literature on citizen preference for democracy" [@Konig2022, 2026] but are also directly implicated in the recent apprehensions regarding democratic backsliding [e.g., @Gora2022; @Ananda2023; @Meyerrose2023]. 
-In light of recent concerns that citizens do not always prioritize the preferences for democracy they express in the abstract, we also draw on questions that assess democracy's relative importance.
 
 ```{r v_data, include=FALSE}
 if (!file.exists(here("data", "v_raw.rda"))) {
@@ -678,6 +678,12 @@ validation_plot(v_vars_poly, lab_x = .55, lab_y = 15) +
          y = "% Agreeing")
 ```
 
+To test the validity of the one-dimensional latent variable measure of democratic support, we compare it to a range of questions from multi-wave cross-national surveys that also address various aspects of support for democracy; that is, we provide a series of tests of convergent validation [see @Adcock2001, 540].
+Because these survey questions were not used to estimate the latent variable---again, those indicators ask respondents to evaluate 'democracy' or a specific undemocratic alternative in the abstract---they constitute "external" validation tests [see @Caughey2019, 684-685].
+We use questions that reference Dahl's [-@Dahl1971, 3-4] two "theoretical dimensions of democratization," public contestation and inclusive participation, and the institutionally guaranteed civil rights and liberties they comprise.
+These criteria of liberal democracy not only comprise "the central construct in the literature on citizen preference for democracy" [@Konig2022, 2026] but are also directly implicated in the recent apprehensions regarding democratic backsliding [e.g., @Gora2022; @Ananda2023; @Meyerrose2023]. 
+In light of recent concerns that citizens do not always prioritize the preferences for democracy they express in the abstract, we also draw on questions that assess democracy's relative importance.
+
 We start with survey questions that most directly address public constestation and inclusive participation.
 For example, the AmericasBarometer asks whether chief executives should "limit the voice and vote of opposition parties," the Asian Barometer questions whether "people with little or no education should have as much say in politics as highly-educated people," and at the two dimensions' point of greatest overlap, the Afrobarometer asks whether "we should choose our leaders in this country through regular, open and honest elections."
 Scatter plots of the aggregate responses to these questions and other similar items against the one-dimensional latent variable of support for democracy in the abstract are presented in Figure\nobreakspace{}\@ref(fig:polyarchy).
@@ -702,13 +708,24 @@ validation_plot(v_vars_lib, lab_x = .55) +
          y = "% Agreeing")
 ```
 
+Next, we consider the survey questions that examine the level of support for civil liberties.
+We compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
+Scatter plots of the aggregate responses to these questions against the one-dimensional latent variable of democratic support are presented in Figure\nobreakspace{}\@ref(fig:liberties).
+All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
+For example, across five waves of the Asian Barometer, the one-dimensional latent variable of democratic support has a _positive_ relationship ($R~=~0.14$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
+Support for democracy in the abstract appears not to conflict with favoring government censorship in those countries and years. 
+The strongest relationship with democratic support so measured is found with an item on free speech from the surveys from the AmericasBarometer, which asked respondents the extent of their approval of "people who only say bad things about" the country's form of government "appearing on television to make speeches."
+That correlation reaches only $R~=~−0.39$, and even then, it stands out as an exception rather than the rule.
+The one-dimensional latent variable of democratic support does not capture much of the variation across countries and over time of public demand that civil liberties are respected.
+
 ```{r institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3, fig.pos='h'}
 
 v_vars_inst <- v_raw %>%
     filter(group == "rule_of_law" | group == "no_leg") %>% 
     arrange(desc(group), title) 
 
-validation_plot(v_vars_inst) +
+validation_plot(v_vars_inst,
+                lab_x = .6) +
     theme_bw() +
     theme(legend.position="none",
           axis.text  = element_text(size=8),
@@ -720,21 +737,16 @@ validation_plot(v_vars_inst) +
          y = "% Agreeing")
 ```
 
-Next, we consider the survey questions that examine the level of support for civil liberties.
-We compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
-Scatter plots of the aggregate responses to these questions against the one-dimensional latent variable of democratic support are presented in Figure\nobreakspace{}\@ref(fig:liberties).
-All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
-For example, across five waves of the Asian Barometer, the one-dimensional latent variable of democratic support has a _positive_ relationship ($R~=~0.14$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
-Support for democracy in the abstract appears not to conflict with favoring government censorship in those countries and years. 
-The strongest relationship with democratic support so measured is found with an item on protests from the surveys composing the Consolidation of Democracy in Central and Eastern Europe dataset, which asked respondents the extent of their agreement with "the government passing a law to forbid all public protest demonstrations."
-That correlation reaches only $R~=~−0.39$, and that in a rather thin evidentiary base of just 21 country-years.
-Even then, it stands out as an exception rather than the rule.
-The one-dimensional latent variable of democratic support does not capture much of the variation across countries and over time of public demand that civil liberties are respected.
-
 Figure\nobreakspace{}\@ref(fig:institutions) turns to the institutions that guarantee citizens' rights and liberties from government abuse, i.e., courts and the rule of law, and those that make government policies depend on citizen preferences, that is, legislatures.
-The one-dimensional latent variable relates only very weakly with aggregate agreement with rule of law items like the Afrobarometer question, "the President/Prime Minister must always obey the laws and the courts, even if he thinks they are wrong."
-Its correlations with items specifically on legislative checks, like the AmericasBarometer's "when the Congress hinders the work of our government, our presidents should govern without the Congress," are perhaps a bit stronger, but remain unimpressive.
+The one-dimensional latent variable relates only at best weakly with aggregated rule of law items like the Asian Barometer question, "It is ok for the government to disregard the law in order to deal with the situation, when the country is facing a difficult situation."
+Its correlations with items specifically on legislative checks, like the AmericasBarometer's "when the Congress hinders the work of our government, our presidents should govern without the Congress," are perhaps more consistent, but remain unimpressive.
 Support for democracy in the abstract, even in the form of a latent variable, has little relationship with support for the checks and balances of horizontal accountability.
+
+As mentioned above, recent research has documented that many who proclaim support for democracy in the abstract nevertheless have other preferences---such as those regarding policy or partisanship---that they may consider to be more important priorities [e.g., @Graham2020; @Simonovits2022; see also @Krishnarajan2022].
+Survey questions on the public's prioritization of democracy are relatively rare, but we found seven relevant items.
+Most straightforwardly asked respondents to choose between democracy or political freedom on the one hand and maintaining order, reducing economic inequality, or spurring economic development on the other, though the AmericasBarometer asked, "would a military coup be justified under the following circumstances: when social protest is high."
+Figure\nobreakspace{}\@ref(fig:conditions) shows that the one-dimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
+
 
 ```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Prioritization Survey Items \\label{conditions}", fig.height=3, fig.pos='h'}
 
@@ -754,10 +766,6 @@ validation_plot(v_vars_cond, lab_x = .6, lab_y = 10) +
          y = "% Agreeing")
 ```
 
-As mentioned above, recent research has documented that many who proclaim support for democracy in the abstract nevertheless have other preferences---such as those regarding policy or partisanship---that they may consider to be more important priorities [e.g., @Graham2020; @Simonovits2022; see also @Krishnarajan2022].
-Survey questions on the public's prioritization of democracy are relatively rare, but we found seven relevant items.
-Most straightforwardly asked respondents to choose between democracy or political freedom on the one hand and maintaining order, reducing economic inequality, or spurring economic development on the other, though the AmericasBarometer asked, "would a military coup be justified under the following circumstances: when social protest is high."
-Figure\nobreakspace{}\@ref(fig:conditions) shows that the one-dimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
 
