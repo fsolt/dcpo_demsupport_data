@@ -661,7 +661,14 @@ if (!file.exists(here("data", "v_raw.rda"))) {
 }
 ```
 
-```{r polyarchy, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE, fig.pos='h'}
+We start with survey questions that most directly address public constestation and inclusive participation.
+For example, the AmericasBarometer asks whether chief executives should "limit the voice and vote of opposition parties," the Asian Barometer questions whether "people with little or no education should have as much say in politics as highly-educated people," and at the two dimensions' point of greatest overlap, the Afrobarometer asks whether "we should choose our leaders in this country through regular, open and honest elections."
+Scatter plots of the aggregate responses to these questions and other similar items against the one-dimensional latent variable of support for democracy in the abstract are presented in Figure\nobreakspace{}\@ref(fig:polyarchy).
+It is evident from a glance that all of these relationships are extremely weak, essentially null.
+Support for democracy in the abstract as measured by a one-dimensional latent variable has very little do with attitudes toward these core features of liberal democracy.
+
+
+```{r polyarchy, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Polyarchy Survey Items \\label{polyarchy}", fig.height=3, cache=FALSE}
 v_vars_poly <- v_raw %>%
     filter(group == "contest" | group == "participation") %>% 
     arrange(group, title) 
@@ -678,13 +685,19 @@ validation_plot(v_vars_poly, lab_x = .55, lab_y = 15) +
          y = "% Agreeing")
 ```
 
-We start with survey questions that most directly address public constestation and inclusive participation.
-For example, the AmericasBarometer asks whether chief executives should "limit the voice and vote of opposition parties," the Asian Barometer questions whether "people with little or no education should have as much say in politics as highly-educated people," and at the two dimensions' point of greatest overlap, the Afrobarometer asks whether "we should choose our leaders in this country through regular, open and honest elections."
-Scatter plots of the aggregate responses to these questions and other similar items against the one-dimensional latent variable of support for democracy in the abstract are presented in Figure\nobreakspace{}\@ref(fig:polyarchy).
-It is evident from a glance that all of these relationships are extremely weak, essentially null.
-Support for democracy in the abstract as measured by a one-dimensional latent variable has very little do with attitudes toward these core features of liberal democracy.
 
-```{r liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4, fig.pos='h'}
+Next, we consider the survey questions that examine the level of support for civil liberties.
+We compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
+Scatter plots of the aggregate responses to these questions against the one-dimensional latent variable of democratic support are presented in Figure\nobreakspace{}\@ref(fig:liberties).
+All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
+For example, across five waves of the Asian Barometer, the one-dimensional latent variable of democratic support has a _positive_ relationship ($R~=~0.14$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
+Support for democracy in the abstract appears not to conflict with favoring government censorship in those countries and years. 
+The strongest relationship with democratic support so measured is found with an item on protests from the surveys composing the Consolidation of Democracy in Central and Eastern Europe dataset, which asked respondents the extent of their agreement with "the government passing a law to forbid all public protest demonstrations."
+That correlation reaches only $R~=~−0.39$, and that in a rather thin evidentiary base of just 21 country-years.
+Even then, it stands out as an exception rather than the rule.
+The one-dimensional latent variable of democratic support does not capture much of the variation across countries and over time of public demand that civil liberties are respected.
+
+```{r liberties, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Civil Liberties Survey Items \\label{liberties}", fig.height=4}
 
 v_vars_lib <- v_raw %>%
     filter(str_detect(group, "free")) %>% 
@@ -702,7 +715,12 @@ validation_plot(v_vars_lib, lab_x = .55) +
          y = "% Agreeing")
 ```
 
-```{r institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3, fig.pos='h'}
+Figure\nobreakspace{}\@ref(fig:institutions) turns to the institutions that guarantee citizens' rights and liberties from government abuse, i.e., courts and the rule of law, and those that make government policies depend on citizen preferences, that is, legislatures.
+The one-dimensional latent variable relates only very weakly with aggregate agreement with rule of law items like the Afrobarometer question, "the President/Prime Minister must always obey the laws and the courts, even if he thinks they are wrong."
+Its correlations with items specifically on legislative checks, like the AmericasBarometer's "when the Congress hinders the work of our government, our presidents should govern without the Congress," are also unimpressive.
+Support for democracy in the abstract, even in the form of a latent variable, has little relationship with support for the checks and balances of horizontal accountability.
+
+```{r institutions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Democratic Institutions Survey Items \\label{institutions}", fig.height=3}
 
 v_vars_inst <- v_raw %>%
     filter(group == "rule_of_law" | group == "no_leg") %>% 
@@ -720,21 +738,10 @@ validation_plot(v_vars_inst, lab_x = 0.61) +
          y = "% Agreeing")
 ```
 
-Next, we consider the survey questions that examine the level of support for civil liberties.
-We compiled four items regarding free speech, three on freedom of the press, three more on freedom of assembly, and two that deal with freedom of association.
-Scatter plots of the aggregate responses to these questions against the one-dimensional latent variable of democratic support are presented in Figure\nobreakspace{}\@ref(fig:liberties).
-All of these correlations are weak to very weak, and several are in the opposite of the expected direction.
-For example, across five waves of the Asian Barometer, the one-dimensional latent variable of democratic support has a _positive_ relationship ($R~=~0.14$) with aggregate agreement with the statement, "The government should decide whether certain ideas should be allowed to be discussed in society."
-Support for democracy in the abstract appears not to conflict with favoring government censorship in those countries and years. 
-The strongest relationship with democratic support so measured is found with an item on protests from the surveys composing the Consolidation of Democracy in Central and Eastern Europe dataset, which asked respondents the extent of their agreement with "the government passing a law to forbid all public protest demonstrations."
-That correlation reaches only $R~=~−0.39$, and that in a rather thin evidentiary base of just 21 country-years.
-Even then, it stands out as an exception rather than the rule.
-The one-dimensional latent variable of democratic support does not capture much of the variation across countries and over time of public demand that civil liberties are respected.
-
-Figure\nobreakspace{}\@ref(fig:institutions) turns to the institutions that guarantee citizens' rights and liberties from government abuse, i.e., courts and the rule of law, and those that make government policies depend on citizen preferences, that is, legislatures.
-The one-dimensional latent variable relates only very weakly with aggregate agreement with rule of law items like the Afrobarometer question, "the President/Prime Minister must always obey the laws and the courts, even if he thinks they are wrong."
-Its correlations with items specifically on legislative checks, like the AmericasBarometer's "when the Congress hinders the work of our government, our presidents should govern without the Congress," are perhaps a bit stronger, but remain unimpressive.
-Support for democracy in the abstract, even in the form of a latent variable, has little relationship with support for the checks and balances of horizontal accountability.
+As mentioned above, recent research has documented that many who proclaim support for democracy in the abstract nevertheless have other preferences---such as those regarding policy or partisanship---that they may consider to be more important priorities [e.g., @Graham2020; @Simonovits2022; see also @Krishnarajan2022].
+Survey questions on the public's prioritization of democracy are relatively rare, but we found seven relevant items.
+Most straightforwardly asked respondents to choose between democracy or political freedom on the one hand and maintaining order, reducing economic inequality, or spurring economic development on the other, though the AmericasBarometer asked, "would a military coup be justified under the following circumstances: when social protest is high."
+Figure\nobreakspace{}\@ref(fig:conditions) shows that the one-dimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 ```{r conditions, cache = FALSE, fig.cap="Correlations Between Democratic Support as a One-Dimensional Latent Variable and Prioritization Survey Items \\label{conditions}", fig.height=3, fig.pos='h'}
 
@@ -753,11 +760,6 @@ validation_plot(v_vars_cond, lab_x = .6, lab_y = 10) +
     labs(x = "One-Dimensional Democratic Support",
          y = "% Agreeing")
 ```
-
-As mentioned above, recent research has documented that many who proclaim support for democracy in the abstract nevertheless have other preferences---such as those regarding policy or partisanship---that they may consider to be more important priorities [e.g., @Graham2020; @Simonovits2022; see also @Krishnarajan2022].
-Survey questions on the public's prioritization of democracy are relatively rare, but we found seven relevant items.
-Most straightforwardly asked respondents to choose between democracy or political freedom on the one hand and maintaining order, reducing economic inequality, or spurring economic development on the other, though the AmericasBarometer asked, "would a military coup be justified under the following circumstances: when social protest is high."
-Figure\nobreakspace{}\@ref(fig:conditions) shows that the one-dimensional latent variable of democratic support bears almost no relationship at all to the aggregated responses to these questions.
 
 # Conclusions {.unnumbered}
 
