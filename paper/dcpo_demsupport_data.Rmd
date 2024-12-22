@@ -945,8 +945,8 @@ Germany, Poland, Ukraine, and Russia were all surveyed in more than 20 years.
 At the other end of the spectrum, `r n_data_poorest` countries have only the minimum three survey years required to be included in the source dataset at all.
 
 The upper right panel of this figure shows the twelve countries with the most year-items in the source data.
-It reveals that South Korea enjoys the richest collection of data on support for democracy.
-In addition to countries already mentioned, Japan and the Philippines were also surveyed often and with multiple different items.
+It reveals that Colombia enjoys the richest collection of data on support for democracy.
+In addition to countries already mentioned, South Korea was also surveyed often and with multiple different items.
 The lower right panel counts the countries observed in each year and reveals that relatively few countries were surveyed before the mid-1990s.
 Country coverage reached its peak in `r y_peak_year`, when respondents in `r y_peak_nn` countries were asked items about support for democracy in the abstract.  Figure\nobreakspace{}\ref{obs_by_cy} provides additional detail on the source data, presenting the number of items observed in each country-year; countries are listed on the right in order of the number of years observed. 
 
