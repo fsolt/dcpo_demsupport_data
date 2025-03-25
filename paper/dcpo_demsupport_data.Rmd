@@ -1462,8 +1462,11 @@ m5_path <- here::here("data", "m5")
 
 # Define OSF_PAT in .Renviron: https://docs.ropensci.org/osfr/articles/auth
 dir.create(m5_path, showWarnings = FALSE, recursive = TRUE)
-osf_retrieve_node("vmxkn") %>%
-    osf_ls_files(pattern = "csv$") %>% 
+m5_folder <- osf_retrieve_node("ksa4r") %>% #vmxkn
+    osf_ls_files() %>%
+    dplyr::filter(name == "m5") 
+
+osf_ls_files(m5_folder) %>%
     osf_download(path = m5_path,
                  conflicts = "skip")
 
